@@ -119,7 +119,7 @@ export default function KanbanDemo() {
       onValueChange={setColumns}
       getItemValue={(item) => item.id}
     >
-      <Kanban.Board className="flex gap-4 p-2 overflow-x-auto w-full min-w-0">
+      <Kanban.Board className="flex gap-4 p-2 overflow-x-auto w-full min-w-0 scrollbar-hidden">
         {Object.entries(columns).map(([columnValue, tasks]) => (
           <Kanban.Column
             key={columnValue}

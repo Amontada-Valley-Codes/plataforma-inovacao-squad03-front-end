@@ -22,8 +22,8 @@ interface HeaderProps {
 export function Header({
   navItems = [
     { href: "#sobre", label: "Sobre" },
-    { href: "#servicos", label: "Serviços" },
-    { href: "#portfolio", label: "Portfolio" },
+    { href: "#solucoes", label: "Soluções" },
+    { href: "#startups", label: "Startups" },
     { href: "#contato", label: "Contato" }
   ],
   ctaText = "Começar",
@@ -96,10 +96,10 @@ export function Header({
             <div className="flex items-center gap-2 font-bold">
               <Link href="/">
                 <Image
-                  src="/ninna.png"
-                  alt="Logo NInna"
-                  width={160}
-                  height={120}
+                  src="/Topic.png"
+                  alt="Logo Topic"
+                  width={100}
+                  height={100}
                   className="flex-shrink-0"
                 />
               </Link>
@@ -114,7 +114,7 @@ export function Header({
                   className="group relative py-2"
                 >
                   <span
-                    className={`text-base font-medium transition-all duration-300 cursor-pointer ${
+                    className={`text-base uppercase font-bold transition-all duration-300 cursor-pointer ${
                       currentSection === item.href ? "text-white" : "text-gray-300 group-hover:text-white"
                     }`}
                   >

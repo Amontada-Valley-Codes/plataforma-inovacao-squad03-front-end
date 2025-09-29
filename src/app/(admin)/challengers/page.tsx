@@ -23,7 +23,7 @@ export default function Challengers() {
 
                 <div className="w-full h-full flex justify-end items-end">
                     
-                    <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px]"> Registrar </Button>
+                    <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px]"> Novo desafio </Button>
 
                 </div>
 

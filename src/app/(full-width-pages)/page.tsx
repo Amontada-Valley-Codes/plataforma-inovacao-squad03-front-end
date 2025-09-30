@@ -13,11 +13,9 @@ export default function Initial() {
             { href: "#sobre", label: "Sobre" },
             { href: "#servicos", label: "Serviços" },
             { href: "#startups", label: "Startups" },
-            { href: "#contato", label: "Contato" }
+            { href: "#contato", label: "Contato" },
+            { href: "#contato", label: "Login" }
           ]}
-          ctaText="Faça Login"
-          ctaHref="#contato"
-          mobileCtaText="Começar"
         />
 
         <Hero/>

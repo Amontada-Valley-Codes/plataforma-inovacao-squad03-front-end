@@ -3,8 +3,7 @@
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ChevronRight, Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
 interface NavItem {
@@ -14,9 +13,6 @@ interface NavItem {
 
 interface HeaderProps {
   navItems?: NavItem[]
-  ctaText?: string
-  ctaHref?: string
-  mobileCtaText?: string
 }
 
 export function Header({
@@ -25,11 +21,8 @@ export function Header({
     { href: "#solucoes", label: "Soluções" },
     { href: "#startups", label: "Startups" },
     { href: "#contato", label: "Contato" },
-    { href: "#contato", label: "Contato" },
+    { href: "#login", label: "Login" },
   ],
-  ctaText = "Começar",
-  ctaHref = "#",
-  mobileCtaText = "Começar",
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -93,19 +86,18 @@ export function Header({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <div className="flex items-center gap-2 font-bold">
-              <Link href="/">
-                <Image
-                  src="/Topic.png"
-                  alt="Logo Topic"
-                  width={100}
-                  height={100}
-                  className="flex-shrink-0"
-                />
-              </Link>
-            </div>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/Topic.png"
+                alt="Logo Topic"
+                width={100}
+                height={100}
+                priority
+                className="flex-shrink-0"
+              />
+            </Link>
 
-            {/* {Navegação} */}
+            {/* Navegação Desktop */}
             <div className="hidden md:flex items-center space-x-10 ml-auto">
               {navigationItems.map((item) => (
                 <Link
@@ -135,16 +127,6 @@ export function Header({
                   />
                 </Link>
               ))}
-
-              <Button
-                className="rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-blue-500 hover:to-purple-500 transition-all duration-300"
-                asChild
-              >
-                <Link href={ctaHref}>
-                  {ctaText}
-                  <ChevronRight className="ml-1 size-4" />
-                </Link>
-              </Button>
             </div>
 
             {/* Botão mobile */}
@@ -158,7 +140,7 @@ export function Header({
           </div>
         </div>
 
-        {/* Menu mobile */}
+        {/* Menu Mobile */}
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -184,18 +166,6 @@ export function Header({
                   {item.label}
                 </Link>
               ))}
-
-              <div className="pt-2 border-t border-gray-200">
-                <Button
-                  className="w-full rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-blue-500 hover:to-purple-500 transition-all duration-300"
-                  asChild
-                >
-                  <Link href={ctaHref}>
-                    {mobileCtaText}
-                    <ChevronRight className="ml-1 size-4" />
-                  </Link>
-                </Button>
-              </div>
             </div>
           </motion.div>
         )}

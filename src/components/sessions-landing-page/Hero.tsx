@@ -4,9 +4,9 @@ export default function Hero() {
 
     return (
 
-        <div className="w-full h-screen bg-[url('/image.png')] bg-cover bg-center">
+        <div className="w-full h-screen bg-[url('/Background_Hero.png')] bg-cover bg-center">
 
-            <div className="w-full h-full flex bg-[#0E0062]/80">
+            <div className="w-full h-full flex">
 
                 <div className="flex justify-start px-6 md:px-15 lg:px-0 lg:justify-center items-center w-full lg:w-2/3 h-full">
 

@@ -12,7 +12,7 @@ export default function Initial() {
           navItems={[
             { href: "#sobre", label: "Sobre" },
             { href: "#servicos", label: "Serviços" },
-            { href: "#portfolio", label: "Portfolio" },
+            { href: "#startups", label: "Startups" },
             { href: "#contato", label: "Contato" }
           ]}
           ctaText="Faça Login"

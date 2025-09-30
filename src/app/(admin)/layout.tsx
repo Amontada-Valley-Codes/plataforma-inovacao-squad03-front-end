@@ -1,3 +1,4 @@
+// AdminLayout.tsx
 "use client";
 
 import { useSidebar } from "@/context/SidebarContext";
@@ -13,25 +14,27 @@ export default function AdminLayout({
 }) {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
-  const mainContentMargin = isMobileOpen
-    ? "ml-0"
+  const sidebarWidth = isMobileOpen
+    ? "w-0"
     : isExpanded || isHovered
-    ? "lg:ml-[290px]"
-    : "lg:ml-[90px]";
+    ? "w-[290px]"
+    : "w-[90px]";
 
   return (
-    <div className="min-h-screen xl:flex">
-      {/* Sidebar and Backdrop */}
-      <AppSidebar />
+    <div className="min-h-screen flex">
+      {/* Sidebar: não permite encolher */}
+      <div className={`transition-all duration-300 ease-in-out absolute lg:static ${sidebarWidth} flex-shrink-0`}>
+        <AppSidebar />
+      </div>
+
       <Backdrop />
-      {/* Main Content Area */}
-      <div
-        className={`flex-1 transition-all  duration-300 ease-in-out ${mainContentMargin}`}
-      >
-        {/* Header */}
+
+      {/* Main: importante ter min-w-0 para permitir que os filhos encolham */}
+      <div className="flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out">
         <AppHeader />
-        {/* Page Content */}
-        <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">{children}</div>
+        <div className="mx-auto w-full max-w-screen-2xl px-6 md:p-6">
+          {children}
+        </div>
       </div>
     </div>
   );

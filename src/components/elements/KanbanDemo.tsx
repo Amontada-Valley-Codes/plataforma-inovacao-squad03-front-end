@@ -119,12 +119,12 @@ export default function KanbanDemo() {
       onValueChange={setColumns}
       getItemValue={(item) => item.id}
     >
-      <Kanban.Board className="flex gap-4 p-2 overflow-x-auto w-full min-w-0 scrollbar-hidden">
+      <Kanban.Board className="flex gap-4 p-2 overflow-x-auto w-full min-w-0 scrollbar-hidden h-full">
         {Object.entries(columns).map(([columnValue, tasks]) => (
           <Kanban.Column
             key={columnValue}
             value={columnValue}
-            className="w-72 flex-none border-[#C9C9C9] bg-white" // largura fixa e impede encolher
+            className="w-72 flex-none border-[#C9C9C9] bg-white h-full " // largura fixa e impede encolher
           >
             {/* cabeçalho da coluna */}
             <div className="bg-[#7EB627] text-white px-3 py-2 rounded-t-md flex items-center justify-between">

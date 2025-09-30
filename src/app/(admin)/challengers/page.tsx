@@ -6,7 +6,7 @@ export default function Challengers() {
 
     return (
 
-        <div className="w-full min-h-screen">
+        <div className="w-full flex-1 min-h-0 flex flex-col">
 
             {/* Register */}
             <div className="col-span-12 space-y-2 bg-[#F5F6F7] p-5">
@@ -21,24 +21,24 @@ export default function Challengers() {
 
                 </div>
 
-                <div className="w-full h-full flex justify-end items-end">
+                <div className="w-full h-full flex justify-end ">
                     
-                    <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px]"> Registrar </Button>
+                    <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px]"> Novo desafio </Button>
 
                 </div>
 
             </div>
 
             {/* Kanban */}
-            <div className="w-full h-4/5 min-w-0">
+           
 
-                <div className="w-full h-full min-w-0">
+            <div className="w-full flex-1 min-h-0">
 
-                    <KanbanDemo/>
-
-                </div>
+                <KanbanDemo/>
 
             </div>
+
+            
 
         </div>
 

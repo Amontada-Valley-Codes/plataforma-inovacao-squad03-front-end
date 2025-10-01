@@ -35,12 +35,12 @@ const navItems: NavItem[] = [
   {
     icon: <PlugInIcon />,
     name: "Desafios",
-    path: "/desafios"
+    path: "/pageDesafios"
   },
   {
     icon: <BoxCubeIcon />,
     name: "Funil de Desafios",
-    path: "/kanban"
+    path: "/challengers"
   },
   {
     icon: <ListIcon />,

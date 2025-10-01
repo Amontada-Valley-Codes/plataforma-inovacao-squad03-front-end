@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         ninaButton:
-          "bg-[#7EB627] text-primary-foreground cursor-pointer shadow-xs hover:scale-104 transition-all",
+          "bg-green text-primary-foreground cursor-pointer shadow-xs hover:scale-104 transition-all",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

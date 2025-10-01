@@ -13,12 +13,10 @@ export default function Initial() {
           navItems={[
             { href: "#sobre", label: "Sobre" },
             { href: "#servicos", label: "Serviços" },
-            { href: "#portfolio", label: "Portfolio" },
-            { href: "#contato", label: "Contato" }
+            { href: "#startups", label: "Startups" },
+            { href: "#contato", label: "Contato" },
+            { href: "#contato", label: "Login" }
           ]}
-          ctaText="Faça Login"
-          ctaHref="#contato"
-          mobileCtaText="Começar"
         />
 
         <Hero/>

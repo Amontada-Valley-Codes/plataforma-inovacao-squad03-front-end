@@ -1,37 +1,32 @@
-import { Button } from "../ui/button";
 
 export default function Hero() {
+  return (
+    <section className="w-full h-screen bg-[url('/Background_Hero.png')] bg-cover bg-center relative">
 
-    return (
+      {/* Overlay leve para melhorar o contraste */}
+      <div className="absolute inset-0 bg-black/30" />
 
-        <div className="w-full h-screen bg-[url('/image.png')] bg-cover bg-center">
+      <div className="relative w-full h-full flex items-center">
 
-            <div className="w-full h-full flex bg-[#0E0062]/80">
+        {/* Conteúdo lado esquerdo */}
 
-                <div className="flex justify-start px-6 md:px-15 lg:px-0 lg:justify-center items-center w-full lg:w-2/3 h-full">
+        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-24 w-full lg:w-2/3 space-y-8">
+          <h1 className="text-white tracking-wider font-medium text-[36px] md:text-[56px] md:leading-snug lg:text-[80px] lg:leading-22 max-w-3xl lg:ml-16 mt-20">
+            Plataforma <br></br>
+            de Inovação 
+            Corporativa
+          </h1>
 
-                    <div className="space-y-4">
-
-                        <h1 className="text-[28px] md:text-[40px] lg:text-[50px] text-white leading-11  lg:leading-15">
-                            
-                            Uma plataforma que <br></br> une ideias à <span className="text-[#7EB627] font-medium">soluções</span>.
-
-                        </h1>
-                
-                        <Button className="px-16" variant={"ninaButton"} size={"default"} > Saiba mais </Button>
-
-                    </div>
-
-                </div>
-
-                <div className="hidden w-1/3 h-full lg:block">
-
-                </div>
-
-            </div>
+          <p className="text-white font-light tracking-wide md:text-lg lg:text-xl max-w-xl border border-white/70 px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-sm lg:ml-16">
+            Um ambiente onde grandes empresas e mentes brilhantes se unem para
+            transformar ideias em soluções.
+          </p>
 
         </div>
 
-    )
-
+        {/* Espaço vazio do lado direito (para futuros elementos/ilustrações/celular voando) */}
+        <div className="hidden lg:block w-1/3" />
+      </div>
+    </section>
+  )
 }

@@ -1,9 +1,25 @@
 'use client'
 
+import CardPublic from "@/components/elements/CardPublic";
 import Filters from "@/components/elements/Filters";
 import { useRef } from "react";
 
 export default function Workflow() {
+
+    const cards = [
+
+        {
+        image: "/foto.png",
+        corporationName: "Pague Menos",
+        startDate: "02/10/2025",
+        finishDate: "02/11/2025",
+        title: "Desafio tal que tem aqui publicado",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
+        sector: "Tecnologia",
+        public: true,
+        }
+
+    ]
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -62,8 +78,23 @@ export default function Workflow() {
             </div>
 
             {/* desafios */}
-            <div>
+            <div className="mt-4">
+                {cards.map((card, index) => (
+                    
+                    <CardPublic
+                        key={index}
+                        image={card.image}
+                        corporationName={card.corporationName}
+                        startDate={card.startDate}
+                        finishDate={card.finishDate}
+                        title={card.title}
+                        description={card.description}
+                        sector={card.sector}
+                        public={card.public}
+                    />
 
+                ))}
+                
             </div>
 
         </div>

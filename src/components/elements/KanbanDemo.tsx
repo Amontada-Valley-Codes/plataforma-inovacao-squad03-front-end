@@ -124,7 +124,7 @@ export default function KanbanDemo() {
           <Kanban.Column
             key={columnValue}
             value={columnValue}
-            className="w-72 flex-none border-[#C9C9C9] bg-white h-full " // largura fixa e impede encolher
+            className="w-72 flex-none border-[#C9C9C9] bg-white dark:bg-gray-900 h-full " // largura fixa e impede encolher
           >
             {/* cabeçalho da coluna */}
             <div className="bg-[#7EB627] text-white px-3 py-2 rounded-t-md flex items-center justify-between">
@@ -150,7 +150,7 @@ export default function KanbanDemo() {
             <div className="flex flex-col gap-2">
               {tasks.map((task) => (
                 <Kanban.Item key={task.id} value={task.id} asHandle asChild>
-                  <div className="rounded-md shadow-xs shadow-black/40 bg-card p-3">
+                  <div className="rounded-md shadow-xs dark:bg-gray-800 shadow-black/40 bg-card p-3">
                     {/* conteúdo do card */}
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center justify-between gap-2">

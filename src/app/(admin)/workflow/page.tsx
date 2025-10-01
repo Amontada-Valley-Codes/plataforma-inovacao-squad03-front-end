@@ -13,7 +13,7 @@ export default function Workflow() {
 
             <div className="flex justify-between px-2 md:px-5 py-2">
 
-                <h1 className="text-[25px] md:text-[30px] text-[#0E0062] font-medium"> Workflow </h1>
+                <h1 className="text-[25px] md:text-[30px] text-[#0E0062] dark:text-white font-medium"> Workflow </h1>
 
 
                 {/* searchbar */}

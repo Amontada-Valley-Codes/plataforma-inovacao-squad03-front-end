@@ -14,7 +14,7 @@ export default function Services() {
         >
       
             <div>
-            <h2 className="text-blue text-4x1 sm:text-4xl font-semibold flex items-center">
+            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center">
                 <span className="h-15 w-2.5 bg-green mr-3" />
                 Gestão de desafios
             </h2>
@@ -25,7 +25,7 @@ export default function Services() {
 
        
             <div>
-            <h2 className="text-blue text-4x1 sm:text-4xl font-semibold flex items-center">
+            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center">
                 <span className="h-15 w-2.5 bg-green mr-3" />
                 Avaliação e seleção colaborativa
             </h2>
@@ -36,7 +36,7 @@ export default function Services() {
 
      
             <div>
-            <h2 className="text-blue text-4x1 sm:text-4xl font-semibold flex items-center mt-6">
+            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center mt-6">
                 <span className="h-15 w-2.5 bg-green mr-3" />
                 Banco de ideias e soluções
             </h2>
@@ -46,7 +46,7 @@ export default function Services() {
             </div>
 
             <div>
-            <h2 className="text-blue text-4x1 sm:text-4xl font-semibold flex items-center mt-6">
+            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center mt-6">
                 <span className="h-15 w-2.5 bg-green mr-3" />
                 Comunicação e engajamento
             </h2>

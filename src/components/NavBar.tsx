@@ -157,7 +157,7 @@ export function Header({
                     e.preventDefault()
                     navigateToSection(item.href)
                   }}
-                  className={`block w-full text-left px-4 py-3 rounded-lg text-base transition-all duration-200 ${
+                  className={`block w-full text-center uppercase px-4 py-3 rounded-lg text-base transition-all duration-200 ${
                     currentSection === item.href
                       ? "bg-gray-100 text-[#0A065C] font-medium"
                       : "text-gray-600 hover:bg-gray-100 hover:text-[#0A065C]"

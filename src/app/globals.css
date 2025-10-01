@@ -37,6 +37,10 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.dark {
+  --color-blue: #ffffff;
+}
+
 @theme {
   --font-*: initial;
   --font-outfit: Outfit, sans-serif;
@@ -72,6 +76,9 @@
   --color-transparent: transparent;
   --color-white: #ffffff;
   --color-black: #101828;
+  --color-blue: #0E0062;
+  --color-green: #5BC30D;
+  --color-gray: #6F6F6F;
 
   --color-brand-25: #f2f7ff;
   --color-brand-50: #ecf3ff;

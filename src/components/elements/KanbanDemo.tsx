@@ -127,7 +127,7 @@ export default function KanbanDemo() {
             className="w-72 flex-none border-[#C9C9C9] bg-white dark:bg-gray-900 h-full " // largura fixa e impede encolher
           >
             {/* cabeçalho da coluna */}
-            <div className="bg-[#7EB627] text-white px-3 py-2 rounded-t-md flex items-center justify-between">
+            <div className="bg-green text-white px-3 py-2 rounded-t-md flex items-center justify-between">
            
                 <span className="font-semibold text-sm">
                   {COLUMN_TITLES[columnValue]}

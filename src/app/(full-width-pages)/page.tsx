@@ -3,6 +3,7 @@ import SessionsLogo from "@/components/sessions-landing-page/SessionLogos";
 import About from "@/components/sessions-landing-page/About";
 import {Header} from "@/components/NavBar";
 import Services from "@/components/sessions-landing-page/Services";
+import Startups from "@/components/sessions-landing-page/Startups";
 
 export default function Initial() {
 
@@ -26,6 +27,8 @@ export default function Initial() {
         <About/>
 
         <Services/>
+
+        <Startups/>
 
     </div>
     

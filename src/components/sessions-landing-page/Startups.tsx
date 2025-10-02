@@ -2,13 +2,18 @@
 export default function Startups() {
 
     return(
-       
-        <div className="w-full min-h-screen opacity-65
-                        bg-[url('/imagemfundo2.png')] bg-cover bg-center 
-                        flex items-center py-12 sm:py-16 md:py-20">
+        
+        // Imagem de fundo
+        <div className="w-full bg-[url('/Startups.png')] bg-cover bg-center px-6 pt-18 pb-16 md:pt-18 md:pb-24">
 
-            <div className="w-full h-full flex bg-blue/80" ></div>
-            
+            {/* Frase */}
+            <h1 className="text-center text-4xl text-white font-semibold 
+                           sm:text-5xl lg:text-6xl"> 
+
+                Nossas conexões <br/> geram <span className="text-green"> impacto </span>
+                
+            </h1>
+
         </div>
 
     )

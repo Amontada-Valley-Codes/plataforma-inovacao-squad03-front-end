@@ -7,7 +7,7 @@ import { MoreDotIcon } from "@/icons";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 
-export default function DemographicCard() {
+export default function StartupLocationCard() {
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleDropdown() {
@@ -23,10 +23,10 @@ export default function DemographicCard() {
       <div className="flex justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-            Customers Demographic
+            Localização das Startups
           </h3>
           <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
-            Number of customer based on country
+            Distribuição geográfica das startups conectadas
           </p>
         </div>
 
@@ -43,13 +43,13 @@ export default function DemographicCard() {
               onItemClick={closeDropdown}
               className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              View More
+              Ver Detalhes
             </DropdownItem>
             <DropdownItem
               onItemClick={closeDropdown}
               className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              Delete
+              Exportar Dados
             </DropdownItem>
           </Dropdown>
         </div>
@@ -71,26 +71,26 @@ export default function DemographicCard() {
                 width={48}
                 height={48}
                 src="/images/country/country-01.svg"
-                alt="usa"
+                alt="São Paulo"
                 className="w-full"
               />
             </div>
             <div>
               <p className="font-semibold text-gray-800 text-theme-sm dark:text-white/90">
-                USA
+                São Paulo
               </p>
               <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                2,379 Customers
+                42 Startups
               </span>
             </div>
           </div>
 
           <div className="flex w-full max-w-[140px] items-center gap-3">
             <div className="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800">
-              <div className="absolute left-0 top-0 flex h-full w-[79%] items-center justify-center rounded-sm bg-brand-500 text-xs font-medium text-white"></div>
+              <div className="absolute left-0 top-0 flex h-full w-[48%] items-center justify-center rounded-sm bg-green-500 text-xs font-medium text-white"></div>
             </div>
             <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
-              79%
+              48%
             </p>
           </div>
         </div>
@@ -103,25 +103,87 @@ export default function DemographicCard() {
                 height={48}
                 className="w-full"
                 src="/images/country/country-02.svg"
-                alt="france"
+                alt="Minas Gerais"
               />
             </div>
             <div>
               <p className="font-semibold text-gray-800 text-theme-sm dark:text-white/90">
-                France
+                Minas Gerais
               </p>
               <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                589 Customers
+                18 Startups
               </span>
             </div>
           </div>
 
           <div className="flex w-full max-w-[140px] items-center gap-3">
             <div className="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800">
-              <div className="absolute left-0 top-0 flex h-full w-[23%] items-center justify-center rounded-sm bg-brand-500 text-xs font-medium text-white"></div>
+              <div className="absolute left-0 top-0 flex h-full w-[21%] items-center justify-center rounded-sm bg-green-500 text-xs font-medium text-white"></div>
             </div>
             <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
-              23%
+              21%
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="items-center w-full rounded-full max-w-8">
+              <Image
+                width={48}
+                height={48}
+                className="w-full"
+                src="/images/country/country-03.svg"
+                alt="Rio de Janeiro"
+              />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800 text-theme-sm dark:text-white/90">
+                Rio de Janeiro
+              </p>
+              <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
+                15 Startups
+              </span>
+            </div>
+          </div>
+
+          <div className="flex w-full max-w-[140px] items-center gap-3">
+            <div className="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800">
+              <div className="absolute left-0 top-0 flex h-full w-[17%] items-center justify-center rounded-sm bg-green-500 text-xs font-medium text-white"></div>
+            </div>
+            <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
+              17%
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="items-center w-full rounded-full max-w-8">
+              <Image
+                width={48}
+                height={48}
+                className="w-full"
+                src="/images/country/country-04.svg"
+                alt="Outros Estados"
+              />
+            </div>
+            <div>
+              <p className="font-semibold text-gray-800 text-theme-sm dark:text-white/90">
+                Outros Estados
+              </p>
+              <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
+                12 Startups
+              </span>
+            </div>
+          </div>
+
+          <div className="flex w-full max-w-[140px] items-center gap-3">
+            <div className="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800">
+              <div className="absolute left-0 top-0 flex h-full w-[14%] items-center justify-center rounded-sm bg-green-500 text-xs font-medium text-white"></div>
+            </div>
+            <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
+              14%
             </p>
           </div>
         </div>

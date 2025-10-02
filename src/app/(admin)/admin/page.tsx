@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
+import {InnovationMetrics  } from "@/components/ecommerce/EcommerceMetrics";
 import React from "react";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
-import MonthlySalesChart from "@/components/ecommerce/MonthlySalesChart";
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
-import DemographicCard from "@/components/ecommerce/DemographicCard";
+
 
 export const metadata: Metadata = {
   title: "Dashboard Admin | Plataforma de Inovação",
@@ -13,12 +12,41 @@ export const metadata: Metadata = {
 };
 
 export default function Ecommerce() {
+  const metricsData = [
+    {
+      title: "Startups Conectadas",
+      value: 87,
+      change: 15.3,
+      changeType: "increase" as const,
+      icon: "startups" as const,
+    },
+    {
+      title: "Desafios Criados",
+      value: 45,
+      change: 8.2,
+      changeType: "increase" as const,
+      icon: "challenges" as const,
+    },
+    
+    {
+      title: "Ideias Recebidas",
+      value: 156,
+      change: 12.5,
+      changeType: "increase" as const,
+      icon: "ideas" as const,
+    },
+    {
+      title: "POCs em Andamento",
+      value: 14,
+      change: -5.2,
+      changeType: "decrease" as const,
+      icon: "pocs" as const,
+    },
+  ];
   return (
     <div className="grid grid-cols-12 gap-4 md:gap-6">
       <div className="col-span-12 space-y-6 xl:col-span-7">
-        <EcommerceMetrics />
-
-        <MonthlySalesChart />
+        <InnovationMetrics metrics={metricsData} />
       </div>
 
       <div className="col-span-12 xl:col-span-5">
@@ -29,11 +57,7 @@ export default function Ecommerce() {
         <StatisticsChart />
       </div>
 
-      <div className="col-span-12 xl:col-span-5">
-        <DemographicCard />
-      </div>
-
-      <div className="col-span-12 xl:col-span-7">
+      <div className="col-span-12 xl:col-span-12">
         <RecentOrders />
       </div>
     </div>

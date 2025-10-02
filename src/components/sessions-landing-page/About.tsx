@@ -1,66 +1,30 @@
 import Image from "next/image"
-import { Button } from "../ui/button"
 
 export default function About() {
+  return (
+    <section className="flex flex-col lg:flex-row w-full min-h-screen bg-[#FFFFFF]">
+      
+      {/* Lado da Imagem */}
+      <div className="relative w-full h-[300px] lg:w-1/2 lg:h-screen">
+        <Image
+          src="/Imagem_2.png" // certifique-se de que está em /public
+          alt="Sobre a plataforma de inovação"
+          fill
+          quality={100}
+          className="object-cover"
+          priority
+        />
+      </div>
 
-    return (
-
-        <div className="flex flex-col lg:flex-row justify-center items-center w-full min-h-screen py-5 bg-[#F5F5F5]">
-
-            {/* Image */}
-            <div className="w-full h-1/2 lg:w-1/2 lg:h-full flex justify-center lg:justify-start items-center">
-
-                <Image
-                    src={"/Foto.png"}
-                    alt=""
-                    width={600}
-                    height={700}
-                    className="object-contain w-full lg:w-[90%] h-auto lg:h-full"
-                />
-
-            </div> 
-
-            {/* Content */}
-            <div className="w-full h-fit lg:w-1/2 lg:h-full py-5 px-5 ">
-                
-                <div className="w-full h-full flex flex-col justify-center md:gap-10 lg:gap-8">
-                    
-                    <h1 className="text-[20px] md:text-[30px] font-medium text-[#0E0062] mb-5 lg:mb-0">
-                        Sobre a plaforma de inovação
-                    </h1>
-
-                    <p className="text-[16px] md:text-[25px] lg:text-[24px] mb-5 md:mb-0">
-
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit. 
-                        Quisque faucibus ex sapien vitae pellentesque sem placerat. 
-                        In id cursus mi pretium tellus duis convallis. Tempus leo 
-                        eu aenean sed diam urna tempor. Pulvinar vivamus fringilla 
-                        lacus nec metus bibendum egestas. Iaculis massa nisl malesuada 
-                        lacinia integer nunc posuere. Ut hendrerit semper vel class 
-                        aptent taciti sociosqu. Ad litora torquent per conubia nostra 
-                        inceptos himenaeos.
-
-                    </p>
-                    
-                    <div>
-
-                        <Button 
-                            variant={"ninaButton"} size={"default"}
-                            className="px-16"
-                        > 
-
-                            Saiba mais
-
-                        </Button>
-
-                    </div>
-
-                </div>
-
-            </div>
-            
-        </div>
-
-    )
-
+      {/* Lado do Texto */}
+      <div className="flex flex-col justify-normal w-full lg:w-1/2 px-6 lg:px-12 py-10">
+        
+        <p className="text-[16px] text-justify font-light md:text-[20px] lg:text-[25px] text-gray-600 leading-relaxed">
+          Ferramenta que nasceu com o objetivo de conectar pessoas e projetos, para criar soluções de forma inteligente e integrada. <br/>
+          Nossa plataforma reúne as ferramentas necessárias para transformar a organização interna dos seus projetos e gerar um ambiente
+          de interação que acelera a resolução de problemas.
+        </p>
+      </div>
+    </section>
+  )
 }

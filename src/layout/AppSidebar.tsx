@@ -328,16 +328,16 @@ const AppSidebar: React.FC = () => {
             <>
               <Image
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src="/Topic.png"
                 alt="Logo"
-                width={150}
-                height={40}
+                width={90}
+                height={20}
               />
               <Image
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/Topic.png"
                 alt="Logo"
-                width={150}
+                width={90}
                 height={40}
               />
             </>
@@ -380,7 +380,7 @@ const AppSidebar: React.FC = () => {
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                  "Others"
+                  "Outros"
                 ) : (
                   <HorizontaLDots />
                 )}

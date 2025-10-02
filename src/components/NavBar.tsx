@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
@@ -142,12 +141,7 @@ export function Header({
 
         {/* Menu Mobile */}
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden bg-white border-t border-gray-200 shadow-md"
-          >
+          <div className="md:hidden shadow-md">
             <div className="px-4 py-4 space-y-2">
               {navigationItems.map((item) => (
                 <Link
@@ -157,7 +151,7 @@ export function Header({
                     e.preventDefault()
                     navigateToSection(item.href)
                   }}
-                  className={`block w-full text-center uppercase px-4 py-3 rounded-lg text-base transition-all duration-200 ${
+                  className={`block w-full text-center uppercase font-bold tracking-wide px-4 py-3 rounded-lg text-base transition-all duration-200 ${
                     currentSection === item.href
                       ? "bg-gray-100 text-[#0A065C] font-medium"
                       : "text-gray-600 hover:bg-gray-100 hover:text-[#0A065C]"
@@ -167,7 +161,7 @@ export function Header({
                 </Link>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
       </nav>
     </header>

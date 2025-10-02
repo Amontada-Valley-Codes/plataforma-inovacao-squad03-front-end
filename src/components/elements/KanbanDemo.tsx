@@ -124,7 +124,7 @@ export default function KanbanDemo() {
           <Kanban.Column
             key={columnValue}
             value={columnValue}
-            className="w-72 flex-none border-[#C9C9C9] bg-white dark:bg-gray-900 h-full " // largura fixa e impede encolher
+            className="w-72 flex-none border-[#C9C9C9] dark:border-gray-700 bg-white dark:bg-gray-900 h-full " // largura fixa e impede encolher
           >
             {/* cabeçalho da coluna */}
             <div className="bg-green text-white px-3 py-2 rounded-t-md flex items-center justify-between">

@@ -2,13 +2,15 @@
 
 import CardPublic from "@/components/elements/CardPublic";
 import Filters from "@/components/elements/Filters";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Workflow() {
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const cards = [
 
         {
+        id: "1",
         image: "/foto.png",
         corporationName: "Pague Menos",
         startDate: "02/10/2025",
@@ -16,16 +18,30 @@ export default function Workflow() {
         title: "Desafio tal que tem aqui publicado",
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
         sector: "Tecnologia",
-        public: true,
+        status: "Geração de ideias",
+        published: "PUBLICO",
+        },
+        {
+        id: "2",
+        image: "/foto.png",
+        corporationName: "Pague Menos",
+        startDate: "02/10/2025",
+        finishDate: "02/11/2025",
+        title: "Desafio tal que tem aqui publicado",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
+        sector: "Tecnologia",
+        status: "Geração de ideias",
+        published: "PUBLICO",
         }
 
     ]
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const [posts, setPosts] = useState(cards)
+
 
     return (
 
-        <div className="w-full min-h-full">
+        <div className="w-full min-h-full mb-5">
 
             <div className="flex justify-between px-2 md:px-5 py-2">
 
@@ -78,20 +94,27 @@ export default function Workflow() {
             </div>
 
             {/* desafios */}
-            <div className="mt-4">
-                {cards.map((card, index) => (
+            <div className="mt-4 flex flex-col gap-5">
+                {posts.map((post, index) => (
                     
-                    <CardPublic
-                        key={index}
-                        image={card.image}
-                        corporationName={card.corporationName}
-                        startDate={card.startDate}
-                        finishDate={card.finishDate}
-                        title={card.title}
-                        description={card.description}
-                        sector={card.sector}
-                        public={card.public}
-                    />
+                    <div key={index}>
+                        {post.published && (
+
+                            <CardPublic
+                                id={post.id}
+                                image={post.image}
+                                corporationName={post.corporationName}
+                                startDate={post.startDate}
+                                finishDate={post.finishDate}
+                                title={post.title}
+                                description={post.description}
+                                sector={post.sector}
+                                status={post.status}
+                                published={post.published}
+                            />
+
+                        )}
+                    </div>
 
                 ))}
                 

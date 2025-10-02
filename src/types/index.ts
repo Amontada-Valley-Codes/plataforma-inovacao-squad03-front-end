@@ -1,5 +1,6 @@
 export type PropsCard = {
 
+    id: string;
     image: string;
     corporationName: string;
     startDate: string;
@@ -7,6 +8,7 @@ export type PropsCard = {
     title: string;
     description: string;
     sector: string;
-    public: boolean
+    status: string;
+    published: "PUBLICO" | "RESTRITO" | string;
 
 }

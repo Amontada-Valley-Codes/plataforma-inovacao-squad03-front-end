@@ -17,14 +17,21 @@ export default function About() {
       </div>
 
       {/* Lado do Texto */}
-      <div className="flex flex-col justify-normal w-full lg:w-1/2 px-6 lg:px-12 py-10">
-        
-        <p className="text-[16px] text-justify font-light md:text-[20px] lg:text-[25px] text-gray-600 leading-relaxed">
-          Ferramenta que nasceu com o objetivo de conectar pessoas e projetos, para criar soluções de forma inteligente e integrada. <br/>
-          Nossa plataforma reúne as ferramentas necessárias para transformar a organização interna dos seus projetos e gerar um ambiente
-          de interação que acelera a resolução de problemas.
-        </p>
-      </div>
+      <div className="flex flex-col justify-center w-full lg:w-1/2 px-6 lg:px-12 py-10">
+            <div className="max-w-[500px] mx-auto">
+
+                <p className="text-[16px] text-justify tracking-wide md:text-[20px] lg:text-[20px] text-gray-600 leading-relaxed">
+                Ferramenta que nasceu com o objetivo de conectar pessoas e projetos, 
+                para criar <span className="font-bold text-green">soluções</span> de forma inteligente e integrada.
+                </p>
+                <p className="text-[16px] text-justify md:text-[20px] lg:text-[20px] text-gray-600 leading-relaxed mt-10">
+                Nossa plataforma reúne as ferramentas necessárias para transformar a 
+                organização interna dos seus projetos e gerar um ambiente de interação 
+                que acelera a resolução de problemas.
+                </p>
+            </div>
+        </div>
+
     </section>
   )
 }

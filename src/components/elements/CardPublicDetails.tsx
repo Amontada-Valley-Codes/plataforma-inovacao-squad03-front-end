@@ -50,26 +50,37 @@ export default function CardPublicDetails({id, image, corporationName, startDate
                 <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{title}</DialogTitle>
                 
                 {/* Sessão informações */}
-                <div className="flex flex-row items-center text-[16px] gap-6">
+                <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-[16px] items-center">
 
-                    {/* status */}
-                    <div className="flex flex-col gap-2 text-[18px]">
+                {/* status */}
+                    <span className="font-semibold flex items-center gap-1">
+                        <FiLoader /> Status:
+                    </span>
 
-                        <span className="font-semibold flex items-center gap-1"><FiLoader />Status:</span> 
-                        <span className="font-semibold flex items-center gap-1"><Calendar1 size={17}/>Data de início:</span>
-                        <span className="font-semibold flex items-center gap-1"><CalendarClock size={17}/>Data de entrega:</span>
-                        <span className="font-semibold flex items-center gap-1"><BiCategory/>Setor:</span>
+                    <span className="flex justify-center bg-blue/80 dark:bg-gray-600 px-2 text-[14px] rounded-[14px] text-white">
+                        {status}
+                    </span>
 
-                    </div>
+                    {/* data de início */}
+                    <span className="font-semibold flex items-center gap-1">
+                        <Calendar1 size={17} /> Data de início:
+                    </span>
 
-                    <div className="flex flex-col gap-3">
+                    <span>{startDate}</span>
 
-                        <span className="bg-blue/80 dark:bg-gray-600 px-4 text-[14px] rounded-[14px] text-white ">{status}</span> 
-                        <span > {startDate}</span>
-                        <span > {finishDate}</span>
-                        <span >{sector}</span>
+                    {/* data de entrega */}
+                    <span className="font-semibold flex items-center gap-1">
+                        <CalendarClock size={17} /> Data de entrega:
+                    </span>
 
-                    </div>
+                    <span>{finishDate}</span>
+
+                    {/* setor */}
+                    <span className="font-semibold flex items-center gap-1">
+                        <BiCategory /> Setor:
+                    </span>
+
+                    <span>{sector}</span>
 
                 </div>
 

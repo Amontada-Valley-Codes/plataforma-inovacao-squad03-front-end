@@ -1,0 +1,173 @@
+"use client";
+import React, { useState } from "react";
+import Label from "@/components/form/Label";
+import Select from "@/components/form/Select";
+import { ChevronDownIcon } from "@/icons";
+
+export function ChallengesFilters() {
+  // Estado para os filtros
+  const [filters, setFilters] = useState({
+    search: "",
+    status: "",
+    area: "",
+    date: ""
+  });
+
+  // Opções para os selects
+  const statusOptions = [
+    { value: "publico", label: "Público" },
+    { value: "privado", label: "Privado" },
+    { value: "andamento", label: "Em andamento" },
+    { value: "concluido", label: "Concluído" },
+  ];
+
+  const areaOptions = [
+    { value: "logistica", label: "Logística" },
+    { value: "tecnologia", label: "Tecnologia" },
+    { value: "meio-ambiente", label: "Meio Ambiente" },
+    { value: "marketing", label: "Marketing" },
+    { value: "operacoes", label: "Operações" },
+  ];
+
+  // Funções de atualização
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters(prev => ({ ...prev, search: e.target.value }));
+  };
+
+  const handleStatusChange = (value: string) => {
+    setFilters(prev => ({ ...prev, status: value }));
+  };
+
+  const handleAreaChange = (value: string) => {
+    setFilters(prev => ({ ...prev, area: value }));
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters(prev => ({ ...prev, date: e.target.value }));
+  };
+
+  return (
+    <div className="col-span-12 bg-card mb-5 rounded-[10px] mt-4">
+      {/* Barra de Filtros/Pesquisa - Tudo na mesma linha */}
+      <div className="flex flex-col md:flex-row gap-4 items-end">
+        
+        {/* Buscar por nome */}
+        <div className="flex-1 md:flex-[2] min-w-0">
+          <Label className="block mb-2">Buscar por nome</Label>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Buscar desafios..."
+              value={filters.search}
+              onChange={handleSearchChange}
+              className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+            />
+          </div>
+        </div>
+
+        {/* Filtro por status */}
+        <div className="flex-1 min-w-0">
+          <Label className="block mb-2">Status</Label>
+          <div className="relative">
+            <Select
+              options={statusOptions}
+              placeholder="Selecionar status"
+              value={filters.status}
+              onChange={handleStatusChange}
+              className="w-full dark:bg-gray-800 h-[48px]"
+            />
+            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+              <ChevronDownIcon />
+            </span>
+          </div>
+        </div>
+
+        {/* Filtro por área/tema */}
+        <div className="flex-1 min-w-0">
+          <Label className="block mb-2">Área/Tema</Label>
+          <div className="relative">
+            <Select
+              options={areaOptions}
+              placeholder="Selecionar área"
+              value={filters.area}
+              onChange={handleAreaChange}
+              className="w-full dark:bg-gray-800 h-[48px]"
+            />
+            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
+              <ChevronDownIcon />
+            </span>
+          </div>
+        </div>
+
+        {/* Filtro por data */}
+        <div className="flex-1 min-w-0">
+          <Label className="block mb-2">Data de início</Label>
+          <div className="relative">
+            <input
+              type="date"
+              value={filters.date}
+              onChange={handleDateChange}
+              className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      {/* Mostrar filtros ativos */}
+      {(filters.area || filters.status || filters.date || filters.search) && (
+        <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+          <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Filtros Ativos:
+          </Label>
+          <div className="flex flex-wrap gap-2">
+            {filters.search && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+                Busca: {filters.search}
+                <button
+                  onClick={() => handleSearchChange({ target: { value: '' } } as any)}
+                  className="ml-2 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {filters.area && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                Área: {areaOptions.find(opt => opt.value === filters.area)?.label}
+                <button
+                  onClick={() => handleAreaChange("")}
+                  className="ml-2 hover:text-blue-600 dark:hover:text-blue-300"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {filters.status && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                Status: {statusOptions.find(opt => opt.value === filters.status)?.label}
+                <button
+                  onClick={() => handleStatusChange("")}
+                  className="ml-2 hover:text-green-600 dark:hover:text-green-300"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {filters.date && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                Data: {new Date(filters.date).toLocaleDateString('pt-BR')}
+                <button
+                  onClick={() => handleDateChange({ target: { value: '' } } as any)}
+                  className="ml-2 hover:text-purple-600 dark:hover:text-purple-300"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

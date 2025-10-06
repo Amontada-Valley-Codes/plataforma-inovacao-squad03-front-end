@@ -53,24 +53,12 @@ const navItems: NavItem[] = [
   //   path: "/calendar",
   // },
 
-  //  {
-  //    name: "Forms",
-  //    icon: <ListIcon />,
-  //    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-  //  },
-  // {
-  //   name: "Kanban",
-  //   icon: <TableIcon />,
-  //   subItems: [{ name: "Kanban de desafios", path: "/challengers", pro: false }],
-  // },
-  // {
-  //   name: "Pages",
-  //   icon: <PageIcon />,
-  //   subItems: [
-  //     { name: "Blank Page", path: "/blank", pro: false },
-  //     { name: "404 Error", path: "/error-404", pro: false },
-  //   ],
-  // },
+   {
+     name: "Forms",
+     icon: <ListIcon />,
+     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+   },
+
 ];
 
 const othersItems: NavItem[] = [
@@ -79,34 +67,26 @@ const othersItems: NavItem[] = [
     name: "User Profile",
     path: "/profile",
   },
-  // {
-  //   icon: <PieChartIcon />,
-  //   name: "Charts",
-  //   subItems: [
-  //     { name: "Line Chart", path: "/line-chart", pro: false },
-  //     { name: "Bar Chart", path: "/bar-chart", pro: false },
-  //   ],
-  // },
-  // {
-  //   icon: <BoxCubeIcon />,
-  //   name: "UI Elements",
-  //   subItems: [
-  //     { name: "Alerts", path: "/alerts", pro: false },
-  //     { name: "Avatar", path: "/avatars", pro: false },
-  //     { name: "Badge", path: "/badge", pro: false },
-  //     { name: "Buttons", path: "/buttons", pro: false },
-  //     { name: "Images", path: "/images", pro: false },
-  //     { name: "Videos", path: "/videos", pro: false },
-  //   ],
-  // },
-  // {
-  //   icon: <PlugInIcon />,
-  //   name: "Authentication",
-  //   subItems: [
-  //     { name: "Sign In", path: "/signin", pro: false },
-  //     { name: "Sign Up", path: "/signup", pro: false },
-  //   ],
-  // },
+  //  {
+  //    icon: <BoxCubeIcon />,
+  //    name: "UI Elements",
+  //    subItems: [
+  //      { name: "Alerts", path: "/alerts", pro: false },
+  //      { name: "Avatar", path: "/avatars", pro: false },
+  //      { name: "Badge", path: "/badge", pro: false },
+  //      { name: "Buttons", path: "/buttons", pro: false },
+  //      { name: "Images", path: "/images", pro: false },
+  //      { name: "Videos", path: "/videos", pro: false },
+  //    ],
+  //  },
+   {
+     icon: <PlugInIcon />,
+     name: "Autentificação",
+     subItems: [
+       { name: "Entrar", path: "/signin", pro: false },
+       { name: "Cadastrar", path: "/signup", pro: false },
+     ],
+   },
 ];
 
 const AppSidebar: React.FC = () => {
@@ -328,16 +308,16 @@ const AppSidebar: React.FC = () => {
             <>
               <Image
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src="/Topic.png"
                 alt="Logo"
-                width={150}
-                height={40}
+                width={90}
+                height={20}
               />
               <Image
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/Topic.png"
                 alt="Logo"
-                width={150}
+                width={90}
                 height={40}
               />
             </>
@@ -380,7 +360,7 @@ const AppSidebar: React.FC = () => {
                 }`}
               >
                 {isExpanded || isHovered || isMobileOpen ? (
-                  "Others"
+                  "Outros"
                 ) : (
                   <HorizontaLDots />
                 )}

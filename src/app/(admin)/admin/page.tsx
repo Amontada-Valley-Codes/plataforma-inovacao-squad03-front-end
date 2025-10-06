@@ -57,9 +57,9 @@ export default function Ecommerce() {
         <StatisticsChart />
       </div>
 
-      <div className="col-span-12 xl:col-span-12">
-        <RecentOrders />
-      </div>
+        <div className="col-span-12 xl:col-span-12">
+          <RecentOrders />
+        </div>
     </div>
   );
 }

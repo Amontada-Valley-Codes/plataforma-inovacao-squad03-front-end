@@ -47,7 +47,7 @@ export default function UserLogin() {
                 </form>
 
                 <p className="text-xs sm:text-sm text-gray-500 mt-7">
-                    Ainda não tem uma corporação? <a href="#" className="text-[#7EB627] hover:underline">Crie a sua agora.</a>
+                    Ainda não tem uma corporação? <a href="/signup" className="text-[#7EB627] hover:underline">Crie a sua agora.</a>
                 </p>
             </div>
         </div>

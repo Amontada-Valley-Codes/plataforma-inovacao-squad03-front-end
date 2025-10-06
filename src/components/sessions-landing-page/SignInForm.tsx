@@ -7,9 +7,9 @@ export default function UserLogin() {
             <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
 
                 <img 
-                    src="/logo-nina-dark.png" 
+                    src="/Topic.png" 
                     alt="Logo Nina Hub" 
-                    className="mx-auto mb-6 w-32 sm:w-40"
+                    className="mx-auto mb-4 w-32 sm:w-35"
                 />
 
                 <h2 className="text-xl font-bold text-[#7EB627] uppercase mb-2">
@@ -46,8 +46,8 @@ export default function UserLogin() {
                     </div>
                 </form>
 
-                <p className="text-xs sm:text-sm text-gray-500 mt-6">
-                    Está tendo problemas? <a href="#" className="text-[#7EB627] hover:underline">Recupere a sua senha.</a>
+                <p className="text-xs sm:text-sm text-gray-500 mt-7">
+                    Ainda não tem uma corporação? <a href="#" className="text-[#7EB627] hover:underline">Crie a sua agora.</a>
                 </p>
             </div>
         </div>

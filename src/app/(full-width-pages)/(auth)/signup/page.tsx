@@ -116,7 +116,7 @@ export default function UserCadastro() {
 
             <p className="flex items-center justify-center text-xs sm:text-sm text-gray-500 mt-6">
                     Já faz parte de uma corporação? 
-                    <a href="/signin" className="text-green hover:underline ml-1"> Faça login </a>
+                    <a href="/signin" className="text-green hover:underline ml-1" > Faça login </a>
             </p>
 
           </form>

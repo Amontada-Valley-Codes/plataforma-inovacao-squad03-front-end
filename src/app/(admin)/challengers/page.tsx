@@ -9,7 +9,7 @@ export default function Challengers() {
         <div className="w-full flex-1 min-h-0 flex flex-col">
 
             {/* Register */}
-            <div className="col-span-12 space-y-2 bg-card p-5 rounded-[10px]">
+            <div className="col-span-12 space-y-2 bg-card py-4 px-2 flex justify-between items-center rounded-[10px]">
 
                 <div className="text-blue md:px-5">
                     
@@ -17,11 +17,9 @@ export default function Challengers() {
                         Desafios
                     </h1>
 
-                    <p className="text-[16px] md:text-[18px]"> Ambiente de desenvolvimento de desafios </p>
-
                 </div>
 
-                <div className="w-full h-full flex justify-end ">
+                <div>
                     
                     <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px] text-white"> Novo desafio </Button>
 

@@ -7,7 +7,7 @@ export default function About() {
       {/* Lado da Imagem */}
       <div className="relative w-full h-[300px] lg:w-1/2 lg:h-screen">
         <Image
-          src="/Imagem_2.png" // certifique-se de que está em /public
+          src="/Imagem_2.png" 
           alt="Sobre a plataforma de inovação"
           fill
           quality={100}

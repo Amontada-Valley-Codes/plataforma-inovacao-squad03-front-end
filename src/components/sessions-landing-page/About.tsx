@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function About() {
   return (
@@ -21,7 +22,7 @@ export default function About() {
             <div className="max-w-[480px] mx-auto">
 
                 <p className="text-[16px] text-justify tracking-wide md:text-[20px] lg:text-[24px] text-gray-600 leading-relaxed">
-                Ferramenta que nasceu com o objetivo de conectar pessoas e projetos, 
+                Um sistema que nasceu com o objetivo de conectar pessoas e projetos, 
                 para criar <span className="font-bold text-green">soluções</span> de forma inteligente e integrada.
                 </p>
                 <p className="text-[16px] text-justify md:text-[20px] lg:text-[24px] text-gray-600 leading-relaxed mt-10">
@@ -45,10 +46,11 @@ export default function About() {
         />          
         </div>
 
-        <div  className="absolute right-1/7 rounded-t-4xl bottom-0 w-75 h-52 bg-green">
+        <div  className="flex flex-col absolute right-1/7 rounded-t-4xl bottom-0 w-75 h-52 bg-green">
             <p className="text-white justify-center font-medium text-[30px] mt-5 ml-10 leading-10">
               Conheça o que nosso sistema oferece
             </p>
+            <IoIosArrowDropdown className="fill-white w-10 h-10 stroke-white mx-auto mt-3"/>
           </div>
     </section>
   )

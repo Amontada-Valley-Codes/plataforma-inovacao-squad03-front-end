@@ -16,13 +16,11 @@ export default function CardKanban({
         published
     }: PropsCard) {
     
-    const [open, setOpen] = useState(false)
 
     return (
-        <div onClick={() => {setOpen(true)}} className="rounded-md dark:bg-gray-800 bg-card p-4  flex flex-col gap-2 ">
+        <div className="rounded-md dark:bg-gray-800 bg-card p-4  flex flex-col gap-2 ">
             
             {/* Título e publicado */}
-
             <div className="flex justify-between items-start">
 
                 <div className="flex flex-col">
@@ -50,21 +48,6 @@ export default function CardKanban({
                 <span>Início: {startDate}</span>
                 <span>Fim: {finishDate}</span>
             </div>
-
-            <CardKanbanDetail 
-                open={open} 
-                setOpen={setOpen}
-                id={id}
-                image={image}
-                corporationName={corporationName}
-                startDate={startDate}
-                finishDate={finishDate}
-                title={title}
-                description={description}
-                sector={sector}
-                status={status}
-                published={published}
-            />
 
         </div>
     )

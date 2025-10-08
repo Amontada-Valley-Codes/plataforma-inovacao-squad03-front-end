@@ -7,21 +7,12 @@ import {
 import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import { PropsCard } from "@/types";
+import CardKanban from "./CardKanban";
+import MenuCard from "./MenuCard";
 
-interface Props {
-    open: boolean;
-    setOpen: (value: boolean) => void;
-    id: string;
-    image: string;
-    corporationName: string;
-    startDate: string;
-    finishDate: string;
-    title: string;
-    description: string;
-    sector: string;
-    status: string;
-    published: "PUBLICO" | "RESTRITO" | string;
-}
+
 
 const COLUMN_TITLES: Record<string, string> = {
   generation: "Geração de Ideias",
@@ -33,41 +24,37 @@ const COLUMN_TITLES: Record<string, string> = {
 
 
 
-export default function CardKanbanDetail(
-    { 
-        open, 
-        setOpen,
-        id,
-        image,
-        corporationName,
-        startDate,
-        finishDate,
-        title,
-        description,
-        sector,
-        status,
-        published
-    }: Props ) {
+export default function CardKanbanDetail(props: PropsCard) {
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog>
+
+        <DialogTrigger asChild> 
+
+            <div>
+                <CardKanban {...props} /> 
+            </div>
+
+        </DialogTrigger>
 
         <DialogContent className="flex flex-col bg-card">
 
             {/* header */}
             <div className="flex justify-between items-center border-b-2">
 
-                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{title}</DialogTitle>
+                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{props.title}</DialogTitle>
 
                 {/* opções */}
-                <div>
+                <div className="flex items-center px-4 ">
                     
+                    <MenuCard/>
+
                 </div>
 
             </div>
 
             {/* content */}
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-5">
 
                 {/* informações */}
                 <div className="flex flex-col gap-8 ">
@@ -85,7 +72,7 @@ export default function CardKanbanDetail(
                                 </span>
 
                                 <span className="flex justify-center bg-blue/80 dark:bg-gray-600 px-2 text-[14px] rounded-[14px] text-white">
-                                    {COLUMN_TITLES[status] || status}
+                                    {COLUMN_TITLES[props.status] || props.status}
                                 </span>
 
                                 {/* data de início */}
@@ -93,21 +80,21 @@ export default function CardKanbanDetail(
                                     <Calendar1 size={17} /> Data de início:
                                 </span>
 
-                                <span>{startDate}</span>
+                                <span>{props.startDate}</span>
 
                                 {/* data de entrega */}
                                 <span className="font-semibold flex items-center gap-1">
                                     <CalendarClock size={17} /> Data de entrega:
                                 </span>
 
-                                <span>{finishDate}</span>
+                                <span>{props.finishDate}</span>
 
                                 {/* setor */}
                                 <span className="font-semibold flex items-center gap-1">
                                     <BiCategory /> Setor:
                                 </span>
 
-                                <span>{sector}</span>
+                                <span>{props.sector}</span>
 
                             </div>
 
@@ -120,20 +107,20 @@ export default function CardKanbanDetail(
 
                         <span className="font-semibold text-[18px]">Descrição:</span>
 
-                        <p>{description}</p>
+                        <p>{props.description}</p>
 
                     </div>
 
                 </div>
                 
                 {/* comentários */}
-                {status === "ideation" && (
+                {props.status === "ideation" && (
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col bg-gray-100">
                         
                         {/* header dos comentarios */}
                         <div>
-                            <h1> Comentários </h1>
+                            <h1 className="text-[20px]"> Comentários </h1>
                         </div>
 
                         {/* corpo */}

@@ -6,6 +6,7 @@ import * as Kanban from "@/components/ui/Kanban";
 import { PropsCard } from "@/types";
 import CardKanban from "./CardKanban";
 import { GripVertical } from "lucide-react"; // import do ícone
+import CardKanbanDetail from "./CardKanbanDetails";
 
 const COLUMN_TITLES: Record<string, string> = {
   generation: "Geração de Ideias",
@@ -123,7 +124,7 @@ export default function KanbanDemo() {
                   <div className="relative bg-card shadow-md rounded-md hover:scale-102 transition-all">
                     
                     <div>
-                      <CardKanban {...card} />
+                      <CardKanbanDetail {...card} />
                     </div>
                     
                     <Kanban.ItemHandle className="absolute top-2 right-0 cursor-grab text-gray-500 hover:text-gray-700">

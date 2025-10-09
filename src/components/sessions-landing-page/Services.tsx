@@ -25,7 +25,7 @@ export default function Services() {
 
        
             <div>
-            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center">
+            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center leading-9">
                 <span className="h-15 w-2.5 bg-green mr-3" />
                 Avaliação e seleção colaborativa
             </h2>

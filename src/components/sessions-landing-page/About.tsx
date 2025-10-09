@@ -3,10 +3,10 @@ import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function About() {
   return (
-    <section className="relative flex flex-col lg:flex-row w-full min-h-screen bg-[#FFFFFF]">
+    <section className="relative flex flex-col lg:flex-row w-full min-h-screen bg-white overflow-hidden">
       
       {/* Lado da Imagem */}
-      <div className="relative w-full h-[300px] lg:w-1/2 lg:h-screen z-0">
+      <div className="relative w-full h-[300px] sm:h-[400px] lg:w-1/2 lg:h-screen z-0">
         <Image
           src="/Imagem_2.png" 
           alt="Sobre a plataforma de inovação."
@@ -18,14 +18,15 @@ export default function About() {
       </div>
 
       {/* Lado do Texto */}
-      <div className="flex flex-col justify-normal w-full lg:w-1/2 px-6 lg:px-12 py-10 mt-20 font-light z-0">
+      <div className="flex flex-col justify-normal w-full lg:w-1/2 px-6 lg:px-12 py-10 mt-14 font-light z-0">
+            
             <div className="max-w-[480px] mx-auto">
 
-                <p className="text-[16px] text-justify tracking-wide md:text-[20px] lg:text-[24px] text-gray-600 leading-relaxed">
+                <p className="text-[16px] text-justify tracking-wide md:text-[28px] lg:text-[24px] text-gray-600 leading-relaxed">
                 Um sistema que nasceu com o objetivo de conectar pessoas e projetos, 
                 para criar <span className="font-bold text-green">soluções</span> de forma inteligente e integrada.
                 </p>
-                <p className="text-[16px] text-justify md:text-[20px] lg:text-[24px] text-gray-600 leading-relaxed mt-10">
+                <p className="text-[16px] text-justify md:text-[28px] lg:text-[24px] text-gray-600 leading-relaxed mt-10">
                 Nossa plataforma reúne as ferramentas necessárias para transformar a 
                 organização interna dos seus projetos e gerar um ambiente de interação 
                 que acelera a resolução de problemas.
@@ -33,7 +34,7 @@ export default function About() {
             </div>
         </div>
 
-        <div className="absolute top-1/2 left-[40%] lg:left-[8%] -translate-y-1/2 z-10 pointer-events-none"
+        <div className="absolute top-1/2 left-[40%] lg:left-[8%] -translate-y-1/2 z-10 pointer-events-none md:"
              aria-hidden="true">
           <Image
           src="/Imagem1.png" 

@@ -1,24 +1,26 @@
 import { PropsCard } from "@/types"
 import { Badge } from "../ui/badge"
+import CardKanbanDetail from "./CardKanbanDetails"
+import { useState } from "react"
 
 export default function CardKanban({
-    id,
-    image,
-    corporationName,
-    startDate,
-    finishDate,
-    title,
-    description,
-    sector,
-    status,
-    published
-}: PropsCard) {
+        id,
+        image,
+        corporationName,
+        startDate,
+        finishDate,
+        title,
+        description,
+        sector,
+        status,
+        published
+    }: PropsCard) {
+    
 
     return (
-        <div className="rounded-md shadow-md dark:bg-gray-800 bg-card p-4 flex flex-col gap-2 hover:scale-102 transition-all">
+        <div className="rounded-md dark:bg-gray-800 bg-card p-4  flex flex-col gap-2 ">
             
             {/* Título e publicado */}
-
             <div className="flex justify-between items-start">
 
                 <div className="flex flex-col">
@@ -35,11 +37,11 @@ export default function CardKanban({
             </div>
 
             {/* Setor */}
-            {sector && (
-                <span className="self-start bg-blue dark:bg-gray-700 px-3 py-0.5 text-[12px] rounded-full text-white">
-                    {sector}
-                </span>
-            )}
+            
+            <span className="self-start bg-blue dark:bg-gray-700 px-3 py-0.5 text-[12px] rounded-full text-white">
+                {sector}
+            </span>
+            
 
             {/* Datas */}
             <div className="flex justify-between text-xs text-muted-foreground">

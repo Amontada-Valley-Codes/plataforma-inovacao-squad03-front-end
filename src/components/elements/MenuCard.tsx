@@ -14,7 +14,8 @@ export default function MenuCard() {
 
         <DropdownMenu>
         <DropdownMenuTrigger><IoMdMore size={25}/></DropdownMenuTrigger>
-        <DropdownMenuContent>
+
+        <DropdownMenuContent className="bg-card">
 
             <DropdownMenuItem>
                 Editar

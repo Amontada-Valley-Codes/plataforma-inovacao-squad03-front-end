@@ -11,6 +11,7 @@ import { DialogTrigger } from "@radix-ui/react-dialog";
 import { PropsCard } from "@/types";
 import CardKanban from "./CardKanban";
 import MenuCard from "./MenuCard";
+import CardComments from "./CardComments";
 
 
 
@@ -114,22 +115,10 @@ export default function CardKanbanDetail(props: PropsCard) {
                 </div>
                 
                 {/* comentários */}
-                {props.status === "ideation" && (
-
-                    <div className="flex flex-col bg-gray-100">
-                        
-                        {/* header dos comentarios */}
-                        <div>
-                            <h1 className="text-[20px]"> Comentários </h1>
-                        </div>
-
-                        {/* corpo */}
-                        <div>
-
-                        </div>
-
+                {(props.status === "ideation" || props.status === "detailed_screening" || props.status === "experimentation") && (
+                    <div>
+                        <CardComments/>
                     </div>
-
                 )}
 
             </div>

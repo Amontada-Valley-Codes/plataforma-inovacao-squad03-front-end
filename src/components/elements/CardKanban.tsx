@@ -3,6 +3,11 @@ import { Badge } from "../ui/badge"
 import CardKanbanDetail from "./CardKanbanDetails"
 import { useState } from "react"
 
+const PUBLIC_STATE: Record<string, string> = {
+  PUBLIC: "PÚBLICO",
+  RESTRICTED: "RESTRITO",
+};
+
 export default function CardKanban({
         id,
         image,
@@ -31,7 +36,7 @@ export default function CardKanban({
                 </div>
 
                 <Badge variant={"secondary"} className="bg-green dark:bg-gray-600 px-2 py-0.5 text-[12px] rounded-[5px] text-white">
-                    {published}
+                    {PUBLIC_STATE[published]}
                 </Badge>
                 
             </div>

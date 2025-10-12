@@ -3,11 +3,12 @@
 import CardPublic from "@/components/elements/CardPublic";
 import Filters from "@/components/elements/Filters";
 import { useRef, useState } from "react";
+import { PropsCard } from "@/types";
 
 export default function Workflow() {
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const cards = [
+    const cards: PropsCard[] = [
 
         {
         id: "1",
@@ -19,7 +20,7 @@ export default function Workflow() {
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
         sector: "Tecnologia",
         status: "Geração de ideias",
-        published: "PUBLICO",
+        published: "PUBLIC",
         },
         {
         id: "2",
@@ -31,7 +32,7 @@ export default function Workflow() {
         description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
         sector: "Tecnologia",
         status: "Geração de ideias",
-        published: "PUBLICO",
+        published: "PUBLIC",
         }
 
     ]

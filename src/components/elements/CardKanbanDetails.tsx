@@ -55,7 +55,7 @@ export default function CardKanbanDetail(props: PropsCard) {
             </div>
 
             {/* content */}
-            <div className="flex flex-col gap-5 overflow-y-auto min-h-[200px] max-h-[440px] scrollbar-hidden px-2 transition-all">
+            <div className="flex flex-col gap-5 overflow-y-auto min-h-[200px] max-h-[500px] scrollbar-hidden px-2 transition-all">
 
                 {/* informações */}
                 <div className="flex flex-col gap-8">

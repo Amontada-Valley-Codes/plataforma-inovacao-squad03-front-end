@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { TfiCommentAlt } from "react-icons/tfi";
+import CommentSession from "./CommentSession";
 
 
 export default function CardComments() {
@@ -26,7 +27,9 @@ export default function CardComments() {
                 </AccordionTrigger>
 
                 <AccordionContent>
-                    Sessão de comentários
+
+                    <CommentSession/>
+                 
                 </AccordionContent>
 
             </AccordionItem>

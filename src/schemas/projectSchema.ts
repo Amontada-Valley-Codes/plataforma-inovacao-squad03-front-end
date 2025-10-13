@@ -2,6 +2,7 @@
 import { z } from 'zod';
 
 export const projectSchema = z.object({
+  challengeName: z.string().optional().refine(val => val && val.length > 0, 'Nome do desafio é obrigatório'),
   status: z.string().min(1, 'Status é obrigatório'),
 
   // o option diz que o campo inicial vai ser undefined ai o refine aplica a validaçao costumizada que verifica se o valor E se não está vazio

@@ -12,7 +12,7 @@ import TextArea from '@/components/form/input/TextArea';
 import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
 import { statusOptions, sectorOptions } from '@/types/selectOptions';
 
-export default function ProjectForm() {
+export default function ChallengersForm() {
   const {
     register,
     handleSubmit,
@@ -41,6 +41,18 @@ export default function ProjectForm() {
   return (
     <ComponentCard title="Adicione Um Desafio">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div>
+          <Label htmlFor="challengeName">Nome do Desafio</Label>
+          <Input
+            type="text"
+            placeholder="Digite o nome do desafio"
+            {...register('challengeName')}
+          />
+          {errors.challengeName && (
+            <p className="mt-1 text-sm text-red-500">{errors.challengeName.message}</p>
+          )}
+        </div>
+
         <div>
           <Label htmlFor="status">Status</Label>
           <div className="relative">
@@ -108,7 +120,7 @@ export default function ProjectForm() {
             value={watch('description') || ''}
             onChange={(value) => setValue('description', value)}
             rows={6}
-            placeholder="Descreva o projeto..."
+            placeholder="Descreva do Desafio..."
             error={!!errors.description}
             hint={errors.description?.message}
           />

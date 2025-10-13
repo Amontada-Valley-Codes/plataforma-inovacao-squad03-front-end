@@ -12,18 +12,16 @@ import { PropsCard } from "@/types";
 import CardKanban from "./CardKanban";
 import MenuCard from "./MenuCard";
 import CardComments from "./CardComments";
-
+import ButtonPublic from "./ButtonPublic";
 
 
 const COLUMN_TITLES: Record<string, string> = {
-  generation: "Geração de Ideias",
-  pre_screening: "Pré-Triagem",
-  ideation: "Ideação",
-  detailed_screening: "Triagem Detalhada",
-  experimentation: "Experimentação",
+  GENERATION: "Geração de Ideias",
+  PRE_SCREENING: "Pré-Triagem",
+  IDEATION: "Ideação",
+  DETAILED_SCREENING: "Triagem Detalhada",
+  EXPERIMENTATION: "Experimentação",
 };
-
-
 
 export default function CardKanbanDetail(props: PropsCard) {
 
@@ -46,8 +44,10 @@ export default function CardKanbanDetail(props: PropsCard) {
                 <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{props.title}</DialogTitle>
 
                 {/* opções */}
-                <div className="flex items-center px-4 ">
+                <div className="flex items-center px-4 gap-2">
                     
+                    <ButtonPublic published={props.published} state={props.status}/>
+
                     <MenuCard/>
 
                 </div>
@@ -55,10 +55,10 @@ export default function CardKanbanDetail(props: PropsCard) {
             </div>
 
             {/* content */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 overflow-y-auto min-h-[200px] max-h-[440px] scrollbar-hidden px-2 transition-all">
 
                 {/* informações */}
-                <div className="flex flex-col gap-8 ">
+                <div className="flex flex-col gap-8">
 
                     <DialogHeader className="flex flex-col justify-start items-start">
 
@@ -104,18 +104,18 @@ export default function CardKanbanDetail(props: PropsCard) {
                     </DialogHeader>
 
                     {/* descrição */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 ">
 
                         <span className="font-semibold text-[18px]">Descrição:</span>
 
-                        <p>{props.description}</p>
+                        <p className="break-words whitespace-normal  break-all">{props.description}</p>
 
                     </div>
 
                 </div>
                 
                 {/* comentários */}
-                {(props.status === "ideation" || props.status === "detailed_screening" || props.status === "experimentation") && (
+                {(props.status === "IDEATION" || props.status === "DETAILED_SCREENING" || props.status === "EXPERIMENTATION") && (
                     <div>
                         <CardComments/>
                     </div>

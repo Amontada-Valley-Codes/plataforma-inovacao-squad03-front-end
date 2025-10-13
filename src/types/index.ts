@@ -9,6 +9,6 @@ export type PropsCard = {
     description: string;
     sector: string;
     status: string;
-    published: "PUBLICO" | "RESTRITO" | string;
+    published: "PUBLIC" | "RESTRICTED";
 
 }

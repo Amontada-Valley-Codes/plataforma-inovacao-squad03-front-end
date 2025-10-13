@@ -4,17 +4,18 @@ import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import * as Kanban from "@/components/ui/Kanban";
 import { PropsCard } from "@/types";
-import CardKanban from "./CardKanban";
 import { GripVertical } from "lucide-react"; // import do ícone
 import CardKanbanDetail from "./CardKanbanDetails";
 
 const COLUMN_TITLES: Record<string, string> = {
-  generation: "Geração de Ideias",
-  pre_screening: "Pré-Triagem",
-  ideation: "Ideação",
-  detailed_screening: "Triagem Detalhada",
-  experimentation: "Experimentação",
+  GENERATION: "Geração de Ideias",
+  PRE_SCREENING: "Pré-Triagem",
+  IDEATION: "Ideação",
+  DETAILED_SCREENING: "Triagem Detalhada",
+  EXPERIMENTATION: "Experimentação",
 };
+
+
 
 const allCards: PropsCard[] = [ 
   { 
@@ -26,44 +27,44 @@ const allCards: PropsCard[] = [
     title: "Novo Sistema de Pedidos", 
     description: "Implementação de sistema para controle de pedidos online.", 
     sector: "Varejo", 
-    status: "generation", 
-    published: "PUBLICO", 
+    status: "GENERATION", 
+    published: "PUBLIC", 
   }, 
   { 
     id: "2", 
     image: "/empresa.png", 
-    corporationName: "Unimed", 
+    corporationName: "Pague Menos", 
     startDate: "2025/09/15", 
     finishDate: "2025/10/05", 
     title: "App de Agendamento", 
     description: "Aplicativo de agendamento para pacientes.", 
     sector: "Saúde", 
-    status: "experimentation", 
-    published: "RESTRITO", 
+    status: "EXPERIMENTATION", 
+    published: "RESTRICTED", 
   }, 
   { 
     id: "3", 
     image: "/empresa.png", 
-    corporationName: "Unimed", 
+    corporationName: "Pague Menos", 
     startDate: "2025/09/15", 
     finishDate: "2025/10/05", 
     title: "App de Agendamento", 
     description: "Aplicativo de agendamento para pacientes.", 
     sector: "Saúde", 
-    status: "ideation", 
-    published: "RESTRITO", 
+    status: "IDEATION", 
+    published: "RESTRICTED", 
   }, 
   { 
     id: "4", 
     image: "/empresa.png", 
-    corporationName: "Unimed", 
+    corporationName: "Pague Menos", 
     startDate: "2025/09/15", 
     finishDate: "2025/10/05", 
     title: "App de Agendamento", 
     description: "Aplicativo de agendamento para pacientes.", 
     sector: "Saúde", 
-    status: "pre_screening", 
-    published: "RESTRITO", 
+    status: "PRE_SCREENING", 
+    published: "RESTRICTED", 
   }, 
 ];
 
@@ -72,11 +73,11 @@ export default function KanbanDemo() {
 
   const columns = React.useMemo(() => {
     const grouped: Record<string, PropsCard[]> = {
-      generation: [],
-      pre_screening: [],
-      ideation: [],
-      detailed_screening: [],
-      experimentation: [],
+      GENERATION: [],
+      PRE_SCREENING: [],
+      IDEATION: [],
+      DETAILED_SCREENING: [],
+      EXPERIMENTATION: [],
     };
     for (const card of cards) {
       if (grouped[card.status]) grouped[card.status].push(card);

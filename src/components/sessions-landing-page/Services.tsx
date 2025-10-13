@@ -6,6 +6,7 @@ export default function Services() {
       className="w-full min-h-screen bg-white
                  bg-[url('/imagemfundo1.png')] bg-cover bg-center 
                  flex items-center py-12 sm:py-16 md:py-20"
+        id="servicos"
     >
 
         {/* Content */}

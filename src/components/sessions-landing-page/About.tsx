@@ -3,23 +3,10 @@ import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function About() {
   return (
-    <section className="relative flex flex-col lg:flex-row w-full min-h-screen bg-white overflow-hidden">
+    <section className="relative flex flex-col lg:flex-row w-full min-h-screen bg-[#FFFFFF]" id="sobre">
       
-      {/* Container a imagem (mobile/tablet) */}
-      <div className="relative w-full h-[200px] sm:h-[400px] lg:hidden">
-        {/* Imagem de fundo */}
-        <Image
-          src="/Imagem_2.png"
-          alt="Sobre a plataforma de inovação."
-          fill
-          quality={100}
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* Lado da imagem (desktop) */}
-      <div className="relative w-full h-[300px] sm:h-[400px] lg:w-1/2 lg:h-screen z-0 hidden lg:block">
+      {/* Lado da Imagem */}
+      <div className="relative w-full h-[300px] lg:w-1/2 lg:h-screen z-0">
         <Image
           src="/Imagem_2.png"
           alt="Sobre a plataforma de inovação."

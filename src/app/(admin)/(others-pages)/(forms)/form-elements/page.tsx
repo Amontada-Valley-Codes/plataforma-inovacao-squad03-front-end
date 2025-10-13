@@ -9,9 +9,10 @@ import RadioButtons from "@/components/form/form-elements/RadioButtons";
 import SelectInputs from "@/components/form/form-elements/SelectInputs";
 import TextAreaInput from "@/components/form/form-elements/TextAreaInput";
 import ToggleSwitch from "@/components/form/form-elements/ToggleSwitch";
-import ProjectForm from "@/components/elements/formChallengers/ProjectForm";
+
 import { Metadata } from "next";
 import React from "react";
+import ChallengersForm from "@/components/elements/formChallengers/ChallengersForm";
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements | TailAdmin - Next.js Dashboard Template",
@@ -37,7 +38,7 @@ export default function FormElements() {
           <RadioButtons />
           <ToggleSwitch />
           <DropzoneComponent />
-          <ProjectForm/>
+          <ChallengersForm/>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import ProjectForm from "./ProjectForm"
+import ChallengerForm from "./ChallengersForm"
 
 export default function DialogForm() {
 
@@ -23,7 +23,7 @@ export default function DialogForm() {
 
             <DialogContent className="max-h-[700px] overflow-y-auto scrollbar-hidden">
 
-                <ProjectForm/>
+                <ChallengerForm/>
 
             </DialogContent>
 

@@ -6,11 +6,11 @@ export default function UserCadastro() {
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-lg h-[600px] flex flex-col">
 
         <div className="p-6 border-b border-gray-200 text-center">
-          <img src="/logo-nina-dark.png" alt="Logo" className="mx-auto h-12 sm:h-16" />
+          <img src="/Topic.png" alt="Logo" className="mx-auto h-20 sm:h-20" />
           <h2 className="text-green-600 font-bold text-xl mt-4">CADASTRO</h2>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+        <div className="flex-1 overflow-y-auto scrollbar-hidden p-4 sm:p-6">
           <form className="space-y-4 sm:space-y-6">
 
             <div className="text-left">
@@ -60,8 +60,8 @@ export default function UserCadastro() {
 
             <div className="text-left">
               <label className="block mb-1 text-sm font-medium">Estágio de maturidade:</label>
-              <select className="w-full border border-black rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-[#7EB627]">
-                <option selected>Escolha uma opção:</option>
+              <select className="defaultValue w-full border border-black rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-[#7EB627]">
+                <option>Escolha uma opção:</option>
                 <option>Ideação</option>
                 <option>Operação</option>
                 <option>Tração</option>
@@ -115,7 +115,8 @@ export default function UserCadastro() {
             </div>
 
             <p className="flex items-center justify-center text-xs sm:text-sm text-gray-500 mt-6">
-                    Já faz parte de uma corporação?
+                    Já faz parte de uma corporação? 
+                    <a href="/signin" className="text-green hover:underline ml-1" > Faça login </a>
             </p>
 
           </form>

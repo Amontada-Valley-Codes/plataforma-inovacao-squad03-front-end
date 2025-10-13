@@ -1,122 +1,102 @@
 "use client";
- 
-import { GripVertical } from "lucide-react";
+
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import * as Kanban from "@/components/ui/Kanban";
- 
-interface Task {
-  id: string;
-  title: string;
-  priority: "low" | "medium" | "high";
-  assignee?: string;
-  dueDate?: string;
-}
- 
+import { PropsCard } from "@/types";
+import { GripVertical } from "lucide-react"; // import do ícone
+import CardKanbanDetail from "./CardKanbanDetails";
+
 const COLUMN_TITLES: Record<string, string> = {
-  generation: "Geração de Ideias",
-  pre_screening: "Pré-Triagem",
-  ideation: "Ideação",
-  detailed_screening: "Triagem Detalhada",
-  experimentation: "Experimentação",
+  GENERATION: "Geração de Ideias",
+  PRE_SCREENING: "Pré-Triagem",
+  IDEATION: "Ideação",
+  DETAILED_SCREENING: "Triagem Detalhada",
+  EXPERIMENTATION: "Experimentação",
 };
- 
+
+
+
+const allCards: PropsCard[] = [ 
+  { 
+    id: "1", 
+    image: "/empresa.png", 
+    corporationName: "Pague Menos", 
+    startDate: "2025/10/01", 
+    finishDate: "2025/10/15", 
+    title: "Novo Sistema de Pedidos", 
+    description: "Implementação de sistema para controle de pedidos online.", 
+    sector: "Varejo", 
+    status: "GENERATION", 
+    published: "PUBLIC", 
+  }, 
+  { 
+    id: "2", 
+    image: "/empresa.png", 
+    corporationName: "Pague Menos", 
+    startDate: "2025/09/15", 
+    finishDate: "2025/10/05", 
+    title: "App de Agendamento", 
+    description: "Aplicativo de agendamento para pacientes.", 
+    sector: "Saúde", 
+    status: "EXPERIMENTATION", 
+    published: "RESTRICTED", 
+  }, 
+  { 
+    id: "3", 
+    image: "/empresa.png", 
+    corporationName: "Pague Menos", 
+    startDate: "2025/09/15", 
+    finishDate: "2025/10/05", 
+    title: "App de Agendamento", 
+    description: "Aplicativo de agendamento para pacientes.", 
+    sector: "Saúde", 
+    status: "IDEATION", 
+    published: "RESTRICTED", 
+  }, 
+  { 
+    id: "4", 
+    image: "/empresa.png", 
+    corporationName: "Pague Menos", 
+    startDate: "2025/09/15", 
+    finishDate: "2025/10/05", 
+    title: "App de Agendamento", 
+    description: "Aplicativo de agendamento para pacientes.", 
+    sector: "Saúde", 
+    status: "PRE_SCREENING", 
+    published: "RESTRICTED", 
+  }, 
+];
+
 export default function KanbanDemo() {
-  const [columns, setColumns] = React.useState<Record<string, Task[]>>({
-    generation: [
-      {
-        id: "1",
-        title: "Add authentication",
-        priority: "high",
-        assignee: "John Doe",
-        dueDate: "2024-04-01",
-      },
-      {
-        id: "2",
-        title: "Create API endpoints",
-        priority: "medium",
-        assignee: "Jane Smith",
-        dueDate: "2024-04-05",
-      },
-      {
-        id: "3",
-        title: "Write documentation",
-        priority: "low",
-        assignee: "Bob Johnson",
-        dueDate: "2024-04-10",
-      },
-    ],
-    pre_screening: [
-      {
-        id: "4",
-        title: "Design system updates",
-        priority: "high",
-        assignee: "Alice Brown",
-        dueDate: "2024-03-28",
-      },
-      {
-        id: "5",
-        title: "Implement dark mode",
-        priority: "medium",
-        assignee: "Charlie Wilson",
-        dueDate: "2024-04-02",
-      },
-    ],
-    ideation: [
-      {
-        id: "6",
-        title: "Setup project",
-        priority: "high",
-        assignee: "Eve Davis",
-        dueDate: "2024-03-25",
-      },
-      {
-        id: "7",
-        title: "Initial commit",
-        priority: "low",
-        assignee: "Frank White",
-        dueDate: "2024-03-24",
-      },
-    ],
-    detailed_screening: [
-      {
-        id: "8",
-        title: "Setup project",
-        priority: "high",
-        assignee: "Eve Davis",
-        dueDate: "2024-03-25",
-      },
-      {
-        id: "9",
-        title: "Initial commit",
-        priority: "low",
-        assignee: "Frank White",
-        dueDate: "2024-03-24",
-      },
-    ],
-    experimentation: [
-      {
-        id: "10",
-        title: "Setup project",
-        priority: "high",
-        assignee: "Eve Davis",
-        dueDate: "2024-03-25",
-      },
-      {
-        id: "11",
-        title: "Initial commit",
-        priority: "low",
-        assignee: "Frank White",
-        dueDate: "2024-03-24",
-      },
-    ],
-  });
- 
+  const [cards, setCards] = React.useState<PropsCard[]>(allCards);
+
+  const columns = React.useMemo(() => {
+    const grouped: Record<string, PropsCard[]> = {
+      GENERATION: [],
+      PRE_SCREENING: [],
+      IDEATION: [],
+      DETAILED_SCREENING: [],
+      EXPERIMENTATION: [],
+    };
+    for (const card of cards) {
+      if (grouped[card.status]) grouped[card.status].push(card);
+    }
+    return grouped;
+  }, [cards]);
+
   return (
     <Kanban.Root
       value={columns}
-      onValueChange={setColumns}
+      onValueChange={(newColumns) => {
+        const updatedCards: PropsCard[] = [];
+        for (const [columnKey, items] of Object.entries(newColumns)) {
+          for (const item of items) {
+            updatedCards.push({ ...item, status: columnKey });
+          }
+        }
+        setCards(updatedCards);
+      }}
       getItemValue={(item) => item.id}
     >
       <Kanban.Board className="flex gap-4 p-2 overflow-x-auto w-full min-w-0 scrollbar-hidden h-full">
@@ -124,66 +104,34 @@ export default function KanbanDemo() {
           <Kanban.Column
             key={columnValue}
             value={columnValue}
-            className="w-72 flex-none border-[#C9C9C9] bg-white dark:bg-gray-900 h-full " // largura fixa e impede encolher
+            className="w-72 flex-none border-[#C9C9C9] dark:border-gray-700 bg-gray-50 dark:bg-gray-900 h-full"
           >
-            {/* cabeçalho da coluna */}
-            <div className="bg-green text-white px-3 py-2 rounded-t-md flex items-center justify-between">
-           
-                <span className="font-semibold text-sm">
-                  {COLUMN_TITLES[columnValue]}
-                </span>
-                <Badge
-                  variant="secondary"
-                  className="pointer-events-none rounded-sm"
-                >
-                  {tasks.length}
-                </Badge>
-              
-              <Kanban.ColumnHandle asChild>
-                <Button variant="ghost" size="icon">
-                  <GripVertical className="h-4 w-4" />
-                </Button>
-              </Kanban.ColumnHandle>
+            {/* Cabeçalho da coluna */}
+            <div className="text-blue bg-card px-3 py-2 rounded-md flex items-center border-b-2 border-l-10 border-l-green justify-between">
+              <span className="font-semibold text-[18px]">
+                {COLUMN_TITLES[columnValue]}
+              </span>
+              <Badge variant="secondary" className="pointer-events-none rounded-sm">
+                {tasks.length}
+              </Badge>
             </div>
 
-            {/* cards */}
+            {/* Cards */}
             <div className="flex flex-col gap-2">
-              {tasks.map((task) => (
-                <Kanban.Item key={task.id} value={task.id} asHandle asChild>
-                  <div className="rounded-md shadow-xs dark:bg-gray-800 shadow-black/40 bg-card p-3">
-                    {/* conteúdo do card */}
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="line-clamp-1 font-medium text-sm">
-                          {task.title}
-                        </span>
-                        <Badge
-                          variant={
-                            task.priority === "high"
-                              ? "destructive"
-                              : task.priority === "medium"
-                              ? "default"
-                              : "secondary"
-                          }
-                          className="pointer-events-none h-5 rounded-sm px-1.5 text-[11px] capitalize"
-                        >
-                          {task.priority}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center justify-between text-muted-foreground text-xs">
-                        {task.assignee && (
-                          <div className="flex items-center gap-1">
-                            <div className="size-2 rounded-full bg-primary/20" />
-                            <span className="line-clamp-1">{task.assignee}</span>
-                          </div>
-                        )}
-                        {task.dueDate && (
-                          <time className="text-[10px] tabular-nums">
-                            {task.dueDate}
-                          </time>
-                        )}
-                      </div>
+              
+              {tasks.map((card) => (
+                <Kanban.Item key={card.id} value={card.id} asChild>
+
+                  <div className="relative bg-card shadow-md rounded-md hover:scale-102 transition-all">
+                    
+                    <div>
+                      <CardKanbanDetail {...card} />
                     </div>
+                    
+                    <Kanban.ItemHandle className="absolute top-2 right-0 cursor-grab text-gray-500 hover:text-gray-700">
+                      <GripVertical className="h-4 w-4" />
+                    </Kanban.ItemHandle>
+
                   </div>
                 </Kanban.Item>
               ))}

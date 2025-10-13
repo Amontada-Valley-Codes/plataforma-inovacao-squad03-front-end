@@ -9,19 +9,17 @@ export default function Challengers() {
         <div className="w-full flex-1 min-h-0 flex flex-col">
 
             {/* Register */}
-            <div className="col-span-12 space-y-2 bg-[#F5F6F7] dark:bg-gray-800 p-5">
+            <div className="col-span-12 space-y-2 bg-card py-4 px-2 flex justify-between items-center rounded-[10px]">
 
-                <div className="text-[#0E0062] dark:text-white md:px-5">
+                <div className="text-blue md:px-5">
                     
                     <h1 className="text-[25px] md:text-[30px] font-medium">
                         Desafios
                     </h1>
 
-                    <p className="text-[16px] md:text-[18px]"> Ambiente de desenvolvimento de desafios </p>
-
                 </div>
 
-                <div className="w-full h-full flex justify-end ">
+                <div>
                     
                     <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px] text-white"> Novo desafio </Button>
 

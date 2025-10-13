@@ -11,9 +11,9 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function MonthlySalesChart() {
+export default function ConversionRateChart() {
   const options: ApexOptions = {
-    colors: ["#465fff"],
+    colors: ["#10B981"],
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "bar",
@@ -41,17 +41,17 @@ export default function MonthlySalesChart() {
     xaxis: {
       categories: [
         "Jan",
-        "Feb",
+        "Fev",
         "Mar",
-        "Apr",
-        "May",
+        "Abr",
+        "Mai",
         "Jun",
         "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
+        "Ago",
+        "Set",
+        "Out",
         "Nov",
-        "Dec",
+        "Dez",
       ],
       axisBorder: {
         show: false,
@@ -60,15 +60,14 @@ export default function MonthlySalesChart() {
         show: false,
       },
     },
-    legend: {
-      show: true,
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "Outfit",
-    },
     yaxis: {
       title: {
         text: undefined,
+      },
+      min: 0,
+      max: 100,
+      labels: {
+        formatter: (val: number) => `${val}%`,
       },
     },
     grid: {
@@ -81,22 +80,23 @@ export default function MonthlySalesChart() {
     fill: {
       opacity: 1,
     },
-
     tooltip: {
       x: {
         show: false,
       },
       y: {
-        formatter: (val: number) => `${val}`,
+        formatter: (val: number) => `${val}% de conversão`,
       },
     },
   };
+
   const series = [
     {
-      name: "Sales",
-      data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
+      name: "Taxa de Conversão",
+      data: [15, 62, 18, 25, 80, 28, 32, 19, 24, 9, 97, 35],
     },
   ];
+
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleDropdown() {
@@ -111,7 +111,7 @@ export default function MonthlySalesChart() {
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-          Monthly Sales
+          Taxa de Conversão para POC
         </h3>
 
         <div className="relative inline-block">
@@ -127,13 +127,13 @@ export default function MonthlySalesChart() {
               onItemClick={closeDropdown}
               className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              View More
+              Ver Detalhes
             </DropdownItem>
             <DropdownItem
               onItemClick={closeDropdown}
               className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
-              Delete
+              Exportar Dados
             </DropdownItem>
           </Dropdown>
         </div>

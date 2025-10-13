@@ -3,7 +3,7 @@ import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function About() {
   return (
-    <section className="relative flex flex-col lg:flex-row w-full min-h-screen bg-[#FFFFFF]">
+    <section className="relative flex flex-col lg:flex-row w-full min-h-screen bg-[#FFFFFF]" id="sobre">
       
       {/* Lado da Imagem */}
       <div className="relative w-full h-[300px] lg:w-1/2 lg:h-screen z-0">

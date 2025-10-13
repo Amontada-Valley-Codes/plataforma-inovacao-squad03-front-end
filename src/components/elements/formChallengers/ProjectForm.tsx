@@ -39,7 +39,7 @@ export default function ProjectForm() {
   };
 
   return (
-    <ComponentCard title="Formulário de Projeto">
+    <ComponentCard title="Adicione Um Desafio">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <Label htmlFor="status">Status</Label>

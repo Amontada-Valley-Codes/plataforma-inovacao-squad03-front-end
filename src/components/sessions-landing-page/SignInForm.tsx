@@ -1,7 +1,53 @@
 'use client'
+import React from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { email, z } from "zod"
+import Axios from "axios"
 import { Button } from "../ui/button"
+import { useRouter } from "next/navigation"
+import { api } from "@/api/axiosConfig"
+
+const loginSchema = z.object({
+  email: z
+    .string()
+    .min(1, "Email é obrigatório")
+    .email("Email inválido"),
+  senha: z
+    .string()
+    .min(8, "Senha deve ter pelo menos 8 caracteres")
+    .max(20, "Senha deve ter no máximo 20 caracteres"),
+})
+
+type LoginData = z.infer<typeof loginSchema>
 
 export default function UserLogin() {
+    const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>({
+    resolver: zodResolver(loginSchema),
+  })
+
+  const router = useRouter()
+
+  const onSubmit = async (data: LoginData) => {
+    try {
+      const response = await api.post("/auth/login", {
+        email: data.email,
+        password: data.senha,
+      })
+
+      localStorage.setItem("authtoken", response.data.access_token)
+      router.push("/admin")
+
+    } catch (error) {
+      console.error("Erro ao fazer login:", error)
+    }
+
+  }
+
     return (
         <div className="bg-gray-100 flex items-center justify-center min-h-screen px-4">
             <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
@@ -19,22 +65,27 @@ export default function UserLogin() {
                     Digite o seu e-mail e senha de acesso.
                 </p>
 
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4 text-left">
-                        <label className="block mb-1 text-sm font-medium">Email:</label>
+                        <label className="block mb-1 text-sm font-medium text-black">Email:</label>
                         <input 
                             type="email"
-                            className="w-full border border-black rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-[#7EB627]"
-                            required
-                        />
+                             {...register("email")}
+                              className="w-full border border-black rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-[#7EB627] text-black"
+                            />
+                            {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
                     </div>
                     <div className="mb-6 text-left">
-                        <label className="block mb-1 text-sm font-medium">Senha:</label>
+                        <label className="block mb-1 text-sm font-medium text-black">Senha:</label>
                         <input 
                             type="password"
-                            className="w-full border border-black rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-[#7EB627]"
+                            {...register("senha")}
+                            className="w-full border border-black rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-1 focus:ring-[#7EB627] text-black"
                             required
                         />
+                        {errors.senha && (
+                        <p className="text-red-500 text-xs">{errors.senha.message}</p>
+                        )}
                     </div>
                     <div>
                         <Button 

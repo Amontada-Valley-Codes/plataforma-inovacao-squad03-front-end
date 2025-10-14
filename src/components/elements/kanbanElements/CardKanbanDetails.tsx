@@ -9,7 +9,7 @@ import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { PropsCard } from "@/types";
-import CardKanban from "./CardKanban";
+import CardKanban from "./kanbanElements/CardKanban";
 import MenuCard from "./MenuCard";
 import CardComments from "./CardComments";
 import ButtonPublic from "./ButtonPublic";
@@ -36,7 +36,7 @@ export default function CardKanbanDetail(props: PropsCard) {
 
         </DialogTrigger>
 
-        <DialogContent className="flex flex-col bg-card">
+        <DialogContent className="flex flex-col bg-card md:min-w-[600px]">
 
             {/* header */}
             <div className="flex justify-between items-center border-b-2">

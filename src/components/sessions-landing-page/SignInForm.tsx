@@ -2,9 +2,11 @@
 import React from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import { email, z } from "zod"
 import Axios from "axios"
 import { Button } from "../ui/button"
+import { useRouter } from "next/navigation"
+import { api } from "@/api/axiosConfig"
 
 const loginSchema = z.object({
   email: z
@@ -28,13 +30,22 @@ export default function UserLogin() {
     resolver: zodResolver(loginSchema),
   })
 
+  const router = useRouter()
+
   const onSubmit = async (data: LoginData) => {
     try {
-      const response = await Axios.post("/auth/login", data)
-      console.log("Login bem-sucedido:", response.data)
+      const response = await api.post("/auth/login", {
+        email: data.email,
+        password: data.senha,
+      })
+
+      localStorage.setItem("authtoken", response.data.access_token)
+      router.push("/admin")
+
     } catch (error) {
       console.error("Erro ao fazer login:", error)
     }
+
   }
 
     return (

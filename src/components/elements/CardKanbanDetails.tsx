@@ -36,7 +36,7 @@ export default function CardKanbanDetail(props: PropsCard) {
 
         </DialogTrigger>
 
-        <DialogContent className="flex flex-col bg-card">
+        <DialogContent className="flex flex-col bg-card md:min-w-[600px]">
 
             {/* header */}
             <div className="flex justify-between items-center border-b-2">

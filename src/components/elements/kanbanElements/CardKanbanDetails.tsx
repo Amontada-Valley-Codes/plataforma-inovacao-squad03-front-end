@@ -9,7 +9,7 @@ import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { PropsCard } from "@/types";
-import CardKanban from "./CardKanban";
+import CardKanban from "./kanbanElements/CardKanban";
 import MenuCard from "./MenuCard";
 import CardComments from "./CardComments";
 import ButtonPublic from "./ButtonPublic";

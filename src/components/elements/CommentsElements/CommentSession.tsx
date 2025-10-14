@@ -1,4 +1,4 @@
-import Comment from "./Comment"
+import Comment from "./CommentsElements/Comment"
 import InputCommnet from "./InputComment"
 
 export default function CommentSession() {

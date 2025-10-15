@@ -16,7 +16,6 @@ export default function Initial() {
             { href: "#servicos", label: "Serviços" },
             { href: "#startups", label: "Startups" },
             { href: "#contato", label: "Contato" },
-            { href: "#login", label: "Login" }
           ]}
         />
 

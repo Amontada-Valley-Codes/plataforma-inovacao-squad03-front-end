@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import { Button } from "./ui/button"
+import { useRouter } from "next/navigation"
 
 interface NavItem {
   href: string
@@ -26,6 +28,7 @@ export function Header({
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState("")
+  const router = useRouter()
 
   const navigationItems = useMemo(() => navItems, [navItems])
 
@@ -126,6 +129,15 @@ export function Header({
                   />
                 </Link>
               ))}
+
+              <Button 
+                variant={"ninaButton"} 
+                className="px-10 font-bold tracking-wide"
+                onClick={() => {router.push("login")}}
+                >
+                  LOGIN
+                </Button>
+
             </div>
 
             {/* Botão mobile */}

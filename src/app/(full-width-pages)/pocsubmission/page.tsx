@@ -27,15 +27,7 @@ export default function Submission() {
     <div className="flex flex-col items-center justify-center min-h-screen p-6 w-full">
       <form
         onSubmit={handleSubmit}
-        className="
-          w-full 
-          max-w-4xl                 
-          p-6 
-          md:p-10            
-          space-y-6 
-          transition-all 
-          duration-300
-        "
+        className="w-full max-w-4xl p-6 md:p-10 space-y-6 transition-all duration-300"
       >
         {/* Título */}
         <div className="text-[25px] md:text-[30px] text-blue font-medium text-center">
@@ -87,19 +79,10 @@ export default function Submission() {
             type="file"
             multiple
             onChange={handleFileChange}
-            className="
-              block 
-              w-full 
-              text-sm 
-              text-gray-700 
-              border border-gray-300 
-              rounded-md 
-              cursor-pointer 
-              focus:outline-none
-            "
+            className="block w-full text-sm text-gray-800 border border-gray-300 rounded-md h-10 cursor-pointer focus:outline-none"
           />
           {files.length > 0 && (
-            <ul className="mt-2 text-sm text-gray-600 list-disc list-inside">
+            <ul className="mt-2 text-sm text-gray-700 list-disc list-inside">
               {files.map((file, index) => (
                 <li key={index}>{file.name}</li>
               ))}
@@ -110,16 +93,7 @@ export default function Submission() {
         {/* Botão */}
         <button
           type="submit"
-          className="
-            px-6 
-            py-3 
-            text-white 
-            bg-blue-600 
-            rounded-md 
-            hover:bg-blue-700 
-            transition-colors 
-            w-full
-          "
+          className="px-6 py-3 text-white bg-green rounded-md hover:scale-102 transition-all w-full"
         >
           Enviar PoC
         </button>

@@ -11,8 +11,8 @@ import { DialogTrigger } from "@radix-ui/react-dialog";
 import { PropsCard } from "@/types";
 import CardKanban from "./CardKanban";
 import MenuCard from "./MenuCard";
-import CardComments from "./CardComments";
-import ButtonPublic from "./ButtonPublic";
+import CardComments from "../CommentsElements/CardComments";
+import ButtonPublic from "../publicElements/ButtonPublic";
 
 
 const COLUMN_TITLES: Record<string, string> = {

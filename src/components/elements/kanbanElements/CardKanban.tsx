@@ -1,6 +1,6 @@
 import { PropsCard } from "@/types"
-import { Badge } from "../ui/badge"
-import CardKanbanDetail from "./CardKanbanDetails"
+import { Badge } from "../../ui/badge"
+import CardKanbanDetail from "../CardKanbanDetails"
 import { useState } from "react"
 
 const PUBLIC_STATE: Record<string, string> = {

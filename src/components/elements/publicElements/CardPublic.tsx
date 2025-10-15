@@ -40,7 +40,7 @@ export default function CardPublic({id, image, corporationName, startDate, finis
                 <h1 className="text-[18px] text-blue font-medium mb-4"> {title} </h1>
 
                 {/* descrição */}
-                <p>{description}</p>
+                <p className="line-clamp-3 text-muted-foreground">{description}</p>
 
             </CardContent>
 

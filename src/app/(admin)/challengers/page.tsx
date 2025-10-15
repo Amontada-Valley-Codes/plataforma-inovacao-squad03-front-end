@@ -1,5 +1,5 @@
 import DialogForm from "@/components/elements/formChallengers/DialogForm";
-import KanbanDemo from "@/components/elements/KanbanDemo";
+import KanbanDemo from "@/components/elements/kanbanElements/KanbanDemo";
 import { Button } from "@/components/ui/button";
 
 

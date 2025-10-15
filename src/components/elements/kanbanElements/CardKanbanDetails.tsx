@@ -41,12 +41,12 @@ export default function CardKanbanDetail(props: PropsCard) {
             {/* header */}
             <div className="flex justify-between items-center border-b-2">
 
-                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{props.title}</DialogTitle>
+                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{props.name}</DialogTitle>
 
                 {/* opções */}
                 <div className="flex items-center px-4 gap-2">
                     
-                    <ButtonPublic published={props.published} state={props.status}/>
+                    <ButtonPublic published={props.publishOption} state={props.status}/>
 
                     <MenuCard/>
 
@@ -88,7 +88,7 @@ export default function CardKanbanDetail(props: PropsCard) {
                                     <CalendarClock size={17} /> Data de entrega:
                                 </span>
 
-                                <span>{props.finishDate}</span>
+                                <span>{props.endDate}</span>
 
                                 {/* setor */}
                                 <span className="font-semibold flex items-center gap-1">

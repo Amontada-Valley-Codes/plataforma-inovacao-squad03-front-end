@@ -1,6 +1,6 @@
 import { PropsCard } from "@/types"
 import { Badge } from "../../ui/badge"
-import CardKanbanDetail from "../CardKanbanDetails"
+import CardKanbanDetail from "./CardKanbanDetails"
 import { useState } from "react"
 
 const PUBLIC_STATE: Record<string, string> = {
@@ -10,15 +10,15 @@ const PUBLIC_STATE: Record<string, string> = {
 
 export default function CardKanban({
         id,
-        image,
-        corporationName,
+        corporationId,
         startDate,
-        finishDate,
-        title,
+        endDate,
+        name,
         description,
         sector,
         status,
-        published
+        publishOption,
+        corporation
     }: PropsCard) {
     
 
@@ -30,13 +30,13 @@ export default function CardKanban({
 
                 <div className="flex flex-col">
 
-                    <h2 className="font-semibold text-sm line-clamp-2">{title}</h2>
-                    <span className="text-xs text-muted-foreground">{corporationName}</span>
+                    <h2 className="font-semibold text-sm line-clamp-2">{name}</h2>
+                    <span className="text-xs text-muted-foreground">{corporation.tradingName}</span>
                     
                 </div>
 
                 <Badge variant={"secondary"} className="bg-green dark:bg-gray-600 px-2 py-0.5 text-[12px] rounded-[5px] text-white">
-                    {PUBLIC_STATE[published]}
+                    {PUBLIC_STATE[publishOption]}
                 </Badge>
                 
             </div>
@@ -51,7 +51,7 @@ export default function CardKanban({
             {/* Datas */}
             <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Início: {startDate}</span>
-                <span>Fim: {finishDate}</span>
+                <span>Fim: {endDate}</span>
             </div>
 
         </div>

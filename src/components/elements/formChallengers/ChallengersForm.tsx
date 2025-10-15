@@ -11,6 +11,29 @@ import DatePicker from '@/components/form/date-picker';
 import TextArea from '@/components/form/input/TextArea';
 import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
 import { publishOptions, sectorOptions } from '@/types/selectOptions';
+import { api } from '@/api/axiosConfig';
+
+// tipes
+interface CreateChallengeRequest {
+  name: string;
+  startDate: string;
+  endDate: string;
+  sector: string;
+  description: string;
+  publishOption: string;
+}
+
+interface CreateChallengeResponse {
+  id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  sector: string;
+  description: string;
+  publishOption: string;
+  corporationId: string;
+  status: string;
+}
 
 export default function ChallengersForm() {
   const {
@@ -19,6 +42,7 @@ export default function ChallengersForm() {
     formState: { errors, isSubmitting },
     setValue,
     watch,
+    reset,
   } = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
@@ -31,8 +55,52 @@ export default function ChallengersForm() {
     }
   });
 
-  const onSubmit = (data: ProjectFormData) => {
-    console.log('Dados do formulário:', data);
+  const formatDateForAPI = (dateString: string, isEndDate = false): string => {
+    if (!dateString) return '';
+    
+    const date = new Date(dateString + 'T00:00:00');
+    
+    if (isEndDate) {
+      date.setHours(23, 59, 59, 999);
+    } else {
+      date.setHours(0, 0, 0, 0);
+    }
+    
+    return date.toISOString();
+  };
+
+  const createChallenge = async (data: CreateChallengeRequest): Promise<CreateChallengeResponse> => {
+    const token = localStorage.getItem('authToken');
+    
+    const response = await api.post('/challenges', data, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  };
+
+  const onSubmit = async (formData: ProjectFormData) => {
+    try {
+      const apiData: CreateChallengeRequest = {
+        name: formData.challengeName,
+        startDate: formatDateForAPI(formData.startDate, false),
+        endDate: formatDateForAPI(formData.deliveryDate, true),
+        sector: formData.sector,
+        description: formData.description,
+        publishOption: formData.status
+      };
+
+      const result = await createChallenge(apiData);
+      
+      alert('Challenge criado com sucesso!');
+      reset();
+
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao criar challenge.');
+    }
   };
 
   const handleSelectChange = (field: keyof ProjectFormData) => (value: string) => {
@@ -40,7 +108,7 @@ export default function ChallengersForm() {
   };
 
   const handleDateChange = (field: keyof ProjectFormData) => (dates: any, currentDateString: string) => {
-    setValue(field, currentDateString);
+    setValue(field, currentDateString, { shouldValidate: true });
   };
 
   return (
@@ -126,7 +194,7 @@ export default function ChallengersForm() {
           <Label htmlFor="description">Descrição</Label>
           <TextArea
             value={watch('description') || ''}
-            onChange={(value) => setValue('description', value)}
+            onChange={(value) => setValue('description', value, { shouldValidate: true })}
             rows={6}
             placeholder="Descreva do Desafio..."
             error={!!errors.description}

@@ -1,4 +1,4 @@
-// types/selectOptions.ts
+
 export const publishOptions = [
   { value: 'PUBLIC', label: 'Público' },
   { value: 'RESTRICTED', label: 'Restrito' },

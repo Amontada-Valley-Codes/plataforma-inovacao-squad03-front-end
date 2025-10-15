@@ -51,11 +51,11 @@ export default function Submission() {
           <TextArea
             id="description"
             value={message}
-            onChange={(e: any) => setMessage(e.target.value)}
+            onChange={setMessage}
             rows={5}
             placeholder="Descreva brevemente a sua PoC"
             required
-            className="w-full"
+            className="w-full !text-gray-800"
           />
         </div>
 
@@ -71,23 +71,19 @@ export default function Submission() {
           />
         </div>
 
-        {/* Upload de Arquivos */}
+        {/* Campo de Link do Projeto */}
         <div>
-          <Label htmlFor="files">Arquivos</Label>
-          <input
-            id="files"
-            type="file"
-            multiple
-            onChange={handleFileChange}
-            className="block w-full text-sm text-gray-800 border border-gray-300 rounded-md h-10 cursor-pointer focus:outline-none"
+          <Label htmlFor="projectLink">Link do Projeto</Label>
+          <Input
+            id="projectLink"
+            type="url"
+            placeholder="Insira o link do projeto"
+            required
+            className="w-full"
           />
-          {files.length > 0 && (
-            <ul className="mt-2 text-sm text-gray-700 list-disc list-inside">
-              {files.map((file, index) => (
-                <li key={index}>{file.name}</li>
-              ))}
-            </ul>
-          )}
+          <p className="mt-2 text-sm text-gray-500">
+            Envie o link onde sua PoC está hospedada ou disponível para visualização.
+          </p>
         </div>
 
         {/* Botão */}

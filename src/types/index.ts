@@ -1,14 +1,20 @@
 export type PropsCard = {
 
     id: string;
-    image: string;
-    corporationName: string;
+    name: string;
     startDate: string;
-    finishDate: string;
-    title: string;
-    description: string;
+    endDate: string;
     sector: string;
+    description: string;
+    publishOption: "PUBLIC" | "RESTRICTED";
+    corporationId: string;
     status: string;
-    published: "PUBLIC" | "RESTRICTED";
+    corporation: {
+        tradingName: string
+        logo: {
+            url: string
+            public_id: string
+        }
+    }
 
 }

@@ -1,5 +1,5 @@
-import Input from "../form/input/InputField";
-import { Button } from "../ui/button";
+import Input from "@/components/form/input/InputField";
+import { Button } from "@/components/ui/button";
 import { IoIosSend } from "react-icons/io";
 
 export default function InputComment() {

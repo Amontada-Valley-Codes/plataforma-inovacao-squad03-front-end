@@ -1,6 +1,6 @@
 'use client'
 
-import CardPublic from "@/components/elements/CardPublic";
+import CardPublic from "@/components/elements/publicElements/CardPublic";
 import Filters from "@/components/elements/Filters";
 import { useRef, useState } from "react";
 import { PropsCard } from "@/types";
@@ -17,7 +17,7 @@ export default function Workflow() {
         startDate: "02/10/2025",
         finishDate: "02/11/2025",
         title: "Desafio tal que tem aqui publicado",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at",
         sector: "Tecnologia",
         status: "Geração de ideias",
         published: "PUBLIC",
@@ -95,7 +95,7 @@ export default function Workflow() {
             </div>
 
             {/* desafios */}
-            <div className="mt-4 flex flex-col gap-5">
+            <div className="mt-4 gap-5 grid grid-cols-2">
                 {posts.map((post, index) => (
                     
                     <div key={index}>

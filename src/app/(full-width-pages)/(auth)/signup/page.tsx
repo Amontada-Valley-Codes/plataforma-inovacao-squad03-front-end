@@ -3,6 +3,8 @@
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
+import { api } from "@/api/axiosConfig"
 
 const enterpriseValidation = z.object({
   cnpj: z
@@ -61,10 +63,32 @@ export default function EnterpriseCadaster() {
     resolver: zodResolver(enterpriseValidation),
   })
 
-  const onSubmit = (data: EnterpriseFormData) => {
-    console.log("Dados enviados:", data)
-    alert("Cadastro de empresa enviado com sucesso!")
+
+const router = useRouter()
+
+const onSubmit = async (data: EnterpriseFormData) => {
+  try {
+    const response = await api.post("/enterprise", {
+      cnpj: data.cnpj,
+      legalName: data.legalName,
+      tradingName: data.tradingName,
+      foundationDate: data.foundationDate,
+      logo: data.logo,
+      mainAddress: data.mainAddress,
+      mainPhone: data.mainPhone,
+      generalEmail: data.generalEmail,
+      website: data.website,
+      sector: data.sector,
+      size: data.size
+    })
+
+    router.push("/admin")
+
+  } catch (error) {
+    console.error("Erro ao fazer cadastro de empresa.", error)
   }
+
+}
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 sm:px-0">

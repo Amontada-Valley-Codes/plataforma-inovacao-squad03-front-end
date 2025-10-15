@@ -48,7 +48,7 @@ export default function CardKanbanDetail(props: PropsCard) {
                     
                     <ButtonPublic published={props.publishOption} state={props.status}/>
 
-                    <MenuCard/>
+                    <MenuCard {...props} />
 
                 </div>
 

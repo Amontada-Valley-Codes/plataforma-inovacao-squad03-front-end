@@ -16,15 +16,10 @@ const COLUMN_TITLES: Record<string, string> = {
   EXPERIMENTATION: "Experimentação",
 };
 
-
-
-
 export default function KanbanDemo() {
   const [cards, setCards] = React.useState<PropsCard[]>([]);
 
-  React.useEffect(() => {
-
-    const getChallenges = async () => {
+  const getChallenges = async () => {
 
       try {
 
@@ -37,12 +32,13 @@ export default function KanbanDemo() {
         })
 
         setCards(response.data)
-        console.log("Desafios recebidos", response.data)
 
       } catch(error) {
         console.error("error", error)
       }
     }
+
+  React.useEffect(() => {
 
     getChallenges()
 

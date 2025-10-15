@@ -10,7 +10,7 @@ import Select from '@/components/form/Select';
 import DatePicker from '@/components/form/date-picker';
 import TextArea from '@/components/form/input/TextArea';
 import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
-import { statusOptions, sectorOptions } from '@/types/selectOptions';
+import { publishOptions, sectorOptions } from '@/types/selectOptions';
 
 export default function ChallengersForm() {
   const {
@@ -22,7 +22,12 @@ export default function ChallengersForm() {
   } = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      status: 'ideacao',
+      challengeName: "",
+      status: "",
+      startDate: "",
+      deliveryDate: "",
+      sector: "",
+      description: ""
     }
   });
 
@@ -31,7 +36,7 @@ export default function ChallengersForm() {
   };
 
   const handleSelectChange = (field: keyof ProjectFormData) => (value: string) => {
-    setValue(field, value);
+    setValue(field, value, { shouldValidate: true });
   };
 
   const handleDateChange = (field: keyof ProjectFormData) => (dates: any, currentDateString: string) => {
@@ -46,7 +51,9 @@ export default function ChallengersForm() {
           <Input
             type="text"
             placeholder="Digite o nome do desafio"
-            {...register('challengeName')}
+            name={register('challengeName').name}
+            onChange={register('challengeName').onChange}
+            ref={register('challengeName').ref}
           />
           {errors.challengeName && (
             <p className="mt-1 text-sm text-red-500">{errors.challengeName.message}</p>
@@ -54,14 +61,14 @@ export default function ChallengersForm() {
         </div>
 
         <div>
-          <Label htmlFor="status">Status</Label>
+          <Label htmlFor="status">Opção de Publicação</Label>
           <div className="relative">
             <Select
-              options={statusOptions}
-              placeholder="Selecione o status"
+              options={publishOptions}
+              placeholder="Selecione a opção de publicação"
               onChange={handleSelectChange('status')}
               className="dark:bg-dark-900"
-              defaultValue="ideacao"
+              defaultValue={watch('status')}
             />
             <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
               <ChevronDownIcon />
@@ -104,6 +111,7 @@ export default function ChallengersForm() {
               placeholder="Selecione o setor"
               onChange={handleSelectChange('sector')}
               className="dark:bg-dark-900"
+              defaultValue={watch('sector')}
             />
             <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
               <ChevronDownIcon />

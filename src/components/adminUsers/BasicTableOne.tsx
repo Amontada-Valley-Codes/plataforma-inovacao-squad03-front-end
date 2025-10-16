@@ -30,49 +30,49 @@ const tableData: User[] = [
     id: 2,
     name: "Maria Oliveira",
     email: "maria.oliveira@empresa.com",
-    category: "ANALISTA",
+    category: "AVALIADOR",
     company: "LOJAS AMERICANAS",
   },
   {
     id: 3,
     name: "Carlos Santos",
     email: "carlos.santos@tech.com",
-    category: "DESENVOLVEDOR",
+    category: "ADMINISTRADOR",
     company: "MAGAZINE LUIZA",
   },
   {
     id: 4,
     name: "Ana Costa",
     email: "ana.costa@corporation.com",
-    category: "GERENTE",
+    category: "COMUM",
     company: "VIA VAREJO",
   },
   {
     id: 5,
     name: "Paulo Rodrigues",
     email: "paulo.rodrigues@empresa.com",
-    category: "SUPERVISOR",
+    category: "GESTOR",
     company: "CASAS BAHIA",
   },
   {
     id: 6,
     name: "Fernanda Lima",
     email: "fernanda.lima@tech.com",
-    category: "COORDENADOR",
+    category: "AVALIADOR",
     company: "NATURA",
   },
   {
     id: 7,
     name: "Ricardo Almeida",
     email: "ricardo.almeida@corp.com",
-    category: "DIRETOR",
+    category: "ADMINISTRADOR",
     company: "AMBEV",
   },
   {
     id: 8,
     name: "Juliana Pereira",
     email: "juliana.pereira@empresa.com",
-    category: "ANALISTA",
+    category: "COMUM",
     company: "RENNER",
   },
 ];
@@ -101,17 +101,13 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
   const getBadgeColor = (category: string) => {
     switch (category) {
       case "GESTOR":
-      case "DIRETOR":
         return "success";
-      case "GERENTE":
-      case "COORDENADOR":
+      case "ADMINISTRADOR":
         return "primary";
-      case "SUPERVISOR":
+      case "AVALIADOR":
         return "warning";
-      case "ANALISTA":
+      case "COMUM":
         return "info";
-      case "DESENVOLVEDOR":
-        return "dark";
       default:
         return "success";
     }
@@ -141,7 +137,7 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  CATEGORIA
+                  NÍVEL DE USUÁRIO
                 </TableCell>
                 <TableCell
                   isHeader

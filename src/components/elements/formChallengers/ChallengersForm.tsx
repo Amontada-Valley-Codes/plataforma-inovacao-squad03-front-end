@@ -70,7 +70,7 @@ export default function ChallengersForm() {
   };
 
   const createChallenge = async (data: CreateChallengeRequest): Promise<CreateChallengeResponse> => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('authtoken');
     
     const response = await api.post('/challenges', data, {
       headers: {
@@ -94,8 +94,8 @@ export default function ChallengersForm() {
 
       const result = await createChallenge(apiData);
       
-      alert('Challenge criado com sucesso!');
       reset();
+      window.location.reload()
 
     } catch (error) {
       console.error('Erro:', error);

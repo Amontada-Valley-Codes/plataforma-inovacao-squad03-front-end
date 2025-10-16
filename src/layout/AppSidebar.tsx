@@ -17,7 +17,7 @@ import {
   TableIcon,
   UserCircleIcon,
 } from "../icons/index";
-import SidebarWidget from "./SidebarWidget";
+
 
 type NavItem = {
   name: string;
@@ -57,7 +57,11 @@ const navItems: NavItem[] = [
      name: "Forms",
      icon: <ListIcon />,
      subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-   },
+   },{
+    icon: <PlugInIcon />,
+    name: "Organizaçao",
+    path: "/adminUsers",
+  },
 
 ];
 
@@ -79,14 +83,14 @@ const othersItems: NavItem[] = [
   //      { name: "Videos", path: "/videos", pro: false },
   //    ],
   //  },
-   {
-     icon: <PlugInIcon />,
-     name: "Autentificação",
-     subItems: [
-       { name: "Entrar", path: "/signin", pro: false },
-       { name: "Cadastrar", path: "/signup", pro: false },
-     ],
-   },
+  //  {
+  //    icon: <PlugInIcon />,
+  //    name: "Autentificação",
+  //    subItems: [
+  //      { name: "Entrar", path: "/signin", pro: false },
+  //      { name: "Cadastrar", path: "/signup", pro: false },
+  //    ],
+  //  },
 ];
 
 const AppSidebar: React.FC = () => {

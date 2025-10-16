@@ -8,13 +8,17 @@ import {
   BoxCubeIcon,
   CalenderIcon,
   ChevronDownIcon,
+  DocsIcon,
   GridIcon,
+  GroupIcon,
   HorizontaLDots,
   ListIcon,
   PageIcon,
   PieChartIcon,
   PlugInIcon,
+  ShootingStarIcon,
   TableIcon,
+  TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
 
@@ -33,7 +37,12 @@ const navItems: NavItem[] = [
     path: "/admin"
   },
   {
-    icon: <PlugInIcon />,
+    icon: <GridIcon />,
+    name: "Corporaçao",
+    path: "/dashboard-corporation"
+  },
+  {
+    icon: <ShootingStarIcon />,
     name: "Desafios",
     path: "/pageDesafios"
   },
@@ -55,10 +64,10 @@ const navItems: NavItem[] = [
 
    {
      name: "Forms",
-     icon: <ListIcon />,
+     icon: <DocsIcon />,
      subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
    },{
-    icon: <PlugInIcon />,
+    icon: <GroupIcon />,
     name: "Organizaçao",
     path: "/adminUsers",
   },

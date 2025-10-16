@@ -6,7 +6,7 @@ import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
 
-export default function UserAddressCard() {
+export default function InfoCorpCard() {
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
@@ -19,45 +19,101 @@ export default function UserAddressCard() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <h4 className="text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
-              Address
+              Informações da Empresa
             </h4>
 
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Country
+                  CNPJ
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  United States
+                  20.161.506/0001-90
                 </p>
               </div>
 
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  City/State
+                  Nome Legal
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  Phoenix, Arizona, United States.
+                  Empreendimentos Pague Menos S/A
                 </p>
               </div>
 
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Postal Code
+                  Nome Comercial
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  ERT 2489
+                  Farmácia Pague Menos
                 </p>
               </div>
 
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  TAX ID
+                  Data de Fundação
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  AS4568384
+                  19/05/1981
                 </p>
               </div>
+
+                <div>
+                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                  Setor
+                </p>
+                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                  Varejo de Especialidade Farmacêutica
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                  Porte Empresarial
+                </p>
+                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                  Grande Porte
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                  Email
+                </p>
+                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                  paguemenoscontatoempresarial@gmail.com
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                  Telefone
+                </p>
+                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                  XX X XXXX-XXXX
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                  Endereço
+                </p>
+                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                  Fortaleza/CE
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
+                  Website
+                </p>
+                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
+                 www.paguemenos.com.br
+                </p>
+              </div>
+
+
             </div>
           </div>
 
@@ -80,7 +136,7 @@ export default function UserAddressCard() {
                 fill=""
               />
             </svg>
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -88,42 +144,72 @@ export default function UserAddressCard() {
         <div className="relative w-full p-4 overflow-y-auto bg-white no-scrollbar rounded-3xl dark:bg-gray-900 lg:p-11">
           <div className="px-2 pr-14">
             <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
-              Edit Address
+              Editar Informações da Empresa
             </h4>
             <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
-              Update your details to keep your profile up-to-date.
+              Edite as informações para manter o perfil da empresa atualizado.
             </p>
           </div>
           <form className="flex flex-col">
             <div className="px-2 overflow-y-auto custom-scrollbar">
               <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                 <div>
-                  <Label>Country</Label>
-                  <Input type="text" defaultValue="United States" />
+                  <Label>CNPJ</Label>
+                  <Input type="text" defaultValue="20.161.506/0001-90" />
                 </div>
 
                 <div>
-                  <Label>City/State</Label>
-                  <Input type="text" defaultValue="Arizona, United States." />
+                  <Label>Nome Legal</Label>
+                  <Input type="text" defaultValue="Empreendimentos Pague Menos S/A" />
                 </div>
 
                 <div>
-                  <Label>Postal Code</Label>
-                  <Input type="text" defaultValue="ERT 2489" />
+                  <Label>Nome Comercial</Label>
+                  <Input type="text" defaultValue="Farmácia Pague Menos" />
                 </div>
 
                 <div>
-                  <Label>TAX ID</Label>
-                  <Input type="text" defaultValue="AS4568384" />
+                  <Label>Data de Fundação</Label>
+                  <Input type="text" defaultValue="19/05/1981" />
+                </div>
+
+                <div>
+                  <Label>Setor</Label>
+                  <Input type="text" defaultValue="Varejo de Especialidade Farmacêutica" />
+                </div>
+
+                <div>
+                  <Label>Porte Empresarial</Label>
+                  <Input type="text" defaultValue="Grande Porte" />
+                </div>
+
+                <div>
+                  <Label>Email</Label>
+                  <Input type="text" defaultValue="paguemenoscontatoempresarial@gmail.com" />
+                </div>
+
+                <div>
+                  <Label>Telefone</Label>
+                  <Input type="text" defaultValue="XX X XXXX-XXXX" />
+                </div>
+
+                <div>
+                  <Label>Endereço</Label>
+                  <Input type="text" defaultValue="Fortaleza/CE" />
+                </div>
+
+                <div>
+                  <Label>Website</Label>
+                  <Input type="text" defaultValue="www.paguemenos.com.br" />
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-3 px-2 mt-6 lg:justify-end">
               <Button size="sm" variant="outline" onClick={closeModal}>
-                Close
+                Fechar
               </Button>
               <Button size="sm" onClick={handleSave}>
-                Save Changes
+                Salvar
               </Button>
             </div>
           </form>

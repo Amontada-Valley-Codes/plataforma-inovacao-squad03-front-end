@@ -178,7 +178,7 @@ export default function UserInfoCard() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3 px-2 -mt-16 lg:justify-end">
+            <div className="flex items-center gap-3 px-2 mt-6 lg:-mt-16 lg:justify-end">
               <Button size="sm" variant="outline" onClick={closeModal}>
                 Fechar
               </Button>

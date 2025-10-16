@@ -7,10 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { PropsCard } from "@/types";
+import { PropsCardKanban } from "@/types";
 import { IoMdMore } from "react-icons/io";
 
-export default function MenuCard(props: PropsCard) {
+export default function MenuCard(props: PropsCardKanban) {
 
     const handleDelete = async () => {
 
@@ -23,8 +23,8 @@ export default function MenuCard(props: PropsCard) {
                     Authorization: `Bearer ${token}`
                 }
             })
-
-            window.location.reload()
+            
+            props.setReload(!props.realod)
         } catch(error) {
             console.log("Erro:", error)
         }

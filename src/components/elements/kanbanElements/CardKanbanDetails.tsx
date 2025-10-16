@@ -8,7 +8,7 @@ import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { PropsCard } from "@/types";
+import { PropsCard, PropsCardKanban } from "@/types";
 import CardKanban from "./CardKanban";
 import MenuCard from "./MenuCard";
 import CardComments from "../CommentsElements/CardComments";
@@ -24,7 +24,7 @@ const COLUMN_TITLES: Record<string, string> = {
   EXPERIMENTATION: "Experimentação",
 };
 
-export default function CardKanbanDetail(props: PropsCard) {
+export default function CardKanbanDetail(props: PropsCardKanban) {
     
     useEffect(() => {
         
@@ -67,7 +67,7 @@ export default function CardKanbanDetail(props: PropsCard) {
                         
                         <ButtonPublic published={props.publishOption} state={props.status}/>
 
-                        <MenuCard {...props} />
+                        <MenuCard {...props} realod={props.realod} setReload={props.setReload} />
 
                     </div>
 

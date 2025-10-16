@@ -18,49 +18,49 @@ export default function UserInfoCard() {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h4 className="text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6">
-            Personal Information
+            Informações Pessoais
           </h4>
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                First Name
+                Nome
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Musharof
+                Antônio
               </p>
             </div>
 
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Last Name
+                Sobrenome
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Chowdhury
+                Silva
               </p>
             </div>
 
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Email address
+                Email
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
                 randomuser@pimjo.com
               </p>
             </div>
 
-            <div>
+            {/* <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Phone
+                Telefone
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                +09 363 398 46
+                xx x xxxx-xxxx
               </p>
-            </div>
+            </div> */}
 
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Bio
+                Cargo
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
                 Team Manager
@@ -88,7 +88,7 @@ export default function UserInfoCard() {
               fill=""
             />
           </svg>
-          Edit
+          Editar
         </button>
       </div>
 
@@ -96,17 +96,17 @@ export default function UserInfoCard() {
         <div className="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
           <div className="px-2 pr-14">
             <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
-              Edit Personal Information
+              Editar Informações Pessoais
             </h4>
             <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
-              Update your details to keep your profile up-to-date.
+              Insira seus dados para manter seu perfil atualizado.
             </p>
           </div>
           <form className="flex flex-col">
             <div className="custom-scrollbar h-[450px] overflow-y-auto px-2 pb-3">
-              <div>
+              {/* <div>
                 <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
-                  Social Links
+                  Redes Sociais
                 </h5>
 
                 <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
@@ -139,46 +139,51 @@ export default function UserInfoCard() {
                     />
                   </div>
                 </div>
-              </div>
-              <div className="mt-7">
-                <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
-                  Personal Information
-                </h5>
+              </div> */}
+              <div className="mt-2">
+                {/* <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+                  Informações Pessoais
+                </h5> */}
 
                 <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                   <div className="col-span-2 lg:col-span-1">
-                    <Label>First Name</Label>
-                    <Input type="text" defaultValue="Musharof" />
+                    <Label>Nome</Label>
+                    <Input type="text" defaultValue="Antônio" />
                   </div>
 
                   <div className="col-span-2 lg:col-span-1">
-                    <Label>Last Name</Label>
-                    <Input type="text" defaultValue="Chowdhury" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Email Address</Label>
-                    <Input type="text" defaultValue="randomuser@pimjo.com" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Phone</Label>
-                    <Input type="text" defaultValue="+09 363 398 46" />
+                    <Label>Sobrenome</Label>
+                    <Input type="text" defaultValue="Silva" />
                   </div>
 
                   <div className="col-span-2">
-                    <Label>Bio</Label>
+                    <Label>Email</Label>
+                    <Input type="text" defaultValue="randomuser@pimjo.com" />
+                  </div>
+
+                  {/* <div className="col-span-2 lg:col-span-1">
+                    <Label>Telefone</Label>
+                    <Input type="text" defaultValue="(xx) x xxxx-xxxx" />
+                  </div> */}
+
+                  <div className="col-span-2">
+                    <Label>Cargo</Label>
                     <Input type="text" defaultValue="Team Manager" />
+                  </div>
+
+                  <div className="col-span-2">
+                    <Label>Corporação</Label>
+                    <Input type="text" defaultValue="Pague Menos" />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3 px-2 mt-6 lg:justify-end">
+            <div className="flex items-center gap-3 px-2 mt-6 lg:-mt-16 lg:justify-end">
               <Button size="sm" variant="outline" onClick={closeModal}>
-                Close
+                Fechar
               </Button>
-              <Button size="sm" onClick={handleSave}>
-                Save Changes
+              <Button className="bg-green" size="sm" onClick={handleSave}>
+                Salvar
               </Button>
             </div>
           </form>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Label from '@/components/form/Label';
-import Input from '@/components/form/input/InputField';
 import Select from '@/components/form/Select';
 
 interface FiltersProps {
@@ -13,7 +12,7 @@ interface FiltersProps {
 }
 
 export default function Filters({ filters, onFilterChange }: FiltersProps) {
-  const categories = ['GESTOR', 'ANALISTA', 'DESENVOLVEDOR', 'GERENTE', 'SUPERVISOR', 'COORDENADOR', 'DIRETOR'];
+  const categories = ['GESTOR', 'AVALIADOR', 'ADMINISTRADOR', 'COMUM'];
   const companies = ['PAGUE MENOS', 'LOJAS AMERICANAS', 'MAGAZINE LUIZA', 'VIA VAREJO', 'CASAS BAHIA', 'NATURA', 'AMBEV', 'RENNER'];
 
   return (
@@ -24,20 +23,21 @@ export default function Filters({ filters, onFilterChange }: FiltersProps) {
         {/* Filtro por Nome */}
         <div>
           <Label htmlFor="name">Nome</Label>
-          <Input
+          <input
             type="text"
             placeholder="Buscar por nome..."
             value={filters.name}
             onChange={(e) => onFilterChange('name', e.target.value)}
+            className="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:border-gray-700 dark:focus:border-brand-800"
           />
         </div>
 
-        {/* Filtro por Categoria */}
+        {/* Filtro por Nível de Usuário */}
         <div>
-          <Label htmlFor="category">Categoria</Label>
+          <Label htmlFor="category">Nível de Usuário</Label>
           <Select
-            options={[{ value: '', label: 'Todas as categorias' }, ...categories.map(cat => ({ value: cat, label: cat }))]}
-            placeholder="Selecione a categoria"
+            options={[{ value: '', label: 'Todos os níveis' }, ...categories.map(cat => ({ value: cat, label: cat }))]}
+            placeholder="Selecione o nível"
             onChange={(value) => onFilterChange('category', value)}
             defaultValue={filters.category}
           />

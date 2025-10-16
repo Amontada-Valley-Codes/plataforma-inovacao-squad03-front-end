@@ -208,7 +208,7 @@ export default function InfoCorpCard() {
               <Button size="sm" variant="outline" onClick={closeModal}>
                 Fechar
               </Button>
-              <Button size="sm" onClick={handleSave}>
+              <Button className="bg-green" size="sm" onClick={handleSave}>
                 Salvar
               </Button>
             </div>

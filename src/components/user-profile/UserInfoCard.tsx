@@ -49,14 +49,14 @@ export default function UserInfoCard() {
               </p>
             </div>
 
-            <div>
+            {/* <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                 Telefone
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
                 xx x xxxx-xxxx
               </p>
-            </div>
+            </div> */}
 
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
@@ -104,7 +104,7 @@ export default function UserInfoCard() {
           </div>
           <form className="flex flex-col">
             <div className="custom-scrollbar h-[450px] overflow-y-auto px-2 pb-3">
-              <div>
+              {/* <div>
                 <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
                   Redes Sociais
                 </h5>
@@ -139,32 +139,32 @@ export default function UserInfoCard() {
                     />
                   </div>
                 </div>
-              </div>
-              <div className="mt-7">
-                <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+              </div> */}
+              <div className="mt-2">
+                {/* <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
                   Informações Pessoais
-                </h5>
+                </h5> */}
 
                 <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                   <div className="col-span-2 lg:col-span-1">
                     <Label>Nome</Label>
-                    <Input type="text" defaultValue="Musharof" />
+                    <Input type="text" defaultValue="Antônio" />
                   </div>
 
                   <div className="col-span-2 lg:col-span-1">
                     <Label>Sobrenome</Label>
-                    <Input type="text" defaultValue="Chowdhury" />
+                    <Input type="text" defaultValue="Silva" />
                   </div>
 
-                  <div className="col-span-2 lg:col-span-1">
+                  <div className="col-span-2">
                     <Label>Email</Label>
                     <Input type="text" defaultValue="randomuser@pimjo.com" />
                   </div>
 
-                  <div className="col-span-2 lg:col-span-1">
+                  {/* <div className="col-span-2 lg:col-span-1">
                     <Label>Telefone</Label>
                     <Input type="text" defaultValue="(xx) x xxxx-xxxx" />
-                  </div>
+                  </div> */}
 
                   <div className="col-span-2">
                     <Label>Cargo</Label>
@@ -178,11 +178,11 @@ export default function UserInfoCard() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3 px-2 mt-6 lg:justify-end">
+            <div className="flex items-center gap-3 px-2 -mt-16 lg:justify-end">
               <Button size="sm" variant="outline" onClick={closeModal}>
                 Fechar
               </Button>
-              <Button size="sm" onClick={handleSave}>
+              <Button className="bg-green" size="sm" onClick={handleSave}>
                 Salvar
               </Button>
             </div>

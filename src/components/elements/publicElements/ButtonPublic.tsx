@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { api } from "@/api/axiosConfig";
 
 interface Props {
+    id: string;
     published: "PUBLIC" | "RESTRICTED";
     state: string
+    reload: boolean
+    setReload: (prev: boolean) => void
 } 
 
-export default function ButtonPublic({published, state}: Props) {
+
+export default function ButtonPublic({id, published, state, reload, setReload}: Props) {
     const [isHidden, setIsHidden] = useState(state)
 
     const StyleVariant = {
@@ -20,16 +25,40 @@ export default function ButtonPublic({published, state}: Props) {
         },
     }
 
+    const handlePublic = async () => {
+
+        const statusPublic = published === "PUBLIC" ? "RESTRICTED" : "PUBLIC"
+
+        try{
+            const token = localStorage.getItem("authtoken")
+
+            await api.put(`/challenges/${id}`, {
+                publishOption: statusPublic
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            setReload(!reload)
+            
+
+        } catch(error) {
+            console.log(error)
+        }
+
+    }
+
     return (
         
         <Button 
             variant={"ninaButton"} 
-            size={"newsize"} 
+            size={"newsize"}
+            onClick={handlePublic}
             className={`
                 ${StyleVariant[published].bg} 
                 ${StyleVariant[published].hover} 
                 ${isHidden === "EXPERIMENTATION" ? "block" : "hidden"}
-                
+                border-none
             `}>
                     
             <span>{published === "RESTRICTED" ? "Publicar" : "Ocultar"}</span>

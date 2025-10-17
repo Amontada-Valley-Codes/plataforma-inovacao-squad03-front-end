@@ -67,7 +67,7 @@ export default function CardKanbanDetail(props: PropsCardKanban) {
                         
                         <ButtonPublic published={props.publishOption} state={props.status}/>
 
-                        <MenuCard {...props} realod={props.realod} setReload={props.setReload} />
+                        <MenuCard {...props} realod={props.realod} setReload={props.setReload}/>
 
                     </div>
 

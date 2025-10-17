@@ -42,5 +42,6 @@ export type PropsCardKanban = {
 
 export type PropsFormChallenger = {
     setReload: (prev: boolean) => void;
-    realod: boolean
+    realod: boolean;
+    id: string;
 }

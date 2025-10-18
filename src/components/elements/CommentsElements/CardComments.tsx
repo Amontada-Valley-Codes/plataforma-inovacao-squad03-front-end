@@ -6,9 +6,10 @@ import {
 } from "@/components/ui/accordion"
 import { TfiCommentAlt } from "react-icons/tfi";
 import CommentSession from "./CommentSession";
+import { PropsSessionComment } from "@/types";
 
 
-export default function CardComments() {
+export default function CardComments({challangerId}: PropsSessionComment) {
 
     return (
 
@@ -28,7 +29,7 @@ export default function CardComments() {
 
                 <AccordionContent>
 
-                    <CommentSession/>
+                    <CommentSession challangerId={challangerId}/>
                  
                 </AccordionContent>
 

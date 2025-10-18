@@ -45,3 +45,25 @@ export type PropsFormChallenger = {
     realod: boolean;
     id: string;
 }
+
+export type PropsSessionComment = {
+    challangerId: string
+}
+
+export type PropsComment = {
+  id: string;
+  content: string;
+  createdAt: string;
+  challengerId: string;
+  user: {
+    id: string;
+    name: string;
+    role: string;
+  }
+}
+
+export type PropsInputComments = {
+    challengerId: string;
+    commentsUpload: boolean;
+    setCommentsUplaod: (prev: boolean) => void;
+}

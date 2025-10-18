@@ -142,7 +142,7 @@ export default function CardKanbanDetail(props: PropsCardKanban) {
                     {/* comentários */}
                     {(props.status === "IDEATION" || props.status === "DETAILED_SCREENING" || props.status === "EXPERIMENTATION") && (
                         <div>
-                            <CardComments/>
+                            <CardComments challangerId={props.id}/>
                         </div>
                     )}
 

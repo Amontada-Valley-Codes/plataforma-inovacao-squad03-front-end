@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
-import { PropsComment } from "@/types"
-
+import { PropsCardComment } from "@/types"
+import { api } from "@/api/axiosConfig"
 
 const FORMATING_ROLE: Record<string, string> = {
 
@@ -13,7 +13,28 @@ const FORMATING_ROLE: Record<string, string> = {
 
 }
 
-export default function Comment(props: PropsComment) {
+export default function Comment(props: PropsCardComment) {
+ 
+  const handleDeleteComment = async () => {
+
+    const token = localStorage.getItem("authtoken")
+    
+    try {
+
+      await api.delete(`/comments/${props.id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      props.setCommentsUpload(!props.commentsUpload)
+
+    } catch(error) {
+      console.log(error)
+    }
+
+  }
+
   return (
     
     <div className="flex flex-col gap-2 rounded-2xl border p-4 bg-card shadow-sm">
@@ -54,6 +75,7 @@ export default function Comment(props: PropsComment) {
             Editar
           </Button>
           <Button
+            onClick={() => {handleDeleteComment()}}
             variant="ghost"
             size="sm"
             className="h-6 px-2 text-xs text-muted-foreground hover:text-destructive"

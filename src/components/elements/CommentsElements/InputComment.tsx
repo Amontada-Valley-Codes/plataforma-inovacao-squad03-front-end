@@ -3,7 +3,6 @@ import Input from "@/components/form/input/InputField";
 import { Button } from "@/components/ui/button";
 import { PropsInputComments } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoIosSend } from "react-icons/io";
 import z from "zod";
@@ -23,7 +22,7 @@ export default function InputComment(props: PropsInputComments) {
         try {
             const token = localStorage.getItem("authtoken")
 
-            api.post("/comments", {
+            await api.post("/comments", {
                 content: data.content,
                 challengeId: props.challengerId
             }, 
@@ -33,7 +32,7 @@ export default function InputComment(props: PropsInputComments) {
                 }
             })
 
-            props.setCommentsUplaod(!props.commentsUpload)
+            props.setCommentsUpload(!props.commentsUpload)
             reset()
 
         } catch(error) {

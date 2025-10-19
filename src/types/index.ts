@@ -62,8 +62,22 @@ export type PropsComment = {
   }
 }
 
+export type PropsCardComment = {
+  id: string;
+  content: string;
+  createdAt: string;
+  challengerId: string;
+  user: {
+    id: string;
+    name: string;
+    role: string;
+  }
+  commentsUpload: boolean;
+  setCommentsUpload: (prev: boolean) => void;
+}
+
 export type PropsInputComments = {
     challengerId: string;
     commentsUpload: boolean;
-    setCommentsUplaod: (prev: boolean) => void;
+    setCommentsUpload: (prev: boolean) => void;
 }

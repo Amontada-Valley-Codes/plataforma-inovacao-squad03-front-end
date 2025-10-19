@@ -7,7 +7,7 @@ import { PropsComment } from "@/types"
 
 export default function CommentSession({challangerId}:PropsSessionComment) {
   const [comments, setComments] = useState<PropsComment[]>([])
-  const [commentsUpload, setCommentsUpload] = useState(false)
+  const [commentsUpload, setCommentsUpload] = useState(true)
 
   useEffect(() => {
 
@@ -41,7 +41,7 @@ export default function CommentSession({challangerId}:PropsSessionComment) {
         <InputCommnet 
           challengerId={challangerId} 
           commentsUpload={commentsUpload} 
-          setCommentsUplaod={setCommentsUpload} 
+          setCommentsUpload={setCommentsUpload} 
         />
 
       </div>
@@ -52,7 +52,7 @@ export default function CommentSession({challangerId}:PropsSessionComment) {
 
           <>
             {comments.map((comment) => (
-              <Comment key={comment.id} {...comment} />
+              <Comment key={comment.id} {...comment} commentsUpload={commentsUpload} setCommentsUpload={setCommentsUpload} />
             ))}
           </>
 

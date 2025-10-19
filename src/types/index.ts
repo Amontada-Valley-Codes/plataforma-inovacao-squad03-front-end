@@ -55,8 +55,8 @@ export type PropsComment = {
   content: string;
   createdAt: string;
   challengerId: string;
+  userId: string
   user: {
-    id: string;
     name: string;
     role: string;
   }
@@ -67,8 +67,8 @@ export type PropsCardComment = {
   content: string;
   createdAt: string;
   challengerId: string;
+  userId: string;
   user: {
-    id: string;
     name: string;
     role: string;
   }

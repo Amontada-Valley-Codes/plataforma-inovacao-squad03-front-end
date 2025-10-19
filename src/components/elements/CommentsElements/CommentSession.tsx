@@ -7,7 +7,7 @@ import { PropsComment } from "@/types"
 
 export default function CommentSession({challangerId}:PropsSessionComment) {
   const [comments, setComments] = useState<PropsComment[]>([])
-  const [commentsUpload, setCommentsUpload] = useState(true)
+  const [commentsUpload, setCommentsUpload] = useState(false)
 
   useEffect(() => {
 

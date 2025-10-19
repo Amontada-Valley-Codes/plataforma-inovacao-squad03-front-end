@@ -8,16 +8,20 @@ import {
   BoxCubeIcon,
   CalenderIcon,
   ChevronDownIcon,
+  DocsIcon,
   GridIcon,
+  GroupIcon,
   HorizontaLDots,
   ListIcon,
   PageIcon,
   PieChartIcon,
   PlugInIcon,
+  ShootingStarIcon,
   TableIcon,
+  TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
-import SidebarWidget from "./SidebarWidget";
+
 
 type NavItem = {
   name: string;
@@ -33,7 +37,12 @@ const navItems: NavItem[] = [
     path: "/admin"
   },
   {
-    icon: <PlugInIcon />,
+    icon: <GridIcon />,
+    name: "Corporaçao",
+    path: "/dashboard-corporation"
+  },
+  {
+    icon: <ShootingStarIcon />,
     name: "Desafios",
     path: "/pageDesafios"
   },
@@ -55,9 +64,13 @@ const navItems: NavItem[] = [
 
    {
      name: "Forms",
-     icon: <ListIcon />,
+     icon: <DocsIcon />,
      subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-   },
+   },{
+    icon: <GroupIcon />,
+    name: "Organizaçao",
+    path: "/adminUsers",
+  },
 
 ];
 
@@ -79,14 +92,14 @@ const othersItems: NavItem[] = [
   //      { name: "Videos", path: "/videos", pro: false },
   //    ],
   //  },
-   {
-     icon: <PlugInIcon />,
-     name: "Autentificação",
-     subItems: [
-       { name: "Entrar", path: "/signin", pro: false },
-       { name: "Cadastrar", path: "/signup", pro: false },
-     ],
-   },
+  //  {
+  //    icon: <PlugInIcon />,
+  //    name: "Autentificação",
+  //    subItems: [
+  //      { name: "Entrar", path: "/signin", pro: false },
+  //      { name: "Cadastrar", path: "/signup", pro: false },
+  //    ],
+  //  },
 ];
 
 const AppSidebar: React.FC = () => {

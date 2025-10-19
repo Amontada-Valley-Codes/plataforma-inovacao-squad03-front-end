@@ -17,10 +17,9 @@ const COLUMN_TITLES: Record<string, string> = {
 };
 
 
-
-
 export default function KanbanDemo() {
   const [cards, setCards] = React.useState<PropsCard[]>([]);
+  const [reload, setReload] = React.useState(true)
 
   React.useEffect(() => {
 
@@ -37,7 +36,6 @@ export default function KanbanDemo() {
         })
 
         setCards(response.data)
-        console.log("Desafios recebidos", response.data)
 
       } catch(error) {
         console.error("error", error)
@@ -46,7 +44,7 @@ export default function KanbanDemo() {
 
     getChallenges()
 
-  }, [])
+  }, [reload])
 
   const columns = React.useMemo(() => {
     const grouped: Record<string, PropsCard[]> = {
@@ -102,7 +100,7 @@ export default function KanbanDemo() {
                   <div className="relative bg-card shadow-md rounded-md hover:scale-102 transition-all">
                     
                     <div>
-                      <CardKanbanDetail {...card} />
+                      <CardKanbanDetail {...card} realod={reload} setReload={setReload} />
                     </div>
                     
                     <Kanban.ItemHandle className="absolute top-2 right-0 cursor-grab text-gray-500 hover:text-gray-700">

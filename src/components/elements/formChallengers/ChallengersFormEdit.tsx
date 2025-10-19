@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronDownIcon } from '@/icons';
@@ -12,6 +12,7 @@ import TextArea from '@/components/form/input/TextArea';
 import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
 import { publishOptions, sectorOptions } from '@/types/selectOptions';
 import { api } from '@/api/axiosConfig';
+import { PropsFormChallenger } from '@/types';
 
 // tipes
 interface CreateChallengeRequest {
@@ -35,7 +36,7 @@ interface CreateChallengeResponse {
   status: string;
 }
 
-export default function ChallengersForm() {
+export default function ChallengersFormEdit(props: PropsFormChallenger) {
   const {
     register,
     handleSubmit,
@@ -55,6 +56,35 @@ export default function ChallengersForm() {
     }
   });
 
+    useEffect(() => {
+        const getChallengerValue = async () => {
+            try {
+                const token = localStorage.getItem("authtoken");
+
+                const response = await api.get(`/challenges/${props.id}`, {
+                    headers: {
+                    Authorization: `Bearer ${token}`,
+                    },
+            });
+
+            const data = response.data;
+
+            reset({
+                challengeName: data.name || "",
+                status: data.publishOption || "",
+                startDate: data.startDate ? data.startDate.split("T")[0] : "",
+                deliveryDate: data.endDate ? data.endDate.split("T")[0] : "",
+                sector: data.sector || "",
+                description: data.description || "",
+            });
+            } catch (error) {
+            console.log(error);
+            }
+        };
+
+        getChallengerValue();
+    }, [props.id, reset]);
+
   const formatDateForAPI = (dateString: string, isEndDate = false): string => {
     if (!dateString) return '';
     
@@ -69,10 +99,10 @@ export default function ChallengersForm() {
     return date.toISOString();
   };
 
-  const createChallenge = async (data: CreateChallengeRequest): Promise<CreateChallengeResponse> => {
+  const updateChallenge = async (data: CreateChallengeRequest): Promise<CreateChallengeResponse> => {
     const token = localStorage.getItem('authtoken');
     
-    const response = await api.post('/challenges', data, {
+    const response = await api.put(`/challenges/${props.id}`, data, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -92,10 +122,10 @@ export default function ChallengersForm() {
         publishOption: formData.status
       };
 
-      const result = await createChallenge(apiData);
+      const result = await updateChallenge(apiData);
       
       reset();
-      window.location.reload()
+      props.setReload(!props.realod)
 
     } catch (error) {
       console.error('Erro:', error);
@@ -112,7 +142,7 @@ export default function ChallengersForm() {
   };
 
   return (
-    <ComponentCard title="Adicione Um Desafio">
+    <ComponentCard title="Edite o Desafio">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <Label htmlFor="challengeName">Nome do Desafio</Label>

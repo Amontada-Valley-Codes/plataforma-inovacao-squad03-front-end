@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { api } from "@/api/axiosConfig"
 import { Eye, EyeOff } from "lucide-react" // ícones do lucide-react
 import { AxiosError } from 'axios';
+import Image from "next/image";
 
 const loginSchema = z.object({
   email: z
@@ -86,9 +87,11 @@ export default function UserLogin() {
            <Toaster position="top-right" richColors />
             <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
 
-                <img 
+                <Image 
                     src="/Topic.png" 
                     alt="Logo Nina Hub" 
+                    width={140}
+                    height={35}
                     className="mx-auto mb-4 w-32 sm:w-35"
                 />
 

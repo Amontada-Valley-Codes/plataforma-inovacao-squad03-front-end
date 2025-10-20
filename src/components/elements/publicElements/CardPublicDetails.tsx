@@ -97,8 +97,10 @@ export default function CardPublicDetails({id, image, corporationName, startDate
                 <p>{description}</p>
 
             </div>
-
-            <Button variant={"ninaButton"} size={"default"} className="text-white"> POC </Button>
+            
+            <a href="/pocsubmission">
+                <Button variant={"ninaButton"} size={"default"} className="text-white"> POC </Button>
+            </a>
 
 
         </DialogContent>

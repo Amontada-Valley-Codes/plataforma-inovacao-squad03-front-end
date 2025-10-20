@@ -71,18 +71,18 @@ export default function Submission() {
           />
         </div>
 
-        {/* Campo de Link do Projeto */}
+        {/* Campo para fazer o envio do arquivo do projeto. */}
         <div>
-          <Label htmlFor="projectLink">Link do Projeto</Label>
+          <Label htmlFor="projectFIle">Arquivo do  Projeto</Label>
           <Input
-            id="projectLink"
-            type="url"
-            placeholder="Insira o link do projeto"
+            id="projectFile"
+            type="file"
+            accept=".pdf" 
             required
             className="w-full"
           />
           <p className="mt-2 text-sm text-gray-500">
-            Envie o link onde sua PoC está hospedada ou disponível para visualização.
+            Envie o arquivo da sua PoC em PDF.
           </p>
         </div>
 

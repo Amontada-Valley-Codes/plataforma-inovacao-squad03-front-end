@@ -3,7 +3,6 @@ import { z } from 'zod';
 
 export const projectSchema = z.object({
   challengeName: z.string().min(1, 'Nome do desafio é obrigatório'),
-  status: z.string().min(1, 'Opção de publicação é obrigatória'),
   startDate: z.string().min(1, 'Data de início é obrigatória'),
   deliveryDate: z.string().min(1, 'Data de entrega é obrigatória'),
   sector: z.string().min(1, 'Setor é obrigatório'),

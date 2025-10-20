@@ -10,7 +10,7 @@ import Select from '@/components/form/Select';
 import DatePicker from '@/components/form/date-picker';
 import TextArea from '@/components/form/input/TextArea';
 import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
-import { publishOptions, sectorOptions } from '@/types/selectOptions';
+import { sectorOptions } from '@/types/selectOptions';
 import { api } from '@/api/axiosConfig';
 
 // tipes
@@ -47,7 +47,6 @@ export default function ChallengersForm() {
     resolver: zodResolver(projectSchema),
     defaultValues: {
       challengeName: "",
-      status: "",
       startDate: "",
       deliveryDate: "",
       sector: "",
@@ -89,7 +88,7 @@ export default function ChallengersForm() {
         endDate: formatDateForAPI(formData.deliveryDate, true),
         sector: formData.sector,
         description: formData.description,
-        publishOption: formData.status
+        publishOption: "RESTRICTED"
       };
 
       const result = await createChallenge(apiData);
@@ -128,24 +127,7 @@ export default function ChallengersForm() {
           )}
         </div>
 
-        <div>
-          <Label htmlFor="status">Opção de Publicação</Label>
-          <div className="relative">
-            <Select
-              options={publishOptions}
-              placeholder="Selecione a opção de publicação"
-              onChange={handleSelectChange('status')}
-              className="dark:bg-dark-900"
-              defaultValue={watch('status')}
-            />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-              <ChevronDownIcon />
-            </span>
-          </div>
-          {errors.status && (
-            <p className="mt-1 text-sm text-red-500">{errors.status.message}</p>
-          )}
-        </div>
+
 
         <div>
           <DatePicker

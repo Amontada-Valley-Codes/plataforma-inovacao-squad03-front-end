@@ -13,7 +13,7 @@ import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
 import { sectorOptions } from '@/types/selectOptions';
 import { api } from '@/api/axiosConfig';
 
-// tipes
+
 interface CreateChallengeRequest {
   name: string;
   startDate: string;
@@ -91,7 +91,7 @@ export default function ChallengersForm() {
         publishOption: "RESTRICTED"
       };
 
-      const result = await createChallenge(apiData);
+      await createChallenge(apiData);
       
       reset();
       window.location.reload()

@@ -8,7 +8,7 @@ import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { PropsCard, PropsCardKanban } from "@/types";
+import { PropsCardKanban } from "@/types";
 import CardKanban from "./CardKanban";
 import MenuCard from "./MenuCard";
 import CardComments from "../CommentsElements/CardComments";

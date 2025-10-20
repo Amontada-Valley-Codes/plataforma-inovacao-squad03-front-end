@@ -12,7 +12,7 @@ import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 
-export default function CardPublicDetails({id, image, corporationName, startDate, finishDate, title, description, sector, status, published}: PropsCard) {
+export default function CardPublicDetails({image, corporationName, startDate, finishDate, title, description, sector, status}: PropsCard) {
 
     return (
 

@@ -83,7 +83,7 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
           sector: data.sector || "",
           description: data.description || "",
         });
-      } catch (error) {
+      } catch {
         
         alert('Erro ao carregar os dados do challenge.');
       }
@@ -133,7 +133,7 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
       };
 
 
-      const result = await updateChallenge(apiData);
+      await updateChallenge(apiData);
       
       reset();
       
@@ -165,10 +165,7 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
     setValue(field, currentDateString, { shouldValidate: true });
   };
 
-  // funcao para setar o valor do DatePicker 
-  const setDatePickerValue = (field: keyof ProjectFormData, value: string) => {
-    setValue(field, value, { shouldValidate: true });
-  };
+
 
   return (
     <ComponentCard title="Edite o Desafio">

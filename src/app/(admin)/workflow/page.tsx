@@ -37,7 +37,7 @@ export default function Workflow() {
 
     ]
 
-    const [posts, setPosts] = useState(cards)
+    const [posts] = useState(cards)
 
 
     return (

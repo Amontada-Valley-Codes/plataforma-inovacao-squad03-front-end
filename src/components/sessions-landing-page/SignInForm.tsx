@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { email, z } from "zod"
-import Axios from "axios"
+import { z } from "zod"
 import { Button } from "../ui/button"
 import { toast, Toaster } from "sonner"
 import { useRouter } from "next/navigation"

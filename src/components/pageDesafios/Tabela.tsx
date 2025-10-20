@@ -81,7 +81,7 @@ const defaultTableData: Challenge[] = [
 export default function RecentChallenges({
   data = defaultTableData,
   title = "Últimos Desafios Criados",
-  showFilters = true,
+
   onView,
   onEdit,
   onDelete,
@@ -113,13 +113,7 @@ export default function RecentChallenges({
     onDelete?.(challenge);
   };
 
-  const handleFilterClick = () => {
-    onFilterClick?.();
-  };
 
-  const handleViewAllClick = () => {
-    onViewAllClick?.();
-  };
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">

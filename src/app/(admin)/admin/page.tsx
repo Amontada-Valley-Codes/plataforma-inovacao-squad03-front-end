@@ -15,23 +15,23 @@ export default function Ecommerce() {
   const metricsData = [
     {
       title: "Startups Conectadas",
-      value: 87,
+      value: 8,
       change: 15.3,
       changeType: "increase" as const,
       icon: "startups" as const,
     },
     {
       title: "Desafios Criados",
-      value: 45,
+      value: 5,
       change: 8.2,
       changeType: "increase" as const,
       icon: "challenges" as const,
     },
     
     {
-      title: "Ideias Recebidas",
-      value: 156,
-      change: 12.5,
+      title: "Desafios em Analise",
+      value: 8,
+      change: 18.7,
       changeType: "increase" as const,
       icon: "ideas" as const,
     },

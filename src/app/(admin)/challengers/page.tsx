@@ -1,4 +1,5 @@
-import KanbanDemo from "@/components/elements/KanbanDemo";
+import DialogForm from "@/components/elements/formChallengers/DialogForm";
+import KanbanDemo from "@/components/elements/kanbanElements/KanbanDemo";
 import { Button } from "@/components/ui/button";
 
 
@@ -21,7 +22,7 @@ export default function Challengers() {
 
                 <div>
                     
-                    <Button variant={"ninaButton"} className="px-10 md:px-12 md:text-[16px] text-white"> Novo desafio </Button>
+                    <DialogForm/>
 
                 </div>
 

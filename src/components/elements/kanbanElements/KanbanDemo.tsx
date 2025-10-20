@@ -6,6 +6,7 @@ import * as Kanban from "@/components/ui/Kanban";
 import { PropsCard } from "@/types";
 import { GripVertical } from "lucide-react"; // import do ícone
 import CardKanbanDetail from "./CardKanbanDetails";
+import { api } from "@/api/axiosConfig";
 
 const COLUMN_TITLES: Record<string, string> = {
   GENERATION: "Geração de Ideias",
@@ -16,60 +17,34 @@ const COLUMN_TITLES: Record<string, string> = {
 };
 
 
-
-const allCards: PropsCard[] = [ 
-  { 
-    id: "1", 
-    image: "/empresa.png", 
-    corporationName: "Pague Menos", 
-    startDate: "2025/10/01", 
-    finishDate: "2025/10/15", 
-    title: "Novo Sistema de Pedidos", 
-    description: "Implementação de sistema para controle de pedidos online.", 
-    sector: "Varejo", 
-    status: "GENERATION", 
-    published: "PUBLIC", 
-  }, 
-  { 
-    id: "2", 
-    image: "/empresa.png", 
-    corporationName: "Pague Menos", 
-    startDate: "2025/09/15", 
-    finishDate: "2025/10/05", 
-    title: "App de Agendamento", 
-    description: "Aplicativo de agendamento para pacientes.", 
-    sector: "Saúde", 
-    status: "EXPERIMENTATION", 
-    published: "RESTRICTED", 
-  }, 
-  { 
-    id: "3", 
-    image: "/empresa.png", 
-    corporationName: "Pague Menos", 
-    startDate: "2025/09/15", 
-    finishDate: "2025/10/05", 
-    title: "App de Agendamento", 
-    description: "Aplicativo de agendamento para pacientes.", 
-    sector: "Saúde", 
-    status: "IDEATION", 
-    published: "RESTRICTED", 
-  }, 
-  { 
-    id: "4", 
-    image: "/empresa.png", 
-    corporationName: "Pague Menos", 
-    startDate: "2025/09/15", 
-    finishDate: "2025/10/05", 
-    title: "App de Agendamento", 
-    description: "Aplicativo de agendamento para pacientes.", 
-    sector: "Saúde", 
-    status: "PRE_SCREENING", 
-    published: "RESTRICTED", 
-  }, 
-];
-
 export default function KanbanDemo() {
-  const [cards, setCards] = React.useState<PropsCard[]>(allCards);
+  const [cards, setCards] = React.useState<PropsCard[]>([]);
+  const [reload, setReload] = React.useState(true)
+
+  React.useEffect(() => {
+
+    const getChallenges = async () => {
+
+      try {
+
+        const token = localStorage.getItem("authtoken")
+
+        const response = await api.get("/challenges", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        setCards(response.data)
+
+      } catch(error) {
+        console.error("error", error)
+      }
+    }
+
+    getChallenges()
+
+  }, [reload])
 
   const columns = React.useMemo(() => {
     const grouped: Record<string, PropsCard[]> = {
@@ -125,7 +100,7 @@ export default function KanbanDemo() {
                   <div className="relative bg-card shadow-md rounded-md hover:scale-102 transition-all">
                     
                     <div>
-                      <CardKanbanDetail {...card} />
+                      <CardKanbanDetail {...card} realod={reload} setReload={setReload} />
                     </div>
                     
                     <Kanban.ItemHandle className="absolute top-2 right-0 cursor-grab text-gray-500 hover:text-gray-700">

@@ -16,7 +16,7 @@ export default function POCEvolutionChart() {
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#10B981", "#465FFF"], // Verde para POCs Iniciadas, Azul para POCs Concluídas
+    colors: ["#5BC30D", "#465FFF"], // Verde para POCs Iniciadas, Azul para POCs Concluídas
     chart: {
       fontFamily: "Outfit, sans-serif",
       height: 310,

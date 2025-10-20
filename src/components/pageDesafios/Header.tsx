@@ -23,7 +23,7 @@ export function ChallengesHeader({ onNewChallenge }: ChallengesHeaderProps) {
         className="px-8 md:px-10 py-2.5 text-white whitespace-nowrap"
         onClick={onNewChallenge}
       >
-        + Novo Desafio
+         Novo Desafio
       </Button>
     </div>
   );

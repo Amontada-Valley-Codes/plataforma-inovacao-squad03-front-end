@@ -8,16 +8,20 @@ import {
   BoxCubeIcon,
   CalenderIcon,
   ChevronDownIcon,
+  DocsIcon,
   GridIcon,
+  GroupIcon,
   HorizontaLDots,
   ListIcon,
   PageIcon,
   PieChartIcon,
   PlugInIcon,
+  ShootingStarIcon,
   TableIcon,
+  TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
-import SidebarWidget from "./SidebarWidget";
+
 
 type NavItem = {
   name: string;
@@ -33,7 +37,12 @@ const navItems: NavItem[] = [
     path: "/admin"
   },
   {
-    icon: <PlugInIcon />,
+    icon: <GridIcon />,
+    name: "Corporaçao",
+    path: "/dashboard-corporation"
+  },
+  {
+    icon: <ShootingStarIcon />,
     name: "Desafios",
     path: "/pageDesafios"
   },
@@ -55,9 +64,13 @@ const navItems: NavItem[] = [
 
    {
      name: "Forms",
-     icon: <ListIcon />,
+     icon: <DocsIcon />,
      subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-   },
+   },{
+    icon: <GroupIcon />,
+    name: "Organizaçao",
+    path: "/adminUsers",
+  },
 
 ];
 
@@ -79,14 +92,14 @@ const othersItems: NavItem[] = [
   //      { name: "Videos", path: "/videos", pro: false },
   //    ],
   //  },
-   {
-     icon: <PlugInIcon />,
-     name: "Autentificação",
-     subItems: [
-       { name: "Entrar", path: "/signin", pro: false },
-       { name: "Cadastrar", path: "/signup", pro: false },
-     ],
-   },
+  //  {
+  //    icon: <PlugInIcon />,
+  //    name: "Autentificação",
+  //    subItems: [
+  //      { name: "Entrar", path: "/signin", pro: false },
+  //      { name: "Cadastrar", path: "/signup", pro: false },
+  //    ],
+  //  },
 ];
 
 const AppSidebar: React.FC = () => {
@@ -142,6 +155,7 @@ const AppSidebar: React.FC = () => {
                 href={nav.path}
                 className={`menu-item group ${
                   isActive(nav.path) ? "menu-item-active" : "menu-item-inactive"
+                  
                 }`}
               >
                 <span
@@ -285,7 +299,7 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-gray-50 dark:bg-gray-950 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
         ${
           isExpanded || isMobileOpen
             ? "w-[290px]"
@@ -315,10 +329,10 @@ const AppSidebar: React.FC = () => {
               />
               <Image
                 className="hidden dark:block"
-                src="/Topic.png"
+                src="/Topic_2.png"
                 alt="Logo"
-                width={40}
-                height={40}
+                width={90}
+                height={20}
               />
             </>
           ) : (

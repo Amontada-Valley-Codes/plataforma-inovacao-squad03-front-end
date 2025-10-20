@@ -10,55 +10,124 @@ import Select from '@/components/form/Select';
 import DatePicker from '@/components/form/date-picker';
 import TextArea from '@/components/form/input/TextArea';
 import { projectSchema, ProjectFormData } from '@/schemas/projectSchema';
-import { statusOptions, sectorOptions } from '@/types/selectOptions';
+import { sectorOptions } from '@/types/selectOptions';
+import { api } from '@/api/axiosConfig';
 
-export default function ProjectForm() {
+// tipes
+interface CreateChallengeRequest {
+  name: string;
+  startDate: string;
+  endDate: string;
+  sector: string;
+  description: string;
+  publishOption: string;
+}
+
+interface CreateChallengeResponse {
+  id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  sector: string;
+  description: string;
+  publishOption: string;
+  corporationId: string;
+  status: string;
+}
+
+export default function ChallengersForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
     watch,
+    reset,
   } = useForm<ProjectFormData>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      status: 'ideacao',
+      challengeName: "",
+      startDate: "",
+      deliveryDate: "",
+      sector: "",
+      description: ""
     }
   });
 
-  const onSubmit = (data: ProjectFormData) => {
-    console.log('Dados do formulário:', data);
+  const formatDateForAPI = (dateString: string, isEndDate = false): string => {
+    if (!dateString) return '';
+    
+    const date = new Date(dateString + 'T00:00:00');
+    
+    if (isEndDate) {
+      date.setHours(23, 59, 59, 999);
+    } else {
+      date.setHours(0, 0, 0, 0);
+    }
+    
+    return date.toISOString();
+  };
+
+  const createChallenge = async (data: CreateChallengeRequest): Promise<CreateChallengeResponse> => {
+    const token = localStorage.getItem('authtoken');
+    
+    const response = await api.post('/challenges', data, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  };
+
+  const onSubmit = async (formData: ProjectFormData) => {
+    try {
+      const apiData: CreateChallengeRequest = {
+        name: formData.challengeName,
+        startDate: formatDateForAPI(formData.startDate, false),
+        endDate: formatDateForAPI(formData.deliveryDate, true),
+        sector: formData.sector,
+        description: formData.description,
+        publishOption: "RESTRICTED"
+      };
+
+      const result = await createChallenge(apiData);
+      
+      reset();
+      window.location.reload()
+
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao criar challenge.');
+    }
   };
 
   const handleSelectChange = (field: keyof ProjectFormData) => (value: string) => {
-    setValue(field, value);
+    setValue(field, value, { shouldValidate: true });
   };
 
   const handleDateChange = (field: keyof ProjectFormData) => (dates: any, currentDateString: string) => {
-    setValue(field, currentDateString);
+    setValue(field, currentDateString, { shouldValidate: true });
   };
 
   return (
     <ComponentCard title="Adicione Um Desafio">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <Label htmlFor="status">Status</Label>
-          <div className="relative">
-            <Select
-              options={statusOptions}
-              placeholder="Selecione o status"
-              onChange={handleSelectChange('status')}
-              className="dark:bg-dark-900"
-              defaultValue="ideacao"
-            />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-              <ChevronDownIcon />
-            </span>
-          </div>
-          {errors.status && (
-            <p className="mt-1 text-sm text-red-500">{errors.status.message}</p>
+          <Label htmlFor="challengeName">Nome do Desafio</Label>
+          <Input
+            type="text"
+            placeholder="Digite o nome do desafio"
+            name={register('challengeName').name}
+            onChange={register('challengeName').onChange}
+            ref={register('challengeName').ref}
+          />
+          {errors.challengeName && (
+            <p className="mt-1 text-sm text-red-500">{errors.challengeName.message}</p>
           )}
         </div>
+
+
 
         <div>
           <DatePicker
@@ -92,6 +161,7 @@ export default function ProjectForm() {
               placeholder="Selecione o setor"
               onChange={handleSelectChange('sector')}
               className="dark:bg-dark-900"
+              defaultValue={watch('sector')}
             />
             <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
               <ChevronDownIcon />
@@ -106,9 +176,9 @@ export default function ProjectForm() {
           <Label htmlFor="description">Descrição</Label>
           <TextArea
             value={watch('description') || ''}
-            onChange={(value) => setValue('description', value)}
+            onChange={(value) => setValue('description', value, { shouldValidate: true })}
             rows={6}
-            placeholder="Descreva o projeto..."
+            placeholder="Descreva do Desafio..."
             error={!!errors.description}
             hint={errors.description?.message}
           />

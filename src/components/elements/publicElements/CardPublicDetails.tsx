@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 import { PropsCard } from "@/types"
 import Image from "next/image"
 import { FiLoader } from "react-icons/fi";
@@ -24,7 +24,7 @@ export default function CardPublicDetails({id, image, corporationName, startDate
             
         </DialogTrigger>
 
-        <DialogContent className="flex flex-col gap-8 bg-card">
+        <DialogContent className="flex flex-col gap-8 bg-card max-h-[600px] overflow-y-auto scrollbar-hidden">
 
             <DialogHeader className="flex flex-col justify-start items-start gap-6">
 

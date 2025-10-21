@@ -16,7 +16,10 @@ const loginSchema = z.object({
   email: z
     .string()
     .min(1, "Email é obrigatório")
-    .email("Email inválido"),
+    .refine((val) => val.includes("@"), {
+      message: "O e-mail deve conter @",
+    }),
+
   senha: z
     .string()
     .min(8, "Senha deve ter pelo menos 8 caracteres")
@@ -54,8 +57,11 @@ export default function UserLogin() {
         description: "Você será redirecionado em instantes...",
       });
 
-      if (getUserRole() === "ADMIN") {
+      const userRole = getUserRole();
+      if (userRole === "ADMIN") {
         setTimeout(() => router.push("/dashboard-admin"), 1500);
+      } else if (userRole === "STARTUP_MEMBER") {
+        setTimeout(() => router.push("/workflow"), 1500);
       } else {
         setTimeout(() => router.push("/admin"), 1500);
       }

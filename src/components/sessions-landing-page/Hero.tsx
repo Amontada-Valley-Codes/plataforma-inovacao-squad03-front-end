@@ -11,13 +11,13 @@ export default function Hero() {
         {/* Conteúdo lado esquerdo */}
 
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-24 w-full lg:w-2/3 space-y-8">
-          <h1 className="text-white tracking-wider font-medium text-[45px] leading-16 ml-5 md:text-[60px] md:leading-20 lg:text-[80px] lg:leading-22 max-w-3xl lg:ml-16 lg:mt-20">
+          <h1 className="text-white tracking-wider font-medium text-[45px] leading-16 ml-5 md:text-[72px] md:leading-20 lg:text-[80px] lg:leading-22 max-w-3xl lg:ml-16 lg:mt-20 md:mt-28">
             Plataforma <br></br>
             de Inovação 
             Corporativa
           </h1>
 
-          <p className="text-white font-light tracking-wide ml-2 text-[20px] md:text-[24px] lg:text-xl max-w-xl border border-white/70 px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-sm lg:ml-16">
+          <p className="text-white font-light tracking-wide ml-2 text-[20px] md:text-[28px] lg:text-xl max-w-xl border border-white/70 px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-sm lg:ml-16 md:mt-4">
             Um ambiente onde grandes empresas e mentes brilhantes se unem para
             transformar ideias em soluções.
           </p>

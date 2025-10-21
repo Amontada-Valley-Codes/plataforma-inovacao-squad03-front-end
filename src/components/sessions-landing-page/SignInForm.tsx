@@ -57,19 +57,14 @@ export default function UserLogin() {
         description: "Você será redirecionado em instantes...",
       });
 
-      {getUserRole() === "ADMIN" ? (
-
-        setTimeout(() => router.push("/dashboard-admin"), 1500)
-
-      ) : getUserRole() === "STARTUP_MEMBER" ? (
-
-        setTimeout(() => router.push("/workflow"), 1500)
-
-      ) : (
-
-        setTimeout(() => router.push("/admin"), 1500)
-
-      )}
+      const userRole = getUserRole();
+      if (userRole === "ADMIN") {
+        setTimeout(() => router.push("/dashboard-admin"), 1500);
+      } else if (userRole === "STARTUP_MEMBER") {
+        setTimeout(() => router.push("/workflow"), 1500);
+      } else {
+        setTimeout(() => router.push("/admin"), 1500);
+      }
 
 
     } catch (error) {

@@ -1,7 +1,5 @@
 "use client";
 import { InnovationMetrics } from "@/components/ecommerce/EcommerceMetrics";
-import { Button } from "@/components/ui/button";
-import StatisticsChart from "@/components/ecommerce/StatisticsChart";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 
 

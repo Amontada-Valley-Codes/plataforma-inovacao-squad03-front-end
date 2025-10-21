@@ -1,43 +1,43 @@
 'use client'
 
-import CardPublic from "@/components/elements/publicElements/CardPublic";
+// import CardPublic from "@/components/elements/publicElements/CardPublic";
 import Filters from "@/components/elements/Filters";
-import { useRef, useState } from "react";
-import { PropsCard } from "@/types";
+import { useRef } from "react"; // eu tirei o useState
+// import { PropsCard } from "@/types";
 
 export default function Workflow() {
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const cards: PropsCard[] = [
+    // const cards: PropsCard[] = [
 
-        {
-        id: "1",
-        image: "/foto.png",
-        corporationName: "Pague Menos",
-        startDate: "02/10/2025",
-        finishDate: "02/11/2025",
-        title: "Desafio tal que tem aqui publicado",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at",
-        sector: "Tecnologia",
-        status: "Geração de ideias",
-        published: "PUBLIC",
-        },
-        {
-        id: "2",
-        image: "/foto.png",
-        corporationName: "Pague Menos",
-        startDate: "02/10/2025",
-        finishDate: "02/11/2025",
-        title: "Desafio tal que tem aqui publicado",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
-        sector: "Tecnologia",
-        status: "Geração de ideias",
-        published: "PUBLIC",
-        }
+    //     {
+    //     id: "1",
+    //      image: "/foto.png", 
+    //     corporationName: "Pague Menos",
+    //     startDate: "02/10/2025",
+    //     finishDate: "02/11/2025",
+    //     title: "Desafio tal que tem aqui publicado",
+    //     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at",
+    //     sector: "Tecnologia",
+    //     status: "Geração de ideias",
+    //     published: "PUBLIC",
+    //     },
+    //     {
+    //     id: "2",
+    //     // image: "/foto.png", // Comentado: propriedade não existe em PropsCard
+    //     corporationName: "Pague Menos",
+    //     startDate: "02/10/2025",
+    //     finishDate: "02/11/2025",
+    //     title: "Desafio tal que tem aqui publicado",
+    //     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur dolores illum libero voluptatum ipsum. Fuga nam dignissimos illum, corrupti omnis repellendus? Facilis vitae, blanditiis ab optio facere ipsa aliquam at?",
+    //     sector: "Tecnologia",
+    //     status: "Geração de ideias",
+    //     published: "PUBLIC",
+    //     }
 
-    ]
+    // ]
 
-    const [posts, setPosts] = useState(cards)
+    // const [posts] = useState(cards)
 
 
     return (
@@ -95,7 +95,7 @@ export default function Workflow() {
             </div>
 
             {/* desafios */}
-            <div className="mt-4 gap-5 grid grid-cols-2">
+            {/* <div className="mt-4 gap-5 grid grid-cols-2">
                 {posts.map((post, index) => (
                     
                     <div key={index}>
@@ -103,7 +103,7 @@ export default function Workflow() {
 
                             <CardPublic
                                 id={post.id}
-                                image={post.image}
+                                {/* image={post.image}  Comentado: propriedade não existe em PropsCard 
                                 corporationName={post.corporationName}
                                 startDate={post.startDate}
                                 finishDate={post.finishDate}
@@ -119,7 +119,7 @@ export default function Workflow() {
 
                 ))}
                 
-            </div>
+            </div> */}
 
         </div>
 

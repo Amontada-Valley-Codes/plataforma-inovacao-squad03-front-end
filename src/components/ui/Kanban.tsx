@@ -312,7 +312,7 @@ function KanbanRoot<T>(props: KanbanRootProps<T>) {
       if (event.activatorEvent.defaultPrevented) return;
       setActiveId(event.active.id);
     },
-    [kanbanProps.onDragStart],
+    [kanbanProps],
   );
  
   const onDragOver = React.useCallback(
@@ -372,7 +372,7 @@ function KanbanRoot<T>(props: KanbanRootProps<T>) {
         hasMovedRef.current = true;
       }
     },
-    [value, getColumn, getItemValue, onValueChange, kanbanProps.onDragOver],
+    [value, getColumn, getItemValue, onValueChange, kanbanProps],
   );
  
   const onDragEnd = React.useCallback(
@@ -458,7 +458,7 @@ function KanbanRoot<T>(props: KanbanRootProps<T>) {
       getItemValue,
       onValueChange,
       onMove,
-      kanbanProps.onDragEnd,
+      kanbanProps,
     ],
   );
  
@@ -471,7 +471,7 @@ function KanbanRoot<T>(props: KanbanRootProps<T>) {
       setActiveId(null);
       hasMovedRef.current = false;
     },
-    [kanbanProps.onDragCancel],
+    [kanbanProps],
   );
  
   const announcements: Announcements = React.useMemo(

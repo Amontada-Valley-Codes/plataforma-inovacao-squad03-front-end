@@ -8,7 +8,7 @@ import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { PropsCard } from "@/types";
+import { PropsCardKanban } from "@/types";
 import CardKanban from "./CardKanban";
 import MenuCard from "./MenuCard";
 import CardComments from "../CommentsElements/CardComments";
@@ -24,7 +24,7 @@ const COLUMN_TITLES: Record<string, string> = {
   EXPERIMENTATION: "Experimentação",
 };
 
-export default function CardKanbanDetail(props: PropsCard) {
+export default function CardKanbanDetail(props: PropsCardKanban) {
     
     useEffect(() => {
         
@@ -42,7 +42,7 @@ export default function CardKanbanDetail(props: PropsCard) {
         }
         updateChallenge()
 
-    }, [props.status]);
+    }, [props.status, props.id]);
 
     return (
         <Dialog>
@@ -65,9 +65,15 @@ export default function CardKanbanDetail(props: PropsCard) {
                     {/* opções */}
                     <div className="flex items-center px-4 gap-2">
                         
-                        <ButtonPublic published={props.publishOption} state={props.status}/>
+                        <ButtonPublic 
+                            id={props.id}
+                            published={props.publishOption} 
+                            state={props.status} 
+                            reload={props.realod} 
+                            setReload={props.setReload} 
+                        />
 
-                        <MenuCard {...props} />
+                        <MenuCard {...props} realod={props.realod} setReload={props.setReload}/>
 
                     </div>
 
@@ -136,7 +142,7 @@ export default function CardKanbanDetail(props: PropsCard) {
                     {/* comentários */}
                     {(props.status === "IDEATION" || props.status === "DETAILED_SCREENING" || props.status === "EXPERIMENTATION") && (
                         <div>
-                            <CardComments/>
+                            <CardComments challangerId={props.id}/>
                         </div>
                     )}
 

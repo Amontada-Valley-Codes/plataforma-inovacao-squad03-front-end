@@ -1,12 +1,13 @@
-// constants/selectOptions.ts
-export const statusOptions = [
-  { value: 'ideacao', label: 'Ideação' },
+
+export const publishOptions = [
+  { value: 'PUBLIC', label: 'Público' },
+  { value: 'RESTRICTED', label: 'Restrito' },
 ];
 
 export const sectorOptions = [
-  { value: 'saude', label: 'Saúde' },
-  { value: 'educacao', label: 'Educação' },
-  { value: 'tecnologia', label: 'Tecnologia' },
-  { value: 'financeiro', label: 'Financeiro' },
-  { value: 'vendas', label: 'Vendas' },
+  { value: 'TECHNOLOGY', label: 'Tecnologia' },
+  { value: 'HEALTH', label: 'Saúde' },
+  { value: 'EDUCATION', label: 'Educação' },
+  { value: 'FINANCE', label: 'Financeiro' },
+  { value: 'SALES', label: 'Vendas' },
 ];

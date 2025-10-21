@@ -54,15 +54,11 @@ export default function UserLogin() {
         description: "Você será redirecionado em instantes...",
       });
 
-      {getUserRole() === "ADMIN" ? (
-
-        setTimeout(() => router.push("/dashboard-admin"), 1500)
-        
-      ) : (
-
-        setTimeout(() => router.push("/admin"), 1500)
-
-      )}
+      if (getUserRole() === "ADMIN") {
+        setTimeout(() => router.push("/dashboard-admin"), 1500);
+      } else {
+        setTimeout(() => router.push("/admin"), 1500);
+      }
 
 
     } catch (error) {

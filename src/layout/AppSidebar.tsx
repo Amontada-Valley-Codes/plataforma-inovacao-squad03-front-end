@@ -7,7 +7,6 @@ import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
   ChevronDownIcon,
-  DocsIcon,
   GridIcon,
   GroupIcon,
   HorizontaLDots,
@@ -26,14 +25,7 @@ type NavItem = {
 
 
 
-const othersItems: NavItem[] = [
-    {
-    icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
-  },
 
-];
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
@@ -229,7 +221,7 @@ const AppSidebar: React.FC = () => {
     if (!submenuMatched) {
       setOpenSubmenu(null);
     }
-  }, [pathname,isActive]);
+  }, [pathname, isActive, navItems, othersItems]);
 
   useEffect(() => {
     // Set the height of the submenu items when the submenu is opened

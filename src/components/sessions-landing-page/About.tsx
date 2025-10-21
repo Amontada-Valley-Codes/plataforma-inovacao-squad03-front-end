@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/image"
 import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function About() {
@@ -8,7 +8,7 @@ export default function About() {
       {/* Lado da Imagem */}
       <div className="relative w-full h-[300px] lg:w-1/2 lg:h-screen z-0">
         <Image
-          src="/Imagem_2.png"
+          src="/Imagem_2.png" 
           alt="Sobre a plataforma de inovação."
           fill
           quality={100}
@@ -17,50 +17,71 @@ export default function About() {
         />
       </div>
 
-      {/* Lado do texto */}
-      <div className="flex flex-col justify-normal w-full lg:w-1/2 px-6 lg:px-12 py-10 mt-14 font-light z-0">
-        <div className="max-w-[480px] mx-auto">
-          <p className="text-[18px] text-justify tracking-wide md:text-[24px] lg:text-[24px] text-gray-600 leading-relaxed">
-            Um sistema que nasceu com o objetivo de conectar pessoas e projetos,
-            para criar <span className="font-bold text-green">soluções</span> de forma inteligente e integrada.
-          </p>
-          <p className="text-[18px] text-justify md:text-[24px] lg:text-[24px] text-gray-600 leading-relaxed mt-10">
-            Nossa plataforma reúne as ferramentas necessárias para transformar a
-            organização interna dos seus projetos e gerar um ambiente de interação
-            que acelera a resolução de problemas.
-          </p>
-        </div>
-      </div>
+      {/* Lado do Texto */}
+      <div className="flex flex-col justify-normal w-full lg:w-1/2 px-6 lg:px-12 py-10 mt-4 font-light z-0">
+            <div className="max-w-[480px] mx-auto">
 
-      {/* Imagem do Desktop */}
-      <div
-        className="hidden lg:block absolute top-1/2 left-[40%] lg:left-[8%] -translate-y-1/2 z-10 pointer-events-none"
-        aria-hidden="true"
-      >
-        <Image
-          src="/Imagem1.png"
+                <p className="text-[16px] text-justify tracking-wide md:text-[26px] lg:text-[24px] text-gray-600 leading-relaxed">
+                Um sistema que nasceu com o objetivo de conectar pessoas e projetos, 
+                para criar <span className="font-bold text-green">soluções</span> de forma inteligente e integrada.
+                </p>
+                <p className="text-[16px] text-justify md:text-[26px] lg:text-[24px] text-gray-600 leading-relaxed mt-10">
+                Nossa plataforma reúne as ferramentas necessárias para transformar a 
+                organização interna dos seus projetos e gerar um ambiente de interação 
+                que acelera a resolução de problemas.
+                </p>
+            </div>
+        </div>
+
+        <div className="absolute top-1/2 left-[40%] lg:left-[8%] -translate-y-1/2 z-10 pointer-events-none hidden lg:block"
+             aria-hidden="true">
+          <Image
+          src="/Imagem1.png" 
           alt="Mockup Dashboard."
           width={800}
           height={800}
           quality={100}
           className="object-contain"
           priority
-        />
-      </div>
-
-      {/* Shape verde */}
-      <div
-          className="absolute bottom-0 right-1/2 translate-x-1/2 lg:right-[15%] lg:translate-x-0 bg-green rounded-t-[2rem]
-            flex flex-col items-center justify-center sm:w-[70%] md:w-[60%] lg:w-[20%] h-[120px] sm:h-[140px] md:h-[160px] lg:h-52
-            px-6 shadow-lg"
-        >
-          <p className="text-white font-medium text-center tracking-wide sm:text-[10px] sm:leading-snug md:text-[18px] lg:text-[30px]">
-            Conheça o que nosso sistema oferece
-          </p>
-          <IoIosArrowDropdown className="fill-white w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 mt-2" />
+        />          
         </div>
 
+        {/* Elemento verde */}
+          <div
+            className="
+              flex flex-col 
+              items-center 
+              justify-center 
+              text-center
+              absolute 
+              bottom-0 
+              bg-green 
+              rounded-t-3xl
+              w-[60%] 
+              h-40
+              left-1/2 
+              -translate-x-1/2
+
+              sm:w-[80%] 
+              sm:h-44
+
+              md:w-[50%] 
+              md:h-52
+
+              lg:w-75 
+              lg:h-52 
+              lg:rounded-t-4xl 
+              lg:left-auto 
+              lg:right-1/7 
+              lg:translate-x-0
+            "
+          >
+            <p className="text-white font-medium text-[18px] sm:text-[22px] sm:text-center sm:p-4 md:text-[30px] lg:text-[30px] leading-snug lg:ml-10 lg:text-left">
+              Conheça o que nosso sistema oferece
+            </p>
+            <IoIosArrowDropdown className="fill-white w-8 h-8 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:mx-auto mt-3" />
+          </div>
 
     </section>
-  );
+  )
 }

@@ -6,19 +6,12 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
-  CalenderIcon,
   ChevronDownIcon,
-  DocsIcon,
   GridIcon,
   GroupIcon,
   HorizontaLDots,
   ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
   ShootingStarIcon,
-  TableIcon,
-  TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
 import { getUserRole } from "@/components/elements/CommentsElements/GetUserRole";
@@ -32,33 +25,7 @@ type NavItem = {
 
 
 
-const othersItems: NavItem[] = [
-    {
-    icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
-  },
-  //  {
-  //    icon: <BoxCubeIcon />,
-  //    name: "UI Elements",
-  //    subItems: [
-  //      { name: "Alerts", path: "/alerts", pro: false },
-  //      { name: "Avatar", path: "/avatars", pro: false },
-  //      { name: "Badge", path: "/badge", pro: false },
-  //      { name: "Buttons", path: "/buttons", pro: false },
-  //      { name: "Images", path: "/images", pro: false },
-  //      { name: "Videos", path: "/videos", pro: false },
-  //    ],
-  //  },
-  //  {
-  //    icon: <PlugInIcon />,
-  //    name: "Autentificação",
-  //    subItems: [
-  //      { name: "Entrar", path: "/signin", pro: false },
-  //      { name: "Cadastrar", path: "/signup", pro: false },
-  //    ],
-  //  },
-];
+
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
@@ -259,7 +226,7 @@ const AppSidebar: React.FC = () => {
     if (!submenuMatched) {
       setOpenSubmenu(null);
     }
-  }, [pathname,isActive]);
+  }, [pathname, isActive, navItems, othersItems]);
 
   useEffect(() => {
     // Set the height of the submenu items when the submenu is opened

@@ -72,7 +72,6 @@ export function ChallengesFilters() {
             <Select
               options={statusOptions}
               placeholder="Selecionar status"
-              value={filters.status}
               onChange={handleStatusChange}
               className="w-full dark:bg-gray-800 h-[48px]"
             />
@@ -89,7 +88,6 @@ export function ChallengesFilters() {
             <Select
               options={areaOptions}
               placeholder="Selecionar área"
-              value={filters.area}
               onChange={handleAreaChange}
               className="w-full dark:bg-gray-800 h-[48px]"
             />
@@ -125,7 +123,7 @@ export function ChallengesFilters() {
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                 Busca: {filters.search}
                 <button
-                  onClick={() => handleSearchChange({ target: { value: '' } } as any)}
+                  onClick={() => setFilters(prev => ({ ...prev, search: '' }))}
                   className="ml-2 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   ×
@@ -158,7 +156,7 @@ export function ChallengesFilters() {
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                 Data: {new Date(filters.date).toLocaleDateString('pt-BR')}
                 <button
-                  onClick={() => handleDateChange({ target: { value: '' } } as any)}
+                  onClick={() => setFilters(prev => ({ ...prev, date: '' }))}
                   className="ml-2 hover:text-purple-600 dark:hover:text-purple-300"
                 >
                   ×

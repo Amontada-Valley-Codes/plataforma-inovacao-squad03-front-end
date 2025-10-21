@@ -1,5 +1,4 @@
-import { MdLocationOn, MdHotel, MdRestaurant } from "react-icons/md";
-import { FaPizzaSlice, FaMartiniGlass, FaHotel } from "react-icons/fa6";
+
 import { FaHashtag } from "react-icons/fa6";
 
 export default function Filters() {

@@ -83,7 +83,7 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
           sector: data.sector || "",
           description: data.description || "",
         });
-      } catch (error) {
+      } catch {
         
         alert('Erro ao carregar os dados do challenge.');
       }
@@ -133,7 +133,7 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
       };
 
 
-      const result = await updateChallenge(apiData);
+      await updateChallenge(apiData);
       
       reset();
       
@@ -143,13 +143,14 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
       // troca pelo sonner
       alert('Challenge atualizado com sucesso!');
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Erro ao atualizar challenge:', error);
       
      
-      if (error.response?.status === 404) {
+      const axiosError = error as { response?: { status: number } };
+      if (axiosError.response?.status === 404) {
         alert('Challenge não encontrado. Verifique se o ID está correto.');
-      } else if (error.response?.status === 401) {
+      } else if (axiosError.response?.status === 401) {
         alert('Não autorizado. Faça login novamente.');
       } else {
         alert('Erro ao atualizar challenge. Tente novamente.');
@@ -161,14 +162,11 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
     setValue(field, value, { shouldValidate: true });
   };
 
-  const handleDateChange = (field: keyof ProjectFormData) => (dates: any, currentDateString: string) => {
+  const handleDateChange = (field: keyof ProjectFormData) => (dates: Date[], currentDateString: string) => {
     setValue(field, currentDateString, { shouldValidate: true });
   };
 
-  // funcao para setar o valor do DatePicker 
-  const setDatePickerValue = (field: keyof ProjectFormData, value: string) => {
-    setValue(field, value, { shouldValidate: true });
-  };
+
 
   return (
     <ComponentCard title="Edite o Desafio">

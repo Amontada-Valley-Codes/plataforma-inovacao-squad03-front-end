@@ -72,22 +72,27 @@ const AppSidebar: React.FC = () => {
   }, []);
 
   const isAdmin = userRole === "ADMIN";
+  const isStartup = userRole == "STARTUP_MEMBER";
 
- const navItems: NavItem[] = isAdmin
+  const navItems: NavItem[] = isAdmin
     ? [
         { icon: <GridIcon />, name: "Dashboard", path: "/dashboard-admin" },
         { icon: <GroupIcon />, name: "Organização", path: "/adminUsers" },
       ]
+    : isStartup
+    ? [
+        { icon: <ListIcon />, name: "Desafios publicas", path: "/workflow" },
+      ]
     : [
         { icon: <GridIcon />, name: "Dashboard", path: "/admin" },
         { icon: <ShootingStarIcon />, name: "Desafios", path: "/pageDesafios" },
-        { icon: <BoxCubeIcon />, name: "Funil de Desafios", path: "/challengers" },
-        { icon: <ListIcon />, name: "Workflow de Desafios", path: "/workflow" },
+        { icon: <BoxCubeIcon />, name: "Funil de Inovação", path: "/challengers" },
+        { icon: <ListIcon />, name: "Desafios publicados", path: "/workflow" },
       ];
 
   // "Outros" — o User Profile aparece pra todo mundo
   const othersItems: NavItem[] = [
-    { icon: <UserCircleIcon />, name: "User Profile", path: "/profile" },
+    { icon: <UserCircleIcon />, name: "Perfil de usuário", path: "/profile" },
   ];
 
 

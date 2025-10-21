@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import { api } from "@/api/axiosConfig"
 import { Eye, EyeOff } from "lucide-react" // ícones do lucide-react
 import { AxiosError } from 'axios';
+import { getUserRole } from '../elements/CommentsElements/GetUserRole';
 
 const loginSchema = z.object({
   email: z
@@ -53,7 +54,16 @@ export default function UserLogin() {
         description: "Você será redirecionado em instantes...",
       });
 
-      setTimeout(() => router.push("/admin"), 1500);
+      {getUserRole() === "ADMIN" ? (
+
+        setTimeout(() => router.push("/dashboard-admin"), 1500)
+        
+      ) : (
+
+        setTimeout(() => router.push("/admin"), 1500)
+
+      )}
+
 
     } catch (error) {
       const err = error as AxiosError;

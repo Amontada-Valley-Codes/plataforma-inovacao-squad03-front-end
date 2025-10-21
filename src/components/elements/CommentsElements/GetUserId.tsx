@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode"
 type DecodedToken = {
   userId: string;
   email: string;
-  role: string;
+  role: "ADMIN" | "MANAGER" | "EVALUATOR" | "COMMON" | "STARTUP_MEMBER"
   corporationId: string;
   iat: number;
   exp: number;
@@ -23,3 +23,4 @@ export function getUserId(): string | null{
     return null;
   }
 }
+

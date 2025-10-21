@@ -21,7 +21,7 @@ import {
   TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
-
+import { getUserRole } from "@/components/elements/CommentsElements/GetUserRole";
 
 type NavItem = {
   name: string;
@@ -30,49 +30,7 @@ type NavItem = {
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
-const navItems: NavItem[] = [
-  {
-    icon: <GridIcon />,
-    name: "Dashboard",
-    path: "/admin"
-  },
-  {
-    icon: <GridIcon />,
-    name: "Corporaçao",
-    path: "/dashboard-corporation"
-  },
-  {
-    icon: <ShootingStarIcon />,
-    name: "Desafios",
-    path: "/pageDesafios"
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "Funil de Desafios",
-    path: "/challengers"
-  },
-  {
-    icon: <ListIcon />,
-    name: "Workflow de Desafios",
-    path: "/workflow"
-  },
-  // {
-  //   icon: <CalenderIcon />,
-  //   name: "Calendar",
-  //   path: "/calendar",
-  // },
 
-   {
-     name: "Forms",
-     icon: <DocsIcon />,
-     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-   },{
-    icon: <GroupIcon />,
-    name: "Organizaçao",
-    path: "/adminUsers",
-  },
-
-];
 
 const othersItems: NavItem[] = [
     {
@@ -105,6 +63,33 @@ const othersItems: NavItem[] = [
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
+
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const role = getUserRole();
+    setUserRole(role);
+  }, []);
+
+  const isAdmin = userRole === "ADMIN";
+
+ const navItems: NavItem[] = isAdmin
+    ? [
+        { icon: <GridIcon />, name: "Dashboard", path: "/dashboard-admin" },
+        { icon: <GroupIcon />, name: "Organização", path: "/adminUsers" },
+      ]
+    : [
+        { icon: <GridIcon />, name: "Dashboard", path: "/admin" },
+        { icon: <ShootingStarIcon />, name: "Desafios", path: "/pageDesafios" },
+        { icon: <BoxCubeIcon />, name: "Funil de Desafios", path: "/challengers" },
+        { icon: <ListIcon />, name: "Workflow de Desafios", path: "/workflow" },
+      ];
+
+  // "Outros" — o User Profile aparece pra todo mundo
+  const othersItems: NavItem[] = [
+    { icon: <UserCircleIcon />, name: "User Profile", path: "/profile" },
+  ];
+
 
   const renderMenuItems = (
     navItems: NavItem[],

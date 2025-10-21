@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-import CountryMap from "./CountryMap";
+// import CountryMap from "./CountryMap";
 import { useState } from "react";
 import { MoreDotIcon } from "@/icons";
 import { Dropdown } from "../ui/dropdown/Dropdown";
@@ -59,7 +59,10 @@ export default function StartupLocationCard() {
           id="mapOne"
           className="mapOne map-btn -mx-4 -my-6 h-[212px] w-[252px] 2xsm:w-[307px] xsm:w-[358px] sm:-mx-6 md:w-[668px] lg:w-[634px] xl:w-[393px] 2xl:w-[554px]"
         >
-          <CountryMap />
+          {/* <CountryMap /> */} {/* Comentado: componente não existe */}
+          <div className="flex items-center justify-center h-full text-gray-500">
+            Mapa em desenvolvimento
+          </div>
         </div>
       </div>
 

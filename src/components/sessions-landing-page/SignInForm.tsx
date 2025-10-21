@@ -2,14 +2,15 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { email, z } from "zod"
-import Axios from "axios"
+import { z } from "zod"
 import { Button } from "../ui/button"
 import { toast, Toaster } from "sonner"
 import { useRouter } from "next/navigation"
 import { api } from "@/api/axiosConfig"
 import { Eye, EyeOff } from "lucide-react" // ícones do lucide-react
 import { AxiosError } from 'axios';
+import { getUserRole } from '../elements/CommentsElements/GetUserRole';
+import Image from "next/image";
 
 const loginSchema = z.object({
   email: z
@@ -53,7 +54,12 @@ export default function UserLogin() {
         description: "Você será redirecionado em instantes...",
       });
 
-      setTimeout(() => router.push("/admin"), 1500);
+      if (getUserRole() === "ADMIN") {
+        setTimeout(() => router.push("/dashboard-admin"), 1500);
+      } else {
+        setTimeout(() => router.push("/admin"), 1500);
+      }
+
 
     } catch (error) {
       const err = error as AxiosError;
@@ -87,9 +93,11 @@ export default function UserLogin() {
            <Toaster position="top-right" richColors />
             <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
 
-                <img 
+                <Image 
                     src="/Topic.png" 
                     alt="Logo Nina Hub" 
+                    width={140}
+                    height={35}
                     className="mx-auto mb-4 w-32 sm:w-35"
                 />
 

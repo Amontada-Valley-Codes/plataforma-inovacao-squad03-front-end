@@ -6,22 +6,15 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
-  CalenderIcon,
   ChevronDownIcon,
-  DocsIcon,
   GridIcon,
   GroupIcon,
   HorizontaLDots,
   ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
   ShootingStarIcon,
-  TableIcon,
-  TaskIcon,
   UserCircleIcon,
 } from "../icons/index";
-
+import { getUserRole } from "@/components/elements/CommentsElements/GetUserRole";
 
 type NavItem = {
   name: string;
@@ -30,81 +23,40 @@ type NavItem = {
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
-const navItems: NavItem[] = [
-  {
-    icon: <GridIcon />,
-    name: "Dashboard",
-    path: "/admin"
-  },
-  {
-    icon: <GridIcon />,
-    name: "Corporaçao",
-    path: "/dashboard-corporation"
-  },
-  {
-    icon: <ShootingStarIcon />,
-    name: "Desafios",
-    path: "/pageDesafios"
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "Funil de Desafios",
-    path: "/challengers"
-  },
-  {
-    icon: <ListIcon />,
-    name: "Workflow de Desafios",
-    path: "/workflow"
-  },
-  // {
-  //   icon: <CalenderIcon />,
-  //   name: "Calendar",
-  //   path: "/calendar",
-  // },
 
-   {
-     name: "Forms",
-     icon: <DocsIcon />,
-     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-   },{
-    icon: <GroupIcon />,
-    name: "Organizaçao",
-    path: "/adminUsers",
-  },
 
-];
 
-const othersItems: NavItem[] = [
-    {
-    icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
-  },
-  //  {
-  //    icon: <BoxCubeIcon />,
-  //    name: "UI Elements",
-  //    subItems: [
-  //      { name: "Alerts", path: "/alerts", pro: false },
-  //      { name: "Avatar", path: "/avatars", pro: false },
-  //      { name: "Badge", path: "/badge", pro: false },
-  //      { name: "Buttons", path: "/buttons", pro: false },
-  //      { name: "Images", path: "/images", pro: false },
-  //      { name: "Videos", path: "/videos", pro: false },
-  //    ],
-  //  },
-  //  {
-  //    icon: <PlugInIcon />,
-  //    name: "Autentificação",
-  //    subItems: [
-  //      { name: "Entrar", path: "/signin", pro: false },
-  //      { name: "Cadastrar", path: "/signup", pro: false },
-  //    ],
-  //  },
-];
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const pathname = usePathname();
+
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const role = getUserRole();
+    setUserRole(role);
+  }, []);
+
+  const isAdmin = userRole === "ADMIN";
+
+ const navItems: NavItem[] = isAdmin
+    ? [
+        { icon: <GridIcon />, name: "Dashboard", path: "/dashboard-admin" },
+        { icon: <GroupIcon />, name: "Organização", path: "/adminUsers" },
+      ]
+    : [
+        { icon: <GridIcon />, name: "Dashboard", path: "/admin" },
+        { icon: <ShootingStarIcon />, name: "Desafios", path: "/pageDesafios" },
+        { icon: <BoxCubeIcon />, name: "Funil de Desafios", path: "/challengers" },
+        { icon: <ListIcon />, name: "Workflow de Desafios", path: "/workflow" },
+      ];
+
+  // "Outros" — o User Profile aparece pra todo mundo
+  const othersItems: NavItem[] = [
+    { icon: <UserCircleIcon />, name: "User Profile", path: "/profile" },
+  ];
+
 
   const renderMenuItems = (
     navItems: NavItem[],
@@ -269,7 +221,7 @@ const AppSidebar: React.FC = () => {
     if (!submenuMatched) {
       setOpenSubmenu(null);
     }
-  }, [pathname,isActive]);
+  }, [pathname, isActive, navItems, othersItems]);
 
   useEffect(() => {
     // Set the height of the submenu items when the submenu is opened

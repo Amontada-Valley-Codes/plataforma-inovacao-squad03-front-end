@@ -12,7 +12,7 @@ interface Props {
 
 
 export default function ButtonPublic({id, published, state, reload, setReload}: Props) {
-    const [isHidden, setIsHidden] = useState(state)
+    const [isHidden] = useState(state)
 
     const StyleVariant = {
         PUBLIC: {

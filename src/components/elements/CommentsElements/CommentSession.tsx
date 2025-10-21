@@ -31,7 +31,7 @@ export default function CommentSession({challangerId}:PropsSessionComment) {
     }
     getComments()
 
-  }, [commentsUpload])
+  }, [commentsUpload, challangerId])
 
   return (
     <div className="flex flex-col min-h-50 px-5 gap-5">

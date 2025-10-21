@@ -9,7 +9,7 @@ import { PropsCard } from "@/types"
 import Image from "next/image"
 import CardPublicDetails from "./CardPublicDetails"
 
-export default function CardPublic({id, image, corporationName, startDate, finishDate, title, description, sector, status, published}: PropsCard) {
+export default function CardPublic({id, name, startDate, endDate, description, sector, status, publishOption, corporationId, corporation}: PropsCard) {
     
 
     return(
@@ -21,7 +21,7 @@ export default function CardPublic({id, image, corporationName, startDate, finis
                 {/* imagem */}
                 <div>
                     <Image
-                    src={image}
+                    src={corporation.logo.url}
                     alt="corporation image"
                     width={40}
                     height={40}
@@ -31,13 +31,13 @@ export default function CardPublic({id, image, corporationName, startDate, finis
                 </div>
 
                 {/* Nome da empresa */}
-                <CardTitle className="text-[22px] text-blue font-medium">{corporationName}</CardTitle>
+                <CardTitle className="text-[22px] text-blue font-medium">{corporation.tradingName}</CardTitle>
 
             </CardHeader>
 
             <CardContent className="flex flex-col justify-start items-start">
 
-                <h1 className="text-[18px] text-blue font-medium mb-4"> {title} </h1>
+                <h1 className="text-[18px] text-blue font-medium mb-4"> {name} </h1>
 
                 {/* descrição */}
                 <p className="line-clamp-3 text-muted-foreground">{description}</p>
@@ -49,15 +49,15 @@ export default function CardPublic({id, image, corporationName, startDate, finis
                 {/* botão */}
                 <CardPublicDetails
                     id={id}
-                    image={image}
-                    corporationName={corporationName}
+                    name={name}
                     startDate={startDate}
-                    finishDate={finishDate}
-                    title={title}
+                    endDate={endDate}
                     description={description}
                     sector={sector}
                     status={status}
-                    published={published}
+                    publishOption={publishOption}
+                    corporationId={corporationId}
+                    corporation={corporation}
 
                 
                 />

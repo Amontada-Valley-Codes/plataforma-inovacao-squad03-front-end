@@ -57,7 +57,7 @@ export default function InputComment(props: PropsInputComments) {
             <Input
                 placeholder="Escreva um comentário"
                 className="pr-15"
-                {...register("content") as any}
+                {...register("content")}
             />
 
             {errors.content && (

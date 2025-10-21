@@ -42,7 +42,7 @@ export default function CardKanbanDetail(props: PropsCardKanban) {
         }
         updateChallenge()
 
-    }, [props.status]);
+    }, [props.status, props.id]);
 
     return (
         <Dialog>

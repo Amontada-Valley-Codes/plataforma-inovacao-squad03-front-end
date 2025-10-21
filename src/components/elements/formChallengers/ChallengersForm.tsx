@@ -106,7 +106,7 @@ export default function ChallengersForm() {
     setValue(field, value, { shouldValidate: true });
   };
 
-  const handleDateChange = (field: keyof ProjectFormData) => (dates: any, currentDateString: string) => {
+  const handleDateChange = (field: keyof ProjectFormData) => (dates: Date[], currentDateString: string) => {
     setValue(field, currentDateString, { shouldValidate: true });
   };
 

@@ -85,8 +85,7 @@ export default function RecentChallenges({
   onView,
   onEdit,
   onDelete,
-  onFilterClick,
-  onViewAllClick
+
 }: RecentChallengesProps) {
   const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
 

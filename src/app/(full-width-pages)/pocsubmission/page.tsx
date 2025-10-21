@@ -44,12 +44,10 @@ export default function Submission() {
         <div>
           <Label htmlFor="description">Descrição</Label>
           <TextArea
-            id="description"
             value={message}
             onChange={setMessage}
             rows={5}
             placeholder="Descreva brevemente a sua PoC"
-            required
             className="w-full !text-gray-800"
           />
         </div>
@@ -61,7 +59,6 @@ export default function Submission() {
             id="contact"
             type="text"
             placeholder="Nome do responsável"
-            required
             className="w-full"
           />
         </div>
@@ -73,7 +70,6 @@ export default function Submission() {
             id="projectLink"
             type="url"
             placeholder="Insira o link do projeto"
-            required
             className="w-full"
           />
           <p className="mt-2 text-sm text-gray-500">

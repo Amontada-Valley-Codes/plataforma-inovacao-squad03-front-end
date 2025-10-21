@@ -12,7 +12,7 @@ import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 
-export default function CardPublicDetails({image, corporationName, startDate, finishDate, title, description, sector, status}: PropsCard) {
+export default function CardPublicDetails({ name, startDate, endDate, description, sector, status,corporation}: PropsCard) {
 
     return (
 
@@ -32,7 +32,7 @@ export default function CardPublicDetails({image, corporationName, startDate, fi
 
                     <div>
                         <Image
-                        src={image}
+                        src={corporation.logo.url}
                         alt="corporation image"
                         width={40}
                         height={40}
@@ -41,13 +41,13 @@ export default function CardPublicDetails({image, corporationName, startDate, fi
                         />
                     </div>
 
-                <DialogTitle className="text-[24px] text-blue font-medium">{corporationName}</DialogTitle>
+                <DialogTitle className="text-[24px] text-blue font-medium">{corporation.tradingName}</DialogTitle>
 
             </div>
 
             <div className="flex flex-col gap-4 text-start">
 
-                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{title}</DialogTitle>
+                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{name}</DialogTitle>
                 
                 {/* Sessão informações */}
                 <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-[16px] items-center">
@@ -73,7 +73,7 @@ export default function CardPublicDetails({image, corporationName, startDate, fi
                         <CalendarClock size={17} /> Data de entrega:
                     </span>
 
-                    <span>{finishDate}</span>
+                    <span>{endDate}</span>
 
                     {/* setor */}
                     <span className="font-semibold flex items-center gap-1">

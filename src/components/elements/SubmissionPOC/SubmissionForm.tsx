@@ -44,19 +44,17 @@ export default function SubmissionForm() {
         <div>
           <Label htmlFor="description">Descrição</Label>
           <TextArea
-            id="description"
             value={message}
             onChange={(value) => setMessage(value)}
             rows={5}
             placeholder="Descreva brevemente a sua PoC"
-            required
           />
         </div>
 
         {/* Contato */}
         <div>
           <Label htmlFor="contact">Pessoa de Contato</Label>
-          <Input id="contact" type="text" placeholder="Nome do responsável" required />
+          <Input id="contact" type="text" placeholder="Nome do responsável" />
         </div>
 
         {/* Upload de Arquivos */}

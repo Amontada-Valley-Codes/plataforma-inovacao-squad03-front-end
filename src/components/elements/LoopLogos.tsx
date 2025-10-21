@@ -1,7 +1,7 @@
 "use client"
 
 import LogoLoop from '../LogoLoop';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+
 
 
 export default function LoopLogos() {

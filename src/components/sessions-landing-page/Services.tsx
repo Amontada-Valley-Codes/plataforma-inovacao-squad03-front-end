@@ -15,53 +15,53 @@ export default function Services() {
         >
       
             <div>
-            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center">
-                <span className="h-15 w-2.5 bg-green mr-3" />
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center">
+                <span className="h-15 w-2 bg-green mr-3" />
                 Gestão de desafios
             </h2>
-            <p className="text-gray mt-2 text-sm sm:text-[20px] ml-6">
+            <p className="text-gray mt-2 text-[24px] sm:text-[20px] ml-6 leading-snug">
                 Publique problemas estratégicos e receba propostas.
             </p>
             </div>
 
        
             <div>
-            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center leading-9">
-                <span className="h-15 w-2.5 bg-green mr-3" />
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
+                <span className="h-15 w-2 bg-green mr-3" />
                 Avaliação e seleção colaborativa
             </h2>
-            <p className="text-gray mt-2 text-sm sm:text-[20px] ml-6">
+            <p className="text-gray mt-2 text-[24px] sm:text-[20px] ml-6 leading-snug">
                 Ambiente de avaliação e feedback estruturado.
             </p>
             </div>
 
      
             <div>
-            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center mt-6">
-                <span className="h-15 w-2.5 bg-green mr-3" />
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
+                <span className="h-15 w-2 bg-green mr-3" />
                 Banco de ideias e soluções
             </h2>
-            <p className="text-gray mt-2 text-sm sm:text-[20px] ml-6">
+            <p className="text-gray mt-2 text-[24px] sm:text-[20px] ml-6 leading-snug">
                 Centralize ideias, utilizando de avaliação e priorização.
             </p>
             </div>
 
             <div>
-            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center mt-6">
-                <span className="h-15 w-2.5 bg-green mr-3" />
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
+                <span className="h-15 w-2 bg-green mr-3" />
                 Comunicação e engajamento
             </h2>
-            <p className="text-gray mt-2 text-sm sm:text-[20px] ml-6">
+            <p className="text-gray mt-2 text-[24px] sm:text-[20px] ml-6 leading-snug">
                 Dashboard, organização kanban e ambiente de comentários.
             </p>
             </div>
 
             <div>
-            <h2 className="text-blue text-4x1 sm:text-[32px] font-semibold flex items-center mt-5">
-                <span className="h-15 w-2.5 bg-green mr-3" />
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
+                <span className="h-15 w-2 bg-green mr-3" />
                 Matchmaking
             </h2>
-            <p className="text-gray mt-2 text-sm sm:text-[20px] ml-6">
+            <p className="text-gray mt-2 text-[24px] sm:text-[20px] ml-6 leading-snug">
                 Filtros que aproximam desafios de soluções com startups e parceiros.
             </p>
             </div>

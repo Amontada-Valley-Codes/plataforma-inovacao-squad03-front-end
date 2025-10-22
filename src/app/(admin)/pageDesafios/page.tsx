@@ -6,7 +6,7 @@ import  RecentChallenges  from "@/components/pageDesafios/Tabela";
 
 
 export default function ChallengesPage() {
-  const [showNewChallengeModal, setShowNewChallengeModal] = useState(false);
+  const [, setShowNewChallengeModal] = useState(false);
 
   const handleNewChallenge = () => {
     setShowNewChallengeModal(true);

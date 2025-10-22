@@ -1,65 +1,24 @@
 import type { Metadata } from "next";
-import {InnovationMetrics  } from "@/components/ecommerce/EcommerceMetrics";
-import React from "react";
-import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
-import StatisticsChart from "@/components/ecommerce/StatisticsChart";
-import RecentOrders from "@/components/ecommerce/RecentOrders";
-
+import { DashboardContent } from "@/components/dashboard/DashboardContent";
 
 export const metadata: Metadata = {
-  title: "Dashboard Admin | Plataforma de Inovação",
+  title: "Dashboard Corporativa | Topic",
   description: "Dashboard administrativo da Plataforma de Inovação",
 };
 
-export default function Ecommerce() {
-  const metricsData = [
-    {
-      title: "Startups Conectadas",
-      value: 8,
-      change: 15.3,
-      changeType: "increase" as const,
-      icon: "startups" as const,
-    },
-    {
-      title: "Desafios Criados",
-      value: 5,
-      change: 8.2,
-      changeType: "increase" as const,
-      icon: "challenges" as const,
-    },
-    
-    {
-      title: "Desafios em Analise",
-      value: 8,
-      change: 18.7,
-      changeType: "increase" as const,
-      icon: "ideas" as const,
-    },
-    {
-      title: "POCs em Andamento",
-      value: 14,
-      change: -5.2,
-      changeType: "decrease" as const,
-      icon: "pocs" as const,
-    },
-  ];
+export default function dashboardCorporation() {
   return (
-    <div className="grid grid-cols-12 gap-4 md:gap-6">
-      <div className="col-span-12 space-y-6 xl:col-span-7">
-        <InnovationMetrics metrics={metricsData} />
-      </div>
-
-      <div className="col-span-12 xl:col-span-5">
-        <MonthlyTarget />
-      </div>
-
-      <div className="col-span-12">
-        <StatisticsChart />
-      </div>
-
-        <div className="col-span-12 xl:col-span-12">
-          <RecentOrders />
+    <div>
+      <div className="bg-card rounded-[10px] py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4  my-4">
+        <div className="text-blue">
+          <h1 className="text-2xl md:text-3xl font-medium mb-1">
+            Dashboard Corporativa
+          </h1>
+      
         </div>
+      </div>
+      
+      <DashboardContent />
     </div>
   );
 }

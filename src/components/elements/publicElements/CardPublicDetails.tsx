@@ -11,8 +11,27 @@ import Image from "next/image"
 import { FiLoader } from "react-icons/fi";
 import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
+import { getUserRole } from "../CommentsElements/GetUserRole";
+import { useRouter } from "next/navigation";
 
-export default function CardPublicDetails({id, image, corporationName, startDate, finishDate, title, description, sector, status, published}: PropsCard) {
+export default function CardPublicDetails(props: PropsCard) {
+    const router = useRouter()
+
+    const FORMATING_SECTORS: Record<string, string> = {
+        HEALTH: "Saúde",
+        EDUCATION: "Educação", 
+        TECHNOLOGY: "Tecnologia", 
+        FINANCIAL: "Finanças", 
+        SALES: "Vendas",
+    }
+
+    const COLUMN_TITLES: Record<string, string> = {
+        GENERATION: "Geração de Ideias",
+        PRE_SCREENING: "Pré-Triagem",
+        IDEATION: "Ideação",
+        DETAILED_SCREENING: "Triagem Detalhada",
+        EXPERIMENTATION: "Experimentação",
+    };
 
     return (
 
@@ -32,22 +51,22 @@ export default function CardPublicDetails({id, image, corporationName, startDate
 
                     <div>
                         <Image
-                        src={image}
-                        alt="corporation image"
-                        width={40}
-                        height={40}
-                        className="rounded-full w-12 h-12 object-cover object-center"
+                            src={props.corporation.logo[0].url || "/default-logo.png"}
+                            alt="corporation image"
+                            width={40}
+                            height={40}
+                            className="rounded-full w-12 h-12 object-cover object-center"
 
                         />
                     </div>
 
-                <DialogTitle className="text-[24px] text-blue font-medium">{corporationName}</DialogTitle>
+                <DialogTitle className="text-[24px] text-blue font-medium">{props.corporation.tradingName}</DialogTitle>
 
             </div>
 
             <div className="flex flex-col gap-4 text-start">
 
-                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{title}</DialogTitle>
+                <DialogTitle className="text-[22px] text-blue font-medium mb-2" >{props.name}</DialogTitle>
                 
                 {/* Sessão informações */}
                 <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-[16px] items-center">
@@ -58,7 +77,7 @@ export default function CardPublicDetails({id, image, corporationName, startDate
                     </span>
 
                     <span className="flex justify-center bg-blue/80 dark:bg-gray-600 px-2 text-[14px] rounded-[14px] text-white">
-                        {status}
+                        {COLUMN_TITLES[props.status]}
                     </span>
 
                     {/* data de início */}
@@ -66,21 +85,21 @@ export default function CardPublicDetails({id, image, corporationName, startDate
                         <Calendar1 size={17} /> Data de início:
                     </span>
 
-                    <span>{startDate}</span>
+                    <span>{props.startDate}</span>
 
                     {/* data de entrega */}
                     <span className="font-semibold flex items-center gap-1">
                         <CalendarClock size={17} /> Data de entrega:
                     </span>
 
-                    <span>{finishDate}</span>
+                    <span>{props.endDate}</span>
 
                     {/* setor */}
                     <span className="font-semibold flex items-center gap-1">
                         <BiCategory /> Setor:
                     </span>
 
-                    <span>{sector}</span>
+                    <span>{FORMATING_SECTORS[props.sector]}</span>
 
                 </div>
 
@@ -94,13 +113,22 @@ export default function CardPublicDetails({id, image, corporationName, startDate
 
                 <span className="font-semibold text-[18px]">Descrição:</span>
 
-                <p>{description}</p>
+                <p>{props.description}</p>
 
             </div>
-            
-            <a href="/pocsubmission">
-                <Button variant={"ninaButton"} size={"default"} className="text-white"> POC </Button>
-            </a>
+
+            {getUserRole() === "STARTUP_MEMBER" && (
+
+                <Button 
+                    variant={"ninaButton"} 
+                    size={"default"} 
+                    className="text-white"
+                    onClick={() => { router.push("/pocsubmission")}}
+                > 
+                        POC 
+                </Button>
+                
+            )}
 
 
         </DialogContent>

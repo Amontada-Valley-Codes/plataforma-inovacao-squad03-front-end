@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { api } from "@/api/axiosConfig"
 
@@ -95,7 +96,7 @@ const onSubmit = async (data: EnterpriseFormData) => {
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-lg h-[600px] flex flex-col">
 
         <div className="p-6 border-b border-gray-200 text-center">
-          <img src="/Topic.png" alt="Logo" className="mx-auto h-20 sm:h-20" />
+          <Image src="/Topic.png" alt="Logo" width={80} height={80} className="mx-auto h-20 sm:h-20" />
           <h2 className="text-green-600 font-bold text-xl mt-4"> CADASTRO DE EMPRESA </h2>
         </div>
 

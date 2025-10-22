@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { ChallengesHeader } from "@/components/pageDesafios/Header";
 import { ChallengesFilters } from "@/components/pageDesafios/Filtros";
 import  RecentChallenges  from "@/components/pageDesafios/Tabela";
-import RecentOrders from "@/components/ecommerce/RecentOrders";
+
 
 export default function ChallengesPage() {
-  const [showNewChallengeModal, setShowNewChallengeModal] = useState(false);
+  const [, setShowNewChallengeModal] = useState(false);
 
   const handleNewChallenge = () => {
     setShowNewChallengeModal(true);

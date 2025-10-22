@@ -11,10 +11,10 @@ export type PropsCard = {
     status: string;
     corporation: {
         tradingName: string
-        logo: {
+        logo: [{
             url: string
             public_id: string
-        }
+        }]
     }
 }
 
@@ -31,10 +31,10 @@ export type PropsCardKanban = {
     status: string;
     corporation: {
         tradingName: string
-        logo: {
+        logo: [{
             url: string
             public_id: string
-        }
+        }]
     }
     setReload: (prev: boolean) => void;
     realod: boolean

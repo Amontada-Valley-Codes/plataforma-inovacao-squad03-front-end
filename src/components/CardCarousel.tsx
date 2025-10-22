@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface CardCarouselProps {
   src: string;
@@ -13,9 +14,11 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ src, alt }) => {
         w-full h-full p-3 sm:p-4 
       "
     >
-      <img
+      <Image
         src={src}
-        alt={alt}
+        alt={alt || ""}
+        width={200}
+        height={150}
         className="w-auto h-auto max-w-[85%] max-h-[65%] object-contain"
         draggable={false}
       />

@@ -9,6 +9,7 @@ import { toast, Toaster } from "sonner"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff } from "lucide-react"
 import { AxiosError } from "axios";
+import Image from "next/image";
 
 // ✅ Schema de registro
 const registroSchema = z.object({
@@ -47,7 +48,7 @@ export default function UserRegistro() {
   const onSubmit = async (data: RegistroData) => {
     setIsLoading(true);
     try {
-      const response = await api.post("/auth", {
+      await api.post("/auth", {
         name: data.nome,
         password: data.senha,
       });
@@ -87,9 +88,11 @@ export default function UserRegistro() {
     <div className="bg-gray-100 flex items-center justify-center min-h-screen px-4">
       <Toaster position="top-right" richColors />
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
-        <img
+        <Image
           src="/Topic.png"
           alt="Logo Nina Hub"
+          width={140}
+          height={35}
           className="mx-auto mb-4 w-32 sm:w-35"
         />
 

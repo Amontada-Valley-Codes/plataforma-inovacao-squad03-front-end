@@ -4,6 +4,7 @@ import BasicTableOne from "@/components/adminUsers/BasicTableOne";
 import Filters from "@/components/adminUsers/Filters";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import InviteUserModal from "@/components/user-profile/InviteUserModal";
 
 
 
@@ -30,12 +31,7 @@ export default function BasicTables() {
             </p>
           </div>
 
-          <Button 
-            variant="ninaButton" 
-            className="px-8 md:px-10 py-2.5 text-white whitespace-nowrap"
-          >
-            Adicionar
-          </Button>
+          <InviteUserModal/>
         </div>
       
       

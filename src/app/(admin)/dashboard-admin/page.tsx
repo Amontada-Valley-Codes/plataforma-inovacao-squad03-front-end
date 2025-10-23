@@ -6,30 +6,6 @@ import { useDashboardAdmin } from "@/hooks/useDashboardAdmin";
 export default function dashboardCorporation() {
   const { dashboardData, loading, error } = useDashboardAdmin();
 
-  const defaultMetrics = [
-    {
-      title: "Startups Cadastradas",
-      value: 0,
-      change: 0,
-      changeType: "increase" as const,
-      icon: "startups" as const,
-    },
-    {
-      title: "Corporações Cadastradas",
-      value: 0,
-      change: 0,
-      changeType: "increase" as const,
-      icon: "challenges" as const,
-    },
-    {
-      title: "Gestores Ativos",
-      value: 0,
-      change: 0,
-      changeType: "increase" as const,
-      icon: "ideas" as const,
-    },
-  ];
-
   const corporationMetrics = dashboardData ? [
     {
       title: "Startups Cadastradas",
@@ -52,7 +28,7 @@ export default function dashboardCorporation() {
       changeType: "increase" as const,
       icon: "ideas" as const,
     },
-  ] : defaultMetrics;
+  ] : [];
 
   if (loading) {
     return (
@@ -66,10 +42,6 @@ export default function dashboardCorporation() {
               Visão geral das métricas e indicadores da plataforma.
             </p>
           </div>
-        </div>
-        
-        <div className="[&_.grid]:lg:grid-cols-3 [&_h3]:hidden [&_p]:hidden">
-          <InnovationMetrics metrics={defaultMetrics} />
         </div>
         
         <div className="flex items-center justify-center h-32">

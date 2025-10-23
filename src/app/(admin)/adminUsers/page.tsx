@@ -3,7 +3,7 @@ import ComponentCard from "@/components/common/ComponentCard";
 import BasicTableOne from "@/components/adminUsers/BasicTableOne";
 import Filters from "@/components/adminUsers/Filters";
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import InviteUserModal from "@/components/user-profile/InviteUserModal";
 
 

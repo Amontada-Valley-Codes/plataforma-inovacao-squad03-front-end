@@ -1,12 +1,8 @@
 "use client";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import DialogForm from "@/components/elements/formChallengers/DialogForm";
 
-interface ChallengesHeaderProps {
-  onNewChallenge: () => void;
-}
-
-export function ChallengesHeader({ onNewChallenge }: ChallengesHeaderProps) {
+export function ChallengesHeader() {
   return (
     <div className="bg-card rounded-[10px] py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div className="text-blue">
@@ -18,13 +14,7 @@ export function ChallengesHeader({ onNewChallenge }: ChallengesHeaderProps) {
         </p>
       </div>
 
-      <Button 
-        variant="ninaButton" 
-        className="px-8 md:px-10 py-2.5 text-white whitespace-nowrap"
-        onClick={onNewChallenge}
-      >
-         Novo Desafio
-      </Button>
+      <DialogForm />
     </div>
   );
 }

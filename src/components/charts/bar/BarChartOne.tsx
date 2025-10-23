@@ -38,18 +38,14 @@ export default function BarChartOne() {
     },
     xaxis: {
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+        "Tecnologia",
+        "Sustentabilidade",
+        "Saúde",
+        "Educação",
+        "Finanças",
+        "Logística",
+        "Marketing",
+        "RH",
       ],
       axisBorder: {
         show: false,
@@ -66,7 +62,7 @@ export default function BarChartOne() {
     },
     yaxis: {
       title: {
-        text: undefined,
+        text: "Número de Desafios",
       },
     },
     grid: {
@@ -91,8 +87,8 @@ export default function BarChartOne() {
   };
   const series = [
     {
-      name: "Sales",
-      data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
+      name: "Desafios",
+      data: [25, 18, 12, 8, 15, 10, 6, 4],
     },
   ];
   return (

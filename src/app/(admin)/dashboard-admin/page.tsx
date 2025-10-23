@@ -3,7 +3,7 @@ import { InnovationMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import RecentOrders from "@/components/ecommerce/RecentOrders";
 import { useDashboardAdmin } from "@/hooks/useDashboardAdmin";
 
-export default function dashboardCorporation() {
+export default function DashboardCorporation() {
   const { dashboardData, loading, error } = useDashboardAdmin();
 
   const corporationMetrics = dashboardData ? [

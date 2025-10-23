@@ -143,7 +143,7 @@ export default function RecentChallenges({
             {title}
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {challenges.length} desafio(s) da sua corporação
+            {challenges?.length || 0} desafio(s) da sua corporação
           </p>
         </div>
       </div>
@@ -194,7 +194,7 @@ export default function RecentChallenges({
 
           {/* Table Body */}
           <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
-            {challenges.map((challenge) => (
+            {challenges && challenges.map((challenge) => (
               <TableRow key={challenge.id} className="">
                 <TableCell className="py-3">
                   <div>

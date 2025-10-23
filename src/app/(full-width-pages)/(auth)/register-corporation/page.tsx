@@ -75,20 +75,16 @@ const onSubmit = async (data: EnterpriseFormData) => {
   try {
     const token = localStorage.getItem("authtoken")
 
-    const [day, month, year] = data.foundationDate.split("/")
-    const formattedDate = `${year}-${month}-${day}`
-
-
     const formDataToSend = new FormData();
 
     formDataToSend.append("cnpj", data.cnpj)
     formDataToSend.append("legalName", data.legalName)
     formDataToSend.append("tradingName", data.tradingName)
-    formDataToSend.append("foundationDate", formattedDate)
+    formDataToSend.append("foundationDate", data.foundationDate)
     if (data.logo?.[0]) {
       formDataToSend.append("logo", data.logo[0])
     }
-    formDataToSend.append("mainAdress", data.mainAddress)
+    formDataToSend.append("mainAddress", data.mainAddress)
     formDataToSend.append("mainPhone", data.mainPhone)
     formDataToSend.append("generalEmail", data.generalEmail)
     formDataToSend.append("website", data.website)

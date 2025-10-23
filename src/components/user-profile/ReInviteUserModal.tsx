@@ -23,7 +23,7 @@ const inviteSchema = z.object({
 
 type InviteFormData = z.infer<typeof inviteSchema>;
 
-export default function InviteUserModal() {
+export default function ReInviteUserModal() {
   const { isOpen, openModal, closeModal } = useModal();
 
   const {
@@ -51,13 +51,11 @@ export default function InviteUserModal() {
 
   return (
     <div>
-      <Button
-        variant="ninaButton"
-        className="px-8 md:px-10 py-2.5 text-white whitespace-nowrap"
-        onClick={openModal}
-      >
-        Adicionar
-      </Button>
+        <button className="px-3 py-1.5 text-primary-600  hover:bg-gray-100 text-theme-sm font-medium rounded-full border border-primary-600 transition-all duration-200"
+            onClick={openModal}
+        >
+            REENVIAR
+        </button>
 
       <Modal
         isOpen={isOpen}
@@ -66,7 +64,7 @@ export default function InviteUserModal() {
       >
 
         <h4 className="font-semibold text-blue mb-7 text-[25px] dark:text-white/90">
-          Convite de usuário
+          Reenviar convite de usuário
         </h4>
 
         {/* Form */}

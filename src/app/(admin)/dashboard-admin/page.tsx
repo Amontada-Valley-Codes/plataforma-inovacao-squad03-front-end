@@ -1,10 +1,34 @@
 "use client";
 import { InnovationMetrics } from "@/components/ecommerce/EcommerceMetrics";
-import RecentOrders from "@/components/ecommerce/RecentOrders";
+import RecentChallenges from "@/components/ecommerce/RecentChallenges";
 import { useDashboardAdmin } from "@/hooks/useDashboardAdmin";
 
 export default function DashboardCorporation() {
   const { dashboardData, loading, error } = useDashboardAdmin();
+
+  const defaultMetrics = [
+    {
+      title: "Startups Cadastradas",
+      value: 0,
+      change: 0,
+      changeType: "increase" as const,
+      icon: "startups" as const,
+    },
+    {
+      title: "Corporações Cadastradas",
+      value: 0,
+      change: 0,
+      changeType: "increase" as const,
+      icon: "challenges" as const,
+    },
+    {
+      title: "Gestores Ativos",
+      value: 0,
+      change: 0,
+      changeType: "increase" as const,
+      icon: "ideas" as const,
+    },
+  ];
 
   const corporationMetrics = dashboardData ? [
     {
@@ -17,18 +41,18 @@ export default function DashboardCorporation() {
     {
       title: "Corporações Cadastradas",
       value: dashboardData.totalCorporations,
-      change: 12,
+      change: 12.3,
       changeType: "increase" as const,
       icon: "challenges" as const,
     },
     {
       title: "Gestores Ativos",
       value: dashboardData.totalManagers,
-      change: 0,
+      change: 25.7,
       changeType: "increase" as const,
       icon: "ideas" as const,
     },
-  ] : [];
+  ] : defaultMetrics;
 
   if (loading) {
     return (
@@ -42,6 +66,10 @@ export default function DashboardCorporation() {
               Visão geral das métricas e indicadores da plataforma.
             </p>
           </div>
+        </div>
+        
+        <div className="[&_.grid]:lg:grid-cols-3 [&_h3]:hidden [&_p]:hidden">
+          <InnovationMetrics metrics={defaultMetrics} />
         </div>
         
         <div className="flex items-center justify-center h-32">
@@ -92,7 +120,7 @@ export default function DashboardCorporation() {
       </div>
       
        <div className="col-span-12 xl:col-span-12 mt-3">
-        <RecentOrders />
+        <RecentChallenges />
       </div>
     </div>
   );

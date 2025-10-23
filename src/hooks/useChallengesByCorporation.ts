@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -83,6 +84,7 @@ export function useChallengesByCorporation({
         setChallenges(newChallenges);
       }
       
+      // Verifica se há mais páginas
       setHasMore(newChallenges.length === limit);
       
     } catch (err) {

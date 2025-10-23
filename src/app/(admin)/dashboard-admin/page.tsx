@@ -1,58 +1,36 @@
 "use client";
 import { InnovationMetrics } from "@/components/ecommerce/EcommerceMetrics";
-import RecentChallenges from "@/components/ecommerce/RecentChallenges";
+import AllChallenges from "@/components/ecommerce/AllChallenges";
 import { useDashboardAdmin } from "@/hooks/useDashboardAdmin";
-
+import ComponentCard from "@/components/common/ComponentCard";
+import BarChartOne from "@/components/charts/bar/BarChartOne";
 export default function DashboardCorporation() {
   const { dashboardData, loading, error } = useDashboardAdmin();
 
-  const defaultMetrics = [
-    {
-      title: "Startups Cadastradas",
-      value: 0,
-      change: 0,
-      changeType: "increase" as const,
-      icon: "startups" as const,
-    },
-    {
-      title: "Corporações Cadastradas",
-      value: 0,
-      change: 0,
-      changeType: "increase" as const,
-      icon: "challenges" as const,
-    },
-    {
-      title: "Gestores Ativos",
-      value: 0,
-      change: 0,
-      changeType: "increase" as const,
-      icon: "ideas" as const,
-    },
-  ];
 
   const corporationMetrics = dashboardData ? [
     {
       title: "Startups Cadastradas",
       value: dashboardData.totalStartups,
-      change: 18.5,
+      change: 18,
       changeType: "increase" as const,
       icon: "startups" as const,
     },
     {
       title: "Corporações Cadastradas",
       value: dashboardData.totalCorporations,
-      change: 12.3,
+      change: 50,
       changeType: "increase" as const,
       icon: "challenges" as const,
     },
     {
       title: "Gestores Ativos",
       value: dashboardData.totalManagers,
-      change: 25.7,
+      change: 0,
       changeType: "increase" as const,
       icon: "ideas" as const,
     },
-  ] : defaultMetrics;
+  ] : [];
 
   if (loading) {
     return (
@@ -69,7 +47,7 @@ export default function DashboardCorporation() {
         </div>
         
         <div className="[&_.grid]:lg:grid-cols-3 [&_h3]:hidden [&_p]:hidden">
-          <InnovationMetrics metrics={defaultMetrics} />
+          <InnovationMetrics metrics={[]} />
         </div>
         
         <div className="flex items-center justify-center h-32">
@@ -119,9 +97,19 @@ export default function DashboardCorporation() {
         <InnovationMetrics metrics={corporationMetrics} />
       </div>
       
-       <div className="col-span-12 xl:col-span-12 mt-3">
-        <RecentChallenges />
+       <div className="col-span-12 mt-5">
+        <ComponentCard title="Desafios por Categoria">
+          <BarChartOne />
+        </ComponentCard>
       </div>
+       <div className="col-span-12 xl:col-span-12 my-3">
+        <AllChallenges 
+          title="Todos os Desafios da Plataforma"
+          initialLimit={10}
+          showLoadMore={true}
+        />
+      </div>
+
     </div>
   );
 }

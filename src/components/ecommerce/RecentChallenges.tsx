@@ -62,7 +62,7 @@ export default function RecentChallenges({
 }: RecentChallengesProps) {
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   
-  const { challenges, loading, error, refetch, hasMore, loadMore } = useChallengesByCorporation({
+  const { challenges, loading, error, hasMore, loadMore } = useChallengesByCorporation({
     page: 1,
     limit: initialLimit
   });
@@ -123,9 +123,6 @@ export default function RecentChallenges({
         </div>
         <div className="flex items-center justify-center h-32">
           <div className="text-red-500">{error}</div>
-          <Button onClick={refetch} className="ml-4">
-            Tentar Novamente
-          </Button>
         </div>
       </div>
     );

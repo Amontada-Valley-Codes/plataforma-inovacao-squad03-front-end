@@ -38,7 +38,7 @@ export function DashboardContent() {
     {
       title: "Startups Conectadas",
       value: dashboardData.challenges.startupsConectadas,
-      change: 15.3,
+      change: 0,
       changeType: "increase" as const,
       icon: "startups" as const,
     },
@@ -57,10 +57,10 @@ export function DashboardContent() {
       icon: "ideas" as const,
     },
     {
-      title: "Desafios Pendentes",
+      title: "Desafios Em Andamento",
       value: dashboardData.challenges.pendentes,
-      change: -5.2, 
-      changeType: "decrease" as const,
+      change: 0, 
+      changeType: "increase" as const,
       icon: "pocs" as const,
     },
   ];

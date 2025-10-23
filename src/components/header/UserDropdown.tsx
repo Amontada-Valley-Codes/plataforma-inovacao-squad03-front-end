@@ -145,7 +145,28 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
           </li>
         </ul>
         <Link
-          href="/signin"
+          href="/login"
+          className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+        >
+          <svg
+            className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M8.25 9V6.75C8.25 4.12665 10.3766 2 13 2C15.6234 2 17.75 4.12665 17.75 6.75V9H19C20.1046 9 21 9.89543 21 11V19C21 20.1046 20.1046 21 19 21H7C5.89543 21 5 20.1046 5 19V11C5 9.89543 5.89543 9 7 9H8.25ZM16.25 9V6.75C16.25 4.95507 14.7949 3.5 13 3.5C11.2051 3.5 9.75 4.95507 9.75 6.75V9H16.25ZM7 10.5C6.72386 10.5 6.5 10.7239 6.5 11V19C6.5 19.2761 6.72386 19.5 7 19.5H19C19.2761 19.5 19.5 19.2761 19.5 19V11C19.5 10.7239 19.2761 10.5 19 10.5H7Z"
+              fill=""
+            />
+          </svg>
+          Logout
+        </Link>
+        <Link
+          href="/"
           className="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         >
           <svg

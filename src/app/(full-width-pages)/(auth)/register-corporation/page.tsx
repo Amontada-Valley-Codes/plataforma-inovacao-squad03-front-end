@@ -28,7 +28,7 @@ const enterpriseValidation = z.object({
     .refine(
       (file) =>
         !file?.[0] ||
-        ["image/jpeg", "image/png", "image/webp"].includes(file[0].type),
+        ["image/jpg","image/jpeg", "image/png", "image/webp"].includes(file[0].type),
       "Apenas imagens JPG, PNG ou WEBP são aceitas!"
     )
     .optional(),
@@ -68,22 +68,40 @@ export default function EnterpriseCadaster() {
 const router = useRouter()
 
 const onSubmit = async (data: EnterpriseFormData) => {
-  try {
-    const response = await api.post("/enterprise", {
-      cnpj: data.cnpj,
-      legalName: data.legalName,
-      tradingName: data.tradingName,
-      foundationDate: data.foundationDate,
-      logo: data.logo,
-      mainAddress: data.mainAddress,
-      mainPhone: data.mainPhone,
-      generalEmail: data.generalEmail,
-      website: data.website,
-      sector: data.sector,
-      size: data.size
-    })
 
-    router.push("/admin")
+  console.log("Form data before sending:", data);
+  console.log("File data from form:", data.logo?.[0]);
+
+  try {
+    const token = localStorage.getItem("authtoken")
+
+    const [day, month, year] = data.foundationDate.split("/")
+    const formattedDate = `${year}-${month}-${day}`
+
+
+    const formDataToSend = new FormData();
+
+    formDataToSend.append("cnpj", data.cnpj)
+    formDataToSend.append("legalName", data.legalName)
+    formDataToSend.append("tradingName", data.tradingName)
+    formDataToSend.append("foundationDate", formattedDate)
+    if (data.logo?.[0]) {
+      formDataToSend.append("logo", data.logo[0])
+    }
+    formDataToSend.append("mainAdress", data.mainAddress)
+    formDataToSend.append("mainPhone", data.mainPhone)
+    formDataToSend.append("generalEmail", data.generalEmail)
+    formDataToSend.append("website", data.website)
+    formDataToSend.append("sector", data.sector)
+    formDataToSend.append("size", data.size)
+
+    await api.post("/enterprise", formDataToSend, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    
+    router.push("/register")
 
   } catch (error) {
     console.error("Erro ao fazer cadastro de empresa.", error)
@@ -148,6 +166,8 @@ const onSubmit = async (data: EnterpriseFormData) => {
 
             <div className="text-left">
               <label className="block mb-1 text-sm font-medium"> Logo: </label>
+
+              
               <input
                 type="file"
                 accept="image/*"

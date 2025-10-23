@@ -22,7 +22,7 @@ export type ChallengeSector =
   | "AGRICULTURE"
   | "OTHER";
 
-export interface PaginatedChallenge {
+export interface AllChallenge {
   id: string;
   name: string;
   sector: ChallengeSector;
@@ -31,14 +31,14 @@ export interface PaginatedChallenge {
   pocCount: number;
 }
 
-interface UseChallengesPaginationProps {
+interface UseAllChallengesPaginationProps {
   page?: number;
   limit?: number;
   autoFetch?: boolean;
 }
 
-interface UseChallengesPaginationReturn {
-  challenges: PaginatedChallenge[];
+interface UseAllChallengesPaginationReturn {
+  challenges: AllChallenge[];
   loading: boolean;
   error: string | null;
   refetch: () => void;
@@ -47,12 +47,12 @@ interface UseChallengesPaginationReturn {
   loadMore: () => void;
 }
 
-export function useChallengesPagination({
+export function useAllChallengesPagination({
   page = 1,
   limit = 10,
   autoFetch = true
-}: UseChallengesPaginationProps): UseChallengesPaginationReturn {
-  const [challenges, setChallenges] = useState<PaginatedChallenge[]>([]);
+}: UseAllChallengesPaginationProps): UseAllChallengesPaginationReturn {
+  const [challenges, setChallenges] = useState<AllChallenge[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(page);
@@ -86,7 +86,7 @@ export function useChallengesPagination({
       setHasMore(newChallenges.length === limit);
       
     } catch (err) {
-      console.error("Erro ao buscar challenges paginados:", err);
+      console.error("Erro ao buscar todos os challenges:", err);
       setError("Erro ao carregar desafios");
     } finally {
       setLoading(false);

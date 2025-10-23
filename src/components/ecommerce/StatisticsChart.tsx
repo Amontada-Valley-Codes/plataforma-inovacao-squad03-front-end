@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { ApexOptions } from "apexcharts";
-import ChartTab from "../common/ChartTab";
 import dynamic from "next/dynamic";
 
 // Dynamically import the ReactApexChart component
@@ -16,7 +15,7 @@ export default function POCEvolutionChart() {
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#5BC30D", "#465FFF"], // Verde para POCs Iniciadas, Azul para POCs Concluídas
+    colors: ["#5BC30D", "#FF4560"], // Verde para POCs Aprovadas, Vermelho para POCs Não Aprovadas
     chart: {
       fontFamily: "Outfit, sans-serif",
       height: 310,
@@ -100,12 +99,12 @@ export default function POCEvolutionChart() {
 
   const series = [
     {
-      name: "POCs Iniciadas",
-      data: [8, 12, 15, 10, 18, 22, 25, 20, 28, 24, 30, 35],
+      name: "POCs Aprovadas",
+      data: [2, 4, 5, 3, 6, 7, 3, 6, 9, 7, 0, 3],
     },
     {
-      name: "POCs Concluídas",
-      data: [5, 8, 10, 7, 12, 15, 18, 16, 20, 18, 22, 25],
+      name: "POCs Não Aprovadas",
+      data: [1, 2, 3, 1, 3, 4, 5, 3, 6, 2, 7, 4],
     },
   ];
 
@@ -117,12 +116,10 @@ export default function POCEvolutionChart() {
             Evolução de POCs
           </h3>
           <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
-            Quantidade de POCs iniciadas e concluídas por mês
+            Quantidade de POCs aprovadas e não aprovadas por mês
           </p>
         </div>
-        <div className="flex items-start w-full gap-3 sm:justify-end">
-          <ChartTab />
-        </div>
+
       </div>
 
       <div className="max-w-full overflow-x-auto custom-scrollbar">

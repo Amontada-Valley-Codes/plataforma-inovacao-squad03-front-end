@@ -17,14 +17,14 @@ export default function dashboardCorporation() {
     {
       title: "Corporações Cadastradas",
       value: dashboardData.totalCorporations,
-      change: 12.3,
+      change: 12,
       changeType: "increase" as const,
       icon: "challenges" as const,
     },
     {
       title: "Gestores Ativos",
       value: dashboardData.totalManagers,
-      change: 25.7,
+      change: 0,
       changeType: "increase" as const,
       icon: "ideas" as const,
     },

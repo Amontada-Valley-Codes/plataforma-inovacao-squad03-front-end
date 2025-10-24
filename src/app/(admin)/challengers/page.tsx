@@ -9,12 +9,12 @@ export default function Challengers() {
         <div className="w-full flex-1 min-h-0 flex flex-col">
 
             {/* Register */}
-            <div className="col-span-12 space-y-2 bg-card py-4 px-2 flex justify-between items-center rounded-[10px]">
+            <div className="col-span-12 space-y-2 py-4 px-2 flex justify-between items-center rounded-[10px]">
 
-                <div className="text-blue md:px-5">
+                <div className="text-blue">
                     
                     <h1 className="text-[25px] md:text-[30px] font-medium">
-                        Desafios
+                        Funil de Inovação
                     </h1>
 
                 </div>

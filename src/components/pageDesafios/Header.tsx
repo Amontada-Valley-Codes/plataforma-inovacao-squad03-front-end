@@ -4,7 +4,7 @@ import DialogForm from "@/components/elements/formChallengers/DialogForm";
 
 export function ChallengesHeader() {
   return (
-    <div className="bg-card rounded-[10px] py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+    <div className="rounded-[10px] py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div className="text-blue">
         <h1 className="text-2xl md:text-3xl font-medium mb-1">
           Desafios Corporativos

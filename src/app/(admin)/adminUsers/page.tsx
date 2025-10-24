@@ -1,5 +1,4 @@
 "use client";
-import ComponentCard from "@/components/common/ComponentCard";
 import BasicTableOne from "@/components/adminUsers/BasicTableOne";
 import Filters from "@/components/adminUsers/Filters";
 import React, { useState } from "react";
@@ -21,7 +20,7 @@ export default function BasicTables() {
 
   return (
       <div>
-        <div className="bg-card rounded-[10px] py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 px-4 my-4">
+        <div className="rounded-[10px] py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 px-4 my-4">
           <div className="text-blue">
             <h1 className="text-2xl md:text-3xl font-medium mb-1">
               Gerenciamento de Usuários
@@ -38,9 +37,9 @@ export default function BasicTables() {
       <div className="space-y-6">
         <Filters filters={filters} onFilterChange={handleFilterChange} />
         
-        <ComponentCard title="">
-          <BasicTableOne filters={filters} />
-        </ComponentCard>
+       
+        <BasicTableOne filters={filters} />
+       
       </div>
     </div>
   );

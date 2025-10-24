@@ -18,7 +18,7 @@ export default function CardKanban(props: PropsCard) {
     
 
     return (
-        <div className="rounded-md dark:bg-gray-800 bg-card p-4  flex flex-col gap-2 ">
+        <div className="rounded-md dark:bg-gray-800 bg-card p-4 shadow-md flex flex-col gap-2 ">
             
             {/* Título e publicado */}
             <div className="flex justify-between items-start">

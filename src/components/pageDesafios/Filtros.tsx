@@ -47,7 +47,7 @@ export function ChallengesFilters() {
   };
 
   return (
-    <div className="col-span-12 bg-card mb-5 rounded-[10px] mt-4">
+    <div className="col-span-12 mb-5 rounded-[10px] mt-4">
       {/* Barra de Filtros/Pesquisa - Tudo na mesma linha */}
       <div className="flex flex-col md:flex-row gap-4 items-end">
         

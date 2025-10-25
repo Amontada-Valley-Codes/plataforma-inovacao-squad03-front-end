@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { api } from "@/api/axiosConfig"
 
 const enterpriseValidation = z.object({
   cnpj: z
@@ -26,7 +28,7 @@ const enterpriseValidation = z.object({
     .refine(
       (file) =>
         !file?.[0] ||
-        ["image/jpeg", "image/png", "image/webp"].includes(file[0].type),
+        ["image/jpg","image/jpeg", "image/png", "image/webp"].includes(file[0].type),
       "Apenas imagens JPG, PNG ou WEBP são aceitas!"
     )
     .optional(),
@@ -62,10 +64,46 @@ export default function EnterpriseCadaster() {
     resolver: zodResolver(enterpriseValidation),
   })
 
-  const onSubmit = (data: EnterpriseFormData) => {
-    console.log("Dados enviados:", data)
-    alert("Cadastro de empresa enviado com sucesso!")
+
+const router = useRouter()
+
+const onSubmit = async (data: EnterpriseFormData) => {
+
+  console.log("Form data before sending:", data);
+  console.log("File data from form:", data.logo?.[0]);
+
+  try {
+    const token = localStorage.getItem("authtoken")
+
+    const formDataToSend = new FormData();
+
+    formDataToSend.append("cnpj", data.cnpj)
+    formDataToSend.append("legalName", data.legalName)
+    formDataToSend.append("tradingName", data.tradingName)
+    formDataToSend.append("foundationDate", data.foundationDate)
+    if (data.logo?.[0]) {
+      formDataToSend.append("logo", data.logo[0])
+    }
+    formDataToSend.append("mainAddress", data.mainAddress)
+    formDataToSend.append("mainPhone", data.mainPhone)
+    formDataToSend.append("generalEmail", data.generalEmail)
+    formDataToSend.append("website", data.website)
+    formDataToSend.append("sector", data.sector)
+    formDataToSend.append("size", data.size)
+
+    await api.post("/enterprise", formDataToSend, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    
+    router.push("/register")
+
+  } catch (error) {
+    console.error("Erro ao fazer cadastro de empresa.", error)
   }
+
+}
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 sm:px-0">
@@ -124,6 +162,8 @@ export default function EnterpriseCadaster() {
 
             <div className="text-left">
               <label className="block mb-1 text-sm font-medium"> Logo: </label>
+
+              
               <input
                 type="file"
                 accept="image/*"

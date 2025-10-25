@@ -6,6 +6,14 @@ const PUBLIC_STATE: Record<string, string> = {
   RESTRICTED: "RESTRITO",
 };
 
+const FORMATING_SECTORS: Record<string, string> = {
+        HEALTH: "Saúde",
+        EDUCATION: "Educação", 
+        TECHNOLOGY: "Tecnologia", 
+        FINANCIAL: "Finanças", 
+        SALES: "Vendas",
+    }
+
 export default function CardKanban(props: PropsCard) {
     
 
@@ -31,7 +39,7 @@ export default function CardKanban(props: PropsCard) {
             {/* Setor */}
             
             <span className="self-start bg-blue dark:bg-gray-700 px-3 py-0.5 text-[12px] rounded-full text-white">
-                {props.sector}
+                {FORMATING_SECTORS[props.sector]}
             </span>
             
 

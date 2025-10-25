@@ -24,6 +24,14 @@ const COLUMN_TITLES: Record<string, string> = {
   EXPERIMENTATION: "Experimentação",
 };
 
+const FORMATING_SECTORS: Record<string, string> = {
+        HEALTH: "Saúde",
+        EDUCATION: "Educação", 
+        TECHNOLOGY: "Tecnologia", 
+        FINANCIAL: "Finanças", 
+        SALES: "Vendas",
+    }
+
 export default function CardKanbanDetail(props: PropsCardKanban) {
     
     useEffect(() => {
@@ -120,7 +128,7 @@ export default function CardKanbanDetail(props: PropsCardKanban) {
                                         <BiCategory /> Setor:
                                     </span>
 
-                                    <span>{props.sector}</span>
+                                    <span>{FORMATING_SECTORS[props.sector]}</span>
 
                                 </div>
 

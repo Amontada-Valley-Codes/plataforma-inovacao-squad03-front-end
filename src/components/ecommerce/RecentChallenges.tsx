@@ -8,13 +8,12 @@ import {
   TableRow,
 } from "../ui/table";
 import Badge from "../ui/badge/Badge";
+import { Button } from "../ui/button";
+import { useChallengesByCorporation, ChallengeSector, ChallengeStatus, CorporationChallenge } from "@/hooks/useChallengesByCorporation";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { MoreDotIcon } from "@/icons";
-import { Button } from "../ui/button";
-import { useChallengesByCorporation, ChallengeSector, ChallengeStatus, CorporationChallenge } from "@/hooks/useChallengesByCorporation";
 
-// Mapeamento de setores para áreas/temas
 const sectorToAreaMap: Record<ChallengeSector, string> = {
   "TECHNOLOGY": "Tecnologia",
   "EDUCATION": "Educação",
@@ -28,7 +27,6 @@ const sectorToAreaMap: Record<ChallengeSector, string> = {
   "OTHER": "Outros"
 };
 
-// Mapeamento de status para exibição
 const statusMap: Record<ChallengeStatus, string> = {
   "GENERATION": "Geração",
   "PRE_SCREENING": "Pré-Triagem",
@@ -37,7 +35,6 @@ const statusMap: Record<ChallengeStatus, string> = {
   "EXPERIMENTATION": "Experimentação"
 };
 
-// Mapeamento de cores para os badges
 const statusColorMap: Record<ChallengeStatus, "success" | "warning" | "info" | "light" | "primary"> = {
   "GENERATION": "primary",
   "PRE_SCREENING": "info",
@@ -65,7 +62,7 @@ export default function RecentChallenges({
 }: RecentChallengesProps) {
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   
-  const { challenges, loading, error, refetch, hasMore, loadMore } = useChallengesByCorporation({
+  const { challenges, loading, error, hasMore, loadMore } = useChallengesByCorporation({
     page: 1,
     limit: initialLimit
   });
@@ -93,7 +90,6 @@ export default function RecentChallenges({
     onDelete?.(challenge);
   };
 
-  // Função para formatar data
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR');
   };
@@ -127,9 +123,6 @@ export default function RecentChallenges({
         </div>
         <div className="flex items-center justify-center h-32">
           <div className="text-red-500">{error}</div>
-          <Button onClick={refetch} className="ml-4" size="sm">
-            Tentar Novamente
-          </Button>
         </div>
       </div>
     );
@@ -143,14 +136,13 @@ export default function RecentChallenges({
             {title}
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {challenges?.length || 0} desafio(s) da sua corporação
+            {challenges.length} desafio(s) da sua corporação
           </p>
         </div>
       </div>
 
       <div className="max-w-full overflow-x-auto">
         <Table>
-          {/* Table Header */}
           <TableHeader className="border-gray-100 dark:border-gray-800 border-y">
             <TableRow>
               <TableCell
@@ -192,10 +184,9 @@ export default function RecentChallenges({
             </TableRow>
           </TableHeader>
 
-          {/* Table Body */}
           <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
-            {challenges && challenges.map((challenge) => (
-              <TableRow key={challenge.id} className="">
+            {challenges.map((challenge) => (
+              <TableRow key={challenge.id}>
                 <TableCell className="py-3">
                   <div>
                     <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
@@ -280,14 +271,12 @@ export default function RecentChallenges({
           </div>
         )}
 
-        {/* Loading mais itens */}
         {loading && challenges.length > 0 && (
           <div className="flex items-center justify-center py-4">
             <div className="text-gray-500">Carregando mais desafios...</div>
           </div>
         )}
 
-        {/* Botão Load More */}
         {showLoadMore && hasMore && !loading && (
           <div className="flex justify-center mt-4">
             <Button
@@ -300,7 +289,6 @@ export default function RecentChallenges({
           </div>
         )}
 
-        {/* Mensagem quando não há mais itens */}
         {!hasMore && challenges.length > 0 && (
           <div className="flex justify-center mt-4">
             <p className="text-sm text-gray-500">

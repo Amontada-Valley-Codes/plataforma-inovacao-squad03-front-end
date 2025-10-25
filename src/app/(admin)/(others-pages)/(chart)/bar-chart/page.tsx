@@ -10,12 +10,18 @@ export const metadata: Metadata = {
     "This is Next.js Bar Chart page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
 };
 
+
+
+
 export default function page() {
   return (
     <div>
       <PageBreadcrumb pageTitle="Bar Chart" />
       <div className="space-y-6">
-        <ComponentCard title="Bar Chart 1">
+
+
+
+        <ComponentCard title="teste unitario">
           <BarChartOne />
         </ComponentCard>
       </div>

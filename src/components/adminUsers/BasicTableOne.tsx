@@ -8,6 +8,7 @@ import {
 } from "../ui/table";
 
 import Badge from "../ui/badge/Badge";
+import ReInviteUserModal from "../user-profile/ReInviteUserModal";
 
 interface User {
   id: number;
@@ -183,9 +184,7 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     <div className="flex items-center gap-2">
-                      <button className="px-3 py-1.5 text-primary-600  hover:bg-gray-100 text-theme-sm font-medium rounded-full border border-primary-600 transition-all duration-200">
-                        REENVIAR
-                      </button>
+                      <ReInviteUserModal/>
                       <button 
                         className="text-red-500 hover:text-red-700 p-2 rounded-md hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
                         title="Deletar usuário"

@@ -13,6 +13,7 @@ import { Calendar1, CalendarClock } from 'lucide-react';
 import { BiCategory } from "react-icons/bi";
 import { getUserRole } from "../CommentsElements/GetUserRole";
 import { useRouter } from "next/navigation";
+import Submission from "@/app/(full-width-pages)/pocsubmission/page";
 
 export default function CardPublicDetails(props: PropsCard) {
     const router = useRouter()
@@ -123,7 +124,7 @@ export default function CardPublicDetails(props: PropsCard) {
                     variant={"ninaButton"} 
                     size={"default"} 
                     className="text-white"
-                    onClick={() => { router.push("/pocsubmission")}}
+                    onClick={() => { router.push("/pocsubmission"); <Submission challengeId={props.id} /> }}
                 > 
                         POC 
                 </Button>

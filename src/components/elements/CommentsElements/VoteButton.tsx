@@ -6,10 +6,10 @@ interface PropsVote {
   commentId: string;
 }
 
-interface PropsCount {
-  commentId: string;
-  total: number;
-}
+// interface PropsCount {
+//   commentId: string;
+//   total: number;
+// }  
 
 export default function VoteButton({ commentId }: PropsVote) {
   const [vote, setVote] = useState(false);

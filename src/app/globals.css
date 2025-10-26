@@ -239,7 +239,7 @@
 }
 
 @utility menu-item-active {
-  @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+  @apply bg-brand-50 text-green border-green border-1 dark:bg-green/10;
 }
 
 @utility menu-item-inactive {
@@ -251,7 +251,7 @@
 }
 
 @utility menu-item-icon-active {
-  @apply text-brand-500 dark:text-brand-400;
+  @apply text-green;
 }
 
 @utility menu-item-icon-inactive {

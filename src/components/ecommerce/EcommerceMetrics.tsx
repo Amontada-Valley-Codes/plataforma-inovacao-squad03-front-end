@@ -29,7 +29,7 @@ export const InnovationMetrics: React.FC<InnovationMetricsProps> = ({ metrics })
     <div className="w-full">
       {/* Cabeçalho com título fixo */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+        <h3 className="text-lg font-semibold text-blue dark:text-white/90">
           Métricas de Inovação
         </h3>
         <p className="mt-1 mb-8 text-gray-500 text-theme-sm dark:text-gray-400">
@@ -45,9 +45,9 @@ export const InnovationMetrics: React.FC<InnovationMetricsProps> = ({ metrics })
           return (
             <div 
               key={index}
-              className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6 flex flex-col"
+              className="rounded-[15px] bg-white p-5  dark:bg-white/[0.03] md:p-6 flex flex-col shadow-md dark:shadow-green/15 dark:shadow-lg dark:border-green/80 shadow-black/30 border-l-10 border-green"
             >
-              <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl dark:bg-gray-800 mb-4">
+              <div className="flex items-center justify-center w-12 h-12 bg-green/20 border-green rounded-xl mb-4">
                 <IconComponent className="text-gray-800 size-6 dark:text-white/90" />
               </div>
 

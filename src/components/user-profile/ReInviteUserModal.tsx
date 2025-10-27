@@ -11,6 +11,7 @@ import Input from "../form/input/InputField";
 import Label from "../form/Label";
 import Select from "../form/Select";
 import { ChevronDownIcon } from "lucide-react";
+import { getUserRole } from "../elements/CommentsElements/GetUserRole";
 
 
 const inviteSchema = z.object({
@@ -25,6 +26,7 @@ type InviteFormData = z.infer<typeof inviteSchema>;
 
 export default function ReInviteUserModal() {
   const { isOpen, openModal, closeModal } = useModal();
+  const isAdmin = getUserRole() == "ADMIN"
 
   const {
     register,
@@ -40,7 +42,15 @@ export default function ReInviteUserModal() {
     },
   });
 
-  const options = [{ value: "MANAGER", label: "Gestor" }];
+  const options = isAdmin ? [
+      { value: "MANAGER", label: "Gestor" },
+    ] 
+    : 
+    [ 
+      { value: "MANAGER", label: "Gestor" },
+      { value: "EVALUATOR", label: "Avaliador"}, 
+      { value: "COMOM", label: "Comum"}
+    ]
 
   const onSubmit = (data: InviteFormData) => {
     console.log("Dados enviados:", data);

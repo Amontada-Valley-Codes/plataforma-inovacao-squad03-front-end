@@ -40,7 +40,7 @@ const FORMATING_ROLE: Record<string, string> = {
   ADMIN: "ADMINISTRADOR",
   MANAGER: "GESTOR",
   EVALUATOR: "AVALIADOR",
-  COMMON: "Comum",
+  COMMON: "COMUM",
   STARTUP_MEMBER: "STARTUP"
 
 }

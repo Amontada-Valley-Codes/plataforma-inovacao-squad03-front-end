@@ -3,15 +3,16 @@ export default function Services() {
   return (
 
     <div
-      className="w-full min-h-screen bg-white
-                 bg-[url('/imagemfundo1.png')] bg-cover bg-center 
-                 flex items-center py-12 sm:py-16 md:py-20"
+        className="w-full bg-white
+            bg-[url('/imagemfundo1.png')] bg-cover bg-center 
+            flex items-center py-35"
         id="servicos"
     >
 
+
         {/* Content */}
         <div className="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 
-                        gap-y-10 gap-x-16 px-6 sm:px-10 md:px-14 lg:px-20"
+                        gap-y-10 gap-x-45 px-6 sm:px-10 md:px-14 lg:px-20"
         >
       
             <div>
@@ -35,19 +36,8 @@ export default function Services() {
             </p>
             </div>
 
-     
             <div>
-            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
-                <span className="h-15 w-2 bg-green mr-3" />
-                Banco de ideias e soluções
-            </h2>
-            <p className="text-gray mt-2 text-[24px] sm:text-[20px] ml-6 leading-snug">
-                Centralize ideias, utilizando de avaliação e priorização.
-            </p>
-            </div>
-
-            <div>
-            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug mt-9">
                 <span className="h-15 w-2 bg-green mr-3" />
                 Comunicação e engajamento
             </h2>
@@ -57,7 +47,7 @@ export default function Services() {
             </div>
 
             <div>
-            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug">
+            <h2 className="text-blue lg:text-4x1 text-[30px] font-semibold flex items-center leading-snug mt-9">
                 <span className="h-15 w-2 bg-green mr-3" />
                 Matchmaking
             </h2>

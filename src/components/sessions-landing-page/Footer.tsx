@@ -25,9 +25,9 @@ export default function Footer() {
 
                 <div className="text-center md:text-left">
                     <p className="text-green font-semibold mb-3">Nossos parceiros:</p>
-                <div className="flex justify-center md:justify-start gap-4">
-                    <Image src="/logo_pague_menos.png" alt="Pague Menos" width={32} height={32} className="h-8 object-contain"/>
-                    <Image src="/logo-nina-light.png" alt="NNA Hub" width={32} height={32} className="h-8 object-contain" />
+                <div className="flex justify-center md:justify-start ">
+                    <Image src="/logo_pague_menos.png" alt="Pague Menos" width={100} height={70} className="h-8 object-contain"/>
+                    <Image src="/logo-nina-light.png" alt="NNA Hub" width={100} height={70} className="h-8 object-contain" />
                 </div>
                 </div>
             </div>

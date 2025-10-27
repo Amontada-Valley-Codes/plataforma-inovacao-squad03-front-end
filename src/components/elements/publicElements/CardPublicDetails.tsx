@@ -118,17 +118,16 @@ export default function CardPublicDetails(props: PropsCard) {
             </div>
 
             {getUserRole() === "STARTUP_MEMBER" && (
-
-                <Button 
-                    variant={"ninaButton"} 
-                    size={"default"} 
+                <Button
+                    variant="ninaButton"
+                    size="default"
                     className="text-white"
-                    onClick={() => { router.push("/pocsubmission")}}
-                > 
-                        POC 
+                    onClick={() => router.push(`/pocsubmission?challengeId=${props.id}`)}
+                    >
+                    POC
                 </Button>
-                
-            )}
+
+                )}
 
 
         </DialogContent>

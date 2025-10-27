@@ -60,7 +60,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((
         id={id}
         name={name}
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        {...(type !== "file" ? { defaultValue } : {})}
         value={value}
         onChange={onChange}
         min={min}

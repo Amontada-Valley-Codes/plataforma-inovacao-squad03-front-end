@@ -4,8 +4,6 @@ import Filters from "@/components/adminUsers/Filters";
 import React, { useState } from "react";
 import InviteUserModal from "@/components/user-profile/InviteUserModal";
 
-
-
 export default function BasicTables() {
   const [filters, setFilters] = useState({
     name: '',

@@ -1,49 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Label from "@/components/form/Label";
 import Select from "@/components/form/Select";
 import { ChevronDownIcon } from "@/icons";
+import { useChallengesFilters } from "@/context/ChallengesFiltersContext";
 
 export function ChallengesFilters() {
-  // Estado para os filtros
-  const [filters, setFilters] = useState({
-    search: "",
-    status: "",
-    area: "",
-    date: ""
-  });
+  const { filters, updateFilter } = useChallengesFilters();
 
   // Opções para os selects
-  const statusOptions = [
-    { value: "publico", label: "Público" },
-    { value: "privado", label: "Privado" },
-    { value: "andamento", label: "Em andamento" },
-    { value: "concluido", label: "Concluído" },
-  ];
-
   const areaOptions = [
-    { value: "logistica", label: "Logística" },
-    { value: "tecnologia", label: "Tecnologia" },
-    { value: "meio-ambiente", label: "Meio Ambiente" },
-    { value: "marketing", label: "Marketing" },
-    { value: "operacoes", label: "Operações" },
+    { value: "technology", label: "Tecnologia" },
+    { value: "education", label: "Educação" },
+    { value: "finance", label: "Financeiro" },
+    { value: "health", label: "Saúde" },
+    { value: "sales", label: "Vendas" },
   ];
 
   // Funções de atualização
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters(prev => ({ ...prev, search: e.target.value }));
-  };
-
-  const handleStatusChange = (value: string) => {
-    setFilters(prev => ({ ...prev, status: value }));
+    updateFilter('search', e.target.value);
   };
 
   const handleAreaChange = (value: string) => {
-    setFilters(prev => ({ ...prev, area: value }));
+    updateFilter('area', value);
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters(prev => ({ ...prev, date: e.target.value }));
+    updateFilter('date', e.target.value);
   };
 
   return (
@@ -62,22 +46,6 @@ export function ChallengesFilters() {
               onChange={handleSearchChange}
               className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
-          </div>
-        </div>
-
-        {/* Filtro por status */}
-        <div className="flex-1 min-w-0">
-          <Label className="block mb-2">Status</Label>
-          <div className="relative">
-            <Select
-              options={statusOptions}
-              placeholder="Selecionar status"
-              onChange={handleStatusChange}
-              className="w-full dark:bg-gray-800 h-[48px]"
-            />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-              <ChevronDownIcon />
-            </span>
           </div>
         </div>
 
@@ -110,10 +78,25 @@ export function ChallengesFilters() {
           </div>
         </div>
 
+        {/* Botão limpar filtros */}
+        <div className="flex-1 min-w-0">
+          <Label className="block mb-2">&nbsp;</Label>
+          <button
+            onClick={() => {
+              updateFilter('search', '');
+              updateFilter('area', '');
+              updateFilter('date', '');
+            }}
+            className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Limpar Filtros
+          </button>
+        </div>
+
       </div>
 
       {/* Mostrar filtros ativos */}
-      {(filters.area || filters.status || filters.date || filters.search) && (
+      {(filters.area || filters.date || filters.search) && (
         <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Filtros Ativos:
@@ -123,7 +106,7 @@ export function ChallengesFilters() {
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                 Busca: {filters.search}
                 <button
-                  onClick={() => setFilters(prev => ({ ...prev, search: '' }))}
+                  onClick={() => updateFilter('search', '')}
                   className="ml-2 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   ×
@@ -141,22 +124,12 @@ export function ChallengesFilters() {
                 </button>
               </span>
             )}
-            {filters.status && (
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                Status: {statusOptions.find(opt => opt.value === filters.status)?.label}
-                <button
-                  onClick={() => handleStatusChange("")}
-                  className="ml-2 hover:text-green-600 dark:hover:text-green-300"
-                >
-                  ×
-                </button>
-              </span>
-            )}
+
             {filters.date && (
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                 Data: {new Date(filters.date).toLocaleDateString('pt-BR')}
                 <button
-                  onClick={() => setFilters(prev => ({ ...prev, date: '' }))}
+                  onClick={() => updateFilter('date', '')}
                   className="ml-2 hover:text-purple-600 dark:hover:text-purple-300"
                 >
                   ×

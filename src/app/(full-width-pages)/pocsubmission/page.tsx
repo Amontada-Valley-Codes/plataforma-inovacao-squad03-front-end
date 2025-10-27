@@ -1,7 +1,7 @@
 'use client'
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@/api/axiosConfig";
@@ -26,7 +26,7 @@ const pocValidationSchema = z.object({
 
 type PocFormData = z.infer<typeof pocValidationSchema>;
 
-export default function PocForm() {
+function PocFormContent() {
   const searchParams = useSearchParams();
   const challengeId = searchParams.get("challengeId") || "";
 
@@ -177,5 +177,15 @@ export default function PocForm() {
         </button>
       </form>
     </div>
+  );
+}
+
+
+// O useSearchParams() precisa estar envolvido em um Suspense boundary (next que dá e nao sabe pedir)
+export default function PocForm() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
+      <PocFormContent />
+    </Suspense>
   );
 }

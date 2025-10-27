@@ -1,17 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Label from "@/components/form/Label";
 import Select from "@/components/form/Select";
 import { ChevronDownIcon } from "@/icons";
+import { useChallengesFilters } from "@/context/ChallengesFiltersContext";
 
 export function ChallengesFilters() {
-  // Estado para os filtros
-  const [filters, setFilters] = useState({
-    search: "",
-    status: "",
-    area: "",
-    date: ""
-  });
+  const { filters, updateFilter } = useChallengesFilters();
 
   // Opções para os selects
   const statusOptions = [
@@ -31,19 +26,19 @@ export function ChallengesFilters() {
 
   // Funções de atualização
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters(prev => ({ ...prev, search: e.target.value }));
+    updateFilter('search', e.target.value);
   };
 
   const handleStatusChange = (value: string) => {
-    setFilters(prev => ({ ...prev, status: value }));
+    updateFilter('status', value);
   };
 
   const handleAreaChange = (value: string) => {
-    setFilters(prev => ({ ...prev, area: value }));
+    updateFilter('area', value);
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters(prev => ({ ...prev, date: e.target.value }));
+    updateFilter('date', e.target.value);
   };
 
   return (
@@ -123,7 +118,7 @@ export function ChallengesFilters() {
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                 Busca: {filters.search}
                 <button
-                  onClick={() => setFilters(prev => ({ ...prev, search: '' }))}
+                  onClick={() => updateFilter('search', '')}
                   className="ml-2 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   ×
@@ -156,7 +151,7 @@ export function ChallengesFilters() {
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                 Data: {new Date(filters.date).toLocaleDateString('pt-BR')}
                 <button
-                  onClick={() => setFilters(prev => ({ ...prev, date: '' }))}
+                  onClick={() => updateFilter('date', '')}
                   className="ml-2 hover:text-purple-600 dark:hover:text-purple-300"
                 >
                   ×

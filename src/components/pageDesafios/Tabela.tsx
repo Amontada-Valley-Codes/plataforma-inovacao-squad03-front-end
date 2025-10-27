@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -13,6 +13,7 @@ import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { MoreDotIcon } from "@/icons";
 import { Button } from "../ui/button";
 import { useChallengesByCorporation, ChallengeSector, ChallengeStatus, CorporationChallenge } from "@/hooks/useChallengesByCorporation";
+import { useChallengesFilters } from "@/context/ChallengesFiltersContext";
 
 // Mapeamento de setores para áreas/temas
 const sectorToAreaMap: Record<ChallengeSector, string> = {
@@ -64,11 +65,44 @@ export default function RecentChallenges({
   onDelete,
 }: RecentChallengesProps) {
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
+  const { filters } = useChallengesFilters();
   
   const { challenges, loading, error, refetch, hasMore, loadMore } = useChallengesByCorporation({
     page: 1,
     limit: initialLimit
   });
+
+  // Filtrar desafios baseado nos filtros ativos
+  const filteredChallenges = useMemo(() => {
+    if (!challenges) return [];
+    
+    return challenges.filter(challenge => {
+      // Filtro por busca (nome)
+      if (filters.search && !challenge.name.toLowerCase().includes(filters.search.toLowerCase())) {
+        return false;
+      }
+      
+      // Filtro por status
+      if (filters.status && challenge.status !== filters.status.toUpperCase()) {
+        return false;
+      }
+      
+      // Filtro por área/setor
+      if (filters.area && challenge.sector !== filters.area.toUpperCase()) {
+        return false;
+      }
+      
+      // Filtro por data
+      if (filters.date) {
+        const challengeDate = new Date(challenge.startDate).toISOString().split('T')[0];
+        if (challengeDate !== filters.date) {
+          return false;
+        }
+      }
+      
+      return true;
+    });
+  }, [challenges, filters]);
 
   const toggleDropdown = (id: string) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
@@ -143,7 +177,7 @@ export default function RecentChallenges({
             {title}
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {challenges?.length || 0} desafio(s) da sua corporação
+            {filteredChallenges?.length || 0} de {challenges?.length || 0} desafio(s) da sua corporação
           </p>
         </div>
       </div>
@@ -194,7 +228,7 @@ export default function RecentChallenges({
 
           {/* Table Body */}
           <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
-            {challenges && challenges.map((challenge) => (
+            {filteredChallenges && filteredChallenges.map((challenge) => (
               <TableRow key={challenge.id} className="">
                 <TableCell className="py-3">
                   <div>
@@ -274,14 +308,19 @@ export default function RecentChallenges({
           </TableBody>
         </Table>
 
-        {challenges.length === 0 && !loading && (
+        {filteredChallenges.length === 0 && !loading && (
           <div className="flex items-center justify-center h-32">
-            <div className="text-gray-500">Nenhum desafio encontrado para sua corporação</div>
+            <div className="text-gray-500">
+              {challenges.length === 0 
+                ? "Nenhum desafio encontrado para sua corporação" 
+                : "Nenhum desafio encontrado com os filtros aplicados"
+              }
+            </div>
           </div>
         )}
 
         {/* Loading mais itens */}
-        {loading && challenges.length > 0 && (
+        {loading && filteredChallenges.length > 0 && (
           <div className="flex items-center justify-center py-4">
             <div className="text-gray-500">Carregando mais desafios...</div>
           </div>
@@ -301,7 +340,7 @@ export default function RecentChallenges({
         )}
 
         {/* Mensagem quando não há mais itens */}
-        {!hasMore && challenges.length > 0 && (
+        {!hasMore && filteredChallenges.length > 0 && (
           <div className="flex justify-center mt-4">
             <p className="text-sm text-gray-500">
               Todos os desafios da corporação foram carregados

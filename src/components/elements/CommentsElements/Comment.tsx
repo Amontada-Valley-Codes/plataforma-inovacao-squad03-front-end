@@ -6,6 +6,7 @@ import { api } from "@/api/axiosConfig"
 import { useState } from "react"
 import TextArea from "@/components/form/input/TextArea"
 import { getUserId } from "./GetUserId"
+import VoteButton from "./VoteButton"
 
 const FORMATING_ROLE: Record<string, string> = {
 
@@ -94,7 +95,11 @@ export default function Comment(props: PropsCardComment) {
           <Badge variant="topicBadge" className="text-[14px] px-2 py-0.5">
             {FORMATING_ROLE[props.user.role]}
           </Badge>
+          
+        </div>
 
+        <div>
+          <VoteButton commentId={props.id}/>
         </div>
       </div>
 

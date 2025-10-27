@@ -90,9 +90,9 @@ export default function Workflow() {
       </div>
 
       {/* desafios */}
-      <div className="mt-4 gap-5 grid md:grid-cols-2">
+      <div className="mt-4 gap-5 grid md:grid-cols-2 ">
         {filteredPosts.map((post, index) => (
-          <div key={index}>
+          <div key={index} className="rounded-2xl shadow-lg dark:shadow-lg dark:shadow-green/15">
             <CardPublic {...post} id={post.id} />
           </div>
         ))}

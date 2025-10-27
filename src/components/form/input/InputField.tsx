@@ -6,6 +6,7 @@ interface InputProps {
   name?: string;
   placeholder?: string;
   defaultValue?: string | number;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   min?: string | number;
@@ -24,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((
     name,
     placeholder,
     defaultValue,
+    value,
     onChange,
     className = "",
     min,
@@ -59,6 +61,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((
         name={name}
         placeholder={placeholder}
         {...(type !== "file" ? { defaultValue } : {})}
+        value={value}
         onChange={onChange}
         min={min}
         max={max}

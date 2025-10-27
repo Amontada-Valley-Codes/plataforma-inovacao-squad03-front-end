@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronDownIcon } from '@/icons';
 import ComponentCard from '@/components/common/ComponentCard';
 import Label from '@/components/form/Label';
-import Input from '@/components/form/input/InputField';
+import Input from '@/components/form/input/InputField'; // Updated with value prop
 import Select from '@/components/form/Select';
 import DatePicker from '@/components/form/date-picker';
 import TextArea from '@/components/form/input/TextArea';
@@ -176,9 +176,8 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
           <Input
             type="text"
             placeholder="Digite o nome do desafio"
-            name={register('challengeName').name}
-            onChange={register('challengeName').onChange}
-            ref={register('challengeName').ref}
+            value={watch('challengeName') || ''}
+            onChange={(e) => setValue('challengeName', e.target.value, { shouldValidate: true })}
           />
           {errors.challengeName && (
             <p className="mt-1 text-sm text-red-500">{errors.challengeName.message}</p>
@@ -193,9 +192,10 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
             label="Data de início"
             placeholder="Selecione a data de início"
             onChange={handleDateChange('startDate')}
-            // se o DatePicker não aceita value, usamo um input hidden ou controlamos via useEffect
           />
-        
+          {watch('startDate') && (
+            <p className="mt-1 text-sm text-gray-600">Data atual: {new Date(watch('startDate')).toLocaleDateString('pt-BR')}</p>
+          )}
           <input
             type="hidden"
             {...register('startDate')}
@@ -211,9 +211,10 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
             label="Data de entrega"
             placeholder="Selecione a data de entrega"
             onChange={handleDateChange('deliveryDate')}
-            // se o DatePicker não aceita value, usamos um input hidden ou controlamos via useEffect
           />
-          
+          {watch('deliveryDate') && (
+            <p className="mt-1 text-sm text-gray-600">Data atual: {new Date(watch('deliveryDate')).toLocaleDateString('pt-BR')}</p>
+          )}
           <input
             type="hidden"
             {...register('deliveryDate')}
@@ -231,7 +232,7 @@ export default function ChallengersFormEdit(props: PropsFormChallenger) {
               placeholder="Selecione o setor"
               onChange={handleSelectChange('sector')}
               className="dark:bg-dark-900"
-              defaultValue={watch('sector')}
+              value={watch('sector')}
             />
             <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
               <ChevronDownIcon />

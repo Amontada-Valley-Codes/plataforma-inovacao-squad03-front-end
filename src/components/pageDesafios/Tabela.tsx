@@ -71,13 +71,13 @@ export default function RecentChallenges({
   onEdit,
   onDelete,
 }: RecentChallengesProps) {
-  // Tenta usar o contexto de filtros, mas não falha se não estiver disponível
+ 
   let filters = { search: "", area: "", date: "" };
   try {
     const context = useChallengesFilters();
     filters = context.filters;
   } catch {
-    // Contexto não disponível, usa filtros vazios
+   
   }
   
   const { challenges, loading, error, refetch, hasMore, loadMore } = useChallengesByCorporation({

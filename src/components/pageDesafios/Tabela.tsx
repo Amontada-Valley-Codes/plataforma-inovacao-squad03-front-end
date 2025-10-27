@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -71,14 +71,16 @@ export default function RecentChallenges({
   onEdit,
   onDelete,
 }: RecentChallengesProps) {
- 
+  
   let filters = { search: "", area: "", date: "" };
   try {
     const context = useChallengesFilters();
     filters = context.filters;
   } catch {
-   
+    // Use default filters if context is not available
   }
+  
+  const memoizedFilters = useMemo(() => filters, [filters.search, filters.area, filters.date]);
   
   const { challenges, loading, error, refetch, hasMore, loadMore } = useChallengesByCorporation({
     page: 1,
@@ -110,17 +112,9 @@ export default function RecentChallenges({
       
       return true;
     });
-  }, [challenges, filters]);
+  }, [challenges, memoizedFilters]);
 
-  const handleView = (challenge: CorporationChallenge) => {
-    console.log('Visualizar desafio:', challenge);
-    onView?.(challenge);
-  };
 
-  const handleEdit = (challenge: CorporationChallenge) => {
-    console.log('Editar desafio:', challenge);
-    onEdit?.(challenge);
-  };
 
   const handleDelete = async (challenge: CorporationChallenge) => {
     try {

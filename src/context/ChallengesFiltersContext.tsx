@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 export interface ChallengesFilters {
   search: string;
-  status: string;
   area: string;
   date: string;
 }
@@ -20,7 +19,6 @@ const ChallengesFiltersContext = createContext<ChallengesFiltersContextType | un
 export function ChallengesFiltersProvider({ children }: { children: ReactNode }) {
   const [filters, setFilters] = useState<ChallengesFilters>({
     search: "",
-    status: "",
     area: "",
     date: ""
   });
@@ -32,7 +30,6 @@ export function ChallengesFiltersProvider({ children }: { children: ReactNode })
   const clearFilters = () => {
     setFilters({
       search: "",
-      status: "",
       area: "",
       date: ""
     });

@@ -9,28 +9,17 @@ export function ChallengesFilters() {
   const { filters, updateFilter } = useChallengesFilters();
 
   // Opções para os selects
-  const statusOptions = [
-    { value: "publico", label: "Público" },
-    { value: "privado", label: "Privado" },
-    { value: "andamento", label: "Em andamento" },
-    { value: "concluido", label: "Concluído" },
-  ];
-
   const areaOptions = [
-    { value: "logistica", label: "Logística" },
-    { value: "tecnologia", label: "Tecnologia" },
-    { value: "meio-ambiente", label: "Meio Ambiente" },
-    { value: "marketing", label: "Marketing" },
-    { value: "operacoes", label: "Operações" },
+    { value: "technology", label: "Tecnologia" },
+    { value: "education", label: "Educação" },
+    { value: "finance", label: "Financeiro" },
+    { value: "health", label: "Saúde" },
+    { value: "sales", label: "Vendas" },
   ];
 
   // Funções de atualização
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateFilter('search', e.target.value);
-  };
-
-  const handleStatusChange = (value: string) => {
-    updateFilter('status', value);
   };
 
   const handleAreaChange = (value: string) => {
@@ -57,22 +46,6 @@ export function ChallengesFilters() {
               onChange={handleSearchChange}
               className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
-          </div>
-        </div>
-
-        {/* Filtro por status */}
-        <div className="flex-1 min-w-0">
-          <Label className="block mb-2">Status</Label>
-          <div className="relative">
-            <Select
-              options={statusOptions}
-              placeholder="Selecionar status"
-              onChange={handleStatusChange}
-              className="w-full dark:bg-gray-800 h-[48px]"
-            />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
-              <ChevronDownIcon />
-            </span>
           </div>
         </div>
 
@@ -103,6 +76,21 @@ export function ChallengesFilters() {
               className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
           </div>
+        </div>
+
+        {/* Botão limpar filtros */}
+        <div className="flex-1 min-w-0">
+          <Label className="block mb-2">&nbsp;</Label>
+          <button
+            onClick={() => {
+              updateFilter('search', '');
+              updateFilter('area', '');
+              updateFilter('date', '');
+            }}
+            className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Limpar Filtros
+          </button>
         </div>
 
       </div>
@@ -136,17 +124,7 @@ export function ChallengesFilters() {
                 </button>
               </span>
             )}
-            {filters.status && (
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                Status: {statusOptions.find(opt => opt.value === filters.status)?.label}
-                <button
-                  onClick={() => handleStatusChange("")}
-                  className="ml-2 hover:text-green-600 dark:hover:text-green-300"
-                >
-                  ×
-                </button>
-              </span>
-            )}
+
             {filters.date && (
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                 Data: {new Date(filters.date).toLocaleDateString('pt-BR')}

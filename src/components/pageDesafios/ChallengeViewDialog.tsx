@@ -67,7 +67,10 @@ export default function ChallengeViewDialog({ challenge, children }: ChallengeVi
   }, [challenge.id]);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR');
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return 'N/A';
+    return date.toLocaleDateString('pt-BR');
   };
 
   return (

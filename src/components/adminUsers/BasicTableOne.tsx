@@ -1,4 +1,6 @@
-import React, { useMemo } from "react";
+"use client"
+
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,74 +11,18 @@ import {
 
 import Badge from "../ui/badge/Badge";
 import ReInviteUserModal from "../user-profile/ReInviteUserModal";
+import { api } from "@/api/axiosConfig";
 
 interface User {
-  id: number;
+  id: string
   name: string;
   email: string;
-  category: string;
-  company: string;
+  role: string;
+  enterprise: {
+    id: string;
+    name: string;
+  }
 }
-
-// Define the table data using the interface
-const tableData: User[] = [
-  {
-    id: 1,
-    name: "José da Silva",
-    email: "josedasilva@gmail.com",
-    category: "GESTOR",
-    company: "PAGUE MENOS",
-  },
-  {
-    id: 2,
-    name: "Maria Oliveira",
-    email: "maria.oliveira@empresa.com",
-    category: "AVALIADOR",
-    company: "LOJAS AMERICANAS",
-  },
-  {
-    id: 3,
-    name: "Carlos Santos",
-    email: "carlos.santos@tech.com",
-    category: "ADMINISTRADOR",
-    company: "MAGAZINE LUIZA",
-  },
-  {
-    id: 4,
-    name: "Ana Costa",
-    email: "ana.costa@corporation.com",
-    category: "COMUM",
-    company: "VIA VAREJO",
-  },
-  {
-    id: 5,
-    name: "Paulo Rodrigues",
-    email: "paulo.rodrigues@empresa.com",
-    category: "GESTOR",
-    company: "CASAS BAHIA",
-  },
-  {
-    id: 6,
-    name: "Fernanda Lima",
-    email: "fernanda.lima@tech.com",
-    category: "AVALIADOR",
-    company: "NATURA",
-  },
-  {
-    id: 7,
-    name: "Ricardo Almeida",
-    email: "ricardo.almeida@corp.com",
-    category: "ADMINISTRADOR",
-    company: "AMBEV",
-  },
-  {
-    id: 8,
-    name: "Juliana Pereira",
-    email: "juliana.pereira@empresa.com",
-    category: "COMUM",
-    company: "RENNER",
-  },
-];
 
 interface FiltersProps {
   name: string;
@@ -88,26 +34,83 @@ interface BasicTableOneProps {
   filters: FiltersProps;
 }
 
+const FORMATING_ROLE: Record<string, string> = {
+
+  ADMIN: "ADMINISTRADOR",
+  MANAGER: "GESTOR",
+  EVALUATOR: "AVALIADOR",
+  COMMON: "Comum",
+  STARTUP_MEMBER: "MEMBRO DE STARTUP"
+
+}
+
 export default function BasicTableOne({ filters }: BasicTableOneProps) {
-  const filteredData = useMemo(() => {
-    return tableData.filter(user => {
-      return (
-        user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-        (filters.category === '' || user.category === filters.category) &&
-        (filters.company === '' || user.company === filters.company)
-      );
-    });
-  }, [filters]);
+  const [tableData, setTableData] = useState<User[]>([])
+  const [table, setTable] = useState(false)
+
+  useEffect(() => {
+
+    const getUsers = async () => {
+
+      try {
+
+        const token = localStorage.getItem("authtoken")
+
+        const response = await api.get("/user", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        console.log(response.data)
+        setTableData(response.data)
+
+      } catch(error) {
+        console.log(error)
+      }
+    }
+    getUsers()
+
+  }, [table])
+
+  const deleteUser = async (id: string) => {
+
+    try {
+
+      const token = localStorage.getItem("authtoken")
+
+      api.delete(`/user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setTable(!table)
+
+    } catch(error) {
+      console.log(error)
+    }
+
+  }
+
+ const filteredData = useMemo(() => {
+  return tableData.filter(user => {
+    return (
+      user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
+      (filters.category === '' || FORMATING_ROLE[user.role] === filters.category) &&
+      (filters.company === '' || user.enterprise?.name === filters.company )
+    );
+  });
+}, [filters, tableData]);
 
   const getBadgeColor = (category: string) => {
     switch (category) {
-      case "GESTOR":
+      case "MANAGER":
         return "success";
-      case "ADMINISTRADOR":
+      case "ADMIN":
         return "primary";
-      case "AVALIADOR":
+      case "EVALUATOR":
         return "warning";
-      case "COMUM":
+      case "COMOM":
         return "info";
       default:
         return "success";
@@ -174,18 +177,19 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                     <Badge
                       size="sm"
-                      color={getBadgeColor(user.category)}
+                      color={getBadgeColor(FORMATING_ROLE[user.role])}
                     >
-                      {user.category}
+                      {FORMATING_ROLE[user.role]}
                     </Badge>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {user.company}
+                    {user.enterprise?.name || '-'}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <ReInviteUserModal/>
                       <button 
+                        onClick={() => {deleteUser(user.id)}}
                         className="text-red-500 hover:text-red-700 p-2 rounded-md hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
                         title="Deletar usuário"
                       >

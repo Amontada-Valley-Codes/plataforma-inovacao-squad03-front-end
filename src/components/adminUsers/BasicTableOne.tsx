@@ -12,6 +12,7 @@ import {
 import Badge from "../ui/badge/Badge";
 import ReInviteUserModal from "../user-profile/ReInviteUserModal";
 import { api } from "@/api/axiosConfig";
+import ConfirmDeleteMOdal from "./ConfirmDeleteModal";
 
 interface User {
   id: string
@@ -40,7 +41,7 @@ const FORMATING_ROLE: Record<string, string> = {
   MANAGER: "GESTOR",
   EVALUATOR: "AVALIADOR",
   COMMON: "Comum",
-  STARTUP_MEMBER: "MEMBRO DE STARTUP"
+  STARTUP_MEMBER: "STARTUP"
 
 }
 
@@ -72,25 +73,7 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
 
   }, [table])
 
-  const deleteUser = async (id: string) => {
-
-    try {
-
-      const token = localStorage.getItem("authtoken")
-
-      api.delete(`/user/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      setTable(!table)
-
-    } catch(error) {
-      console.log(error)
-    }
-
-  }
+  
 
  const filteredData = useMemo(() => {
   return tableData.filter(user => {
@@ -188,25 +171,7 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
                   <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <ReInviteUserModal/>
-                      <button 
-                        onClick={() => {deleteUser(user.id)}}
-                        className="text-red-500 hover:text-red-700 p-2 rounded-md hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
-                        title="Deletar usuário"
-                      >
-                        <svg 
-                          className="w-4 h-4" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" 
-                          />
-                        </svg>
-                      </button>
+                      <ConfirmDeleteMOdal id={user.id} name={user.name} table={table} setTable={setTable}/>
                     </div>
                   </TableCell>
                 </TableRow>

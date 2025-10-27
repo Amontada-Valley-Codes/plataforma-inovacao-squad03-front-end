@@ -7,19 +7,13 @@ import Input from "../form/input/InputField";
 import Label from "../form/Label";
 
 interface PropsInfoCorp {
-  cnpj: string;
-  legalName: string;
-  tradingName: string;
-  foundationDate: string;
-  email: string;
-  address: string;
-  size: string;
-  phone: string
-  webSite: string;
-  sector: string
+    name: string
+    cnpj: string;
+    addess: string;
+    sector: string
 } 
 
-export default function InfoCorpCard(props: PropsInfoCorp) {
+export default function InfoStarCard(props: PropsInfoCorp) {
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
@@ -35,7 +29,7 @@ export default function InfoCorpCard(props: PropsInfoCorp) {
               Informações da Empresa
             </h4>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-7 2xl:gap-x-32">
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                   CNPJ
@@ -47,28 +41,10 @@ export default function InfoCorpCard(props: PropsInfoCorp) {
 
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Nome Legal
+                  Nome
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.legalName}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Nome Comercial
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.tradingName}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Data de Fundação
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.foundationDate}
+                  {props.name}
                 </p>
               </div>
 
@@ -83,49 +59,12 @@ export default function InfoCorpCard(props: PropsInfoCorp) {
 
               <div>
                 <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Porte Empresarial
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.size}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Email
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.email}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Telefone
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.phone}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                   Endereço
                 </p>
                 <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                  {props.address}
+                  {props.addess}
                 </p>
               </div>
-
-              <div>
-                <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                  Website
-                </p>
-                <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                 {props.webSite}
-                </p>
-              </div>
-
 
             </div>
           </div>

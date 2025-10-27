@@ -6,7 +6,23 @@ import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
 
-export default function UserInfoCard() {
+interface PropsUserInformation {
+  name: string;
+  email: string;
+  role: string
+}
+
+const FORMATING_ROLE: Record<string, string> = {
+
+  ADMIN: "ADMINISTRADOR",
+  MANAGER: "GESTOR",
+  EVALUATOR: "AVALIADOR",
+  COMMON: "COMUM",
+  STARTUP_MEMBER: "STARTUP"
+
+}
+
+export default function UserInfoCard({name, email, role}: PropsUserInformation) {
   const { isOpen, openModal, closeModal } = useModal();
   const handleSave = () => {
     // Handle save logic here
@@ -21,22 +37,13 @@ export default function UserInfoCard() {
             Informações Pessoais
           </h4>
 
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-7 2xl:gap-x-32">
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                 Nome
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Antônio
-              </p>
-            </div>
-
-            <div>
-              <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Sobrenome
-              </p>
-              <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Silva
+                {name}
               </p>
             </div>
 
@@ -45,7 +52,7 @@ export default function UserInfoCard() {
                 Email
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                randomuser@pimjo.com
+                {email}
               </p>
             </div>
 
@@ -63,7 +70,7 @@ export default function UserInfoCard() {
                 Cargo
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                Team Manager
+                {FORMATING_ROLE[role]}
               </p>
             </div>
           </div>
@@ -103,77 +110,21 @@ export default function UserInfoCard() {
             </p>
           </div>
           <form className="flex flex-col">
-            <div className="custom-scrollbar h-[450px] overflow-y-auto px-2 pb-3">
-              {/* <div>
-                <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
-                  Redes Sociais
-                </h5>
-
-                <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                  <div>
-                    <Label>Facebook</Label>
-                    <Input
-                      type="text"
-                      defaultValue="https://www.facebook.com/PimjoHQ"
-                    />
-                  </div>
-
-                  <div>
-                    <Label>X.com</Label>
-                    <Input type="text" defaultValue="https://x.com/PimjoHQ" />
-                  </div>
-
-                  <div>
-                    <Label>Linkedin</Label>
-                    <Input
-                      type="text"
-                      defaultValue="https://www.linkedin.com/company/pimjo"
-                    />
-                  </div>
-
-                  <div>
-                    <Label>Instagram</Label>
-                    <Input
-                      type="text"
-                      defaultValue="https://instagram.com/PimjoHQ"
-                    />
-                  </div>
-                </div>
-              </div> */}
+            <div className="custom-scrollbar h-[250px] overflow-y-auto px-2 pb-3">
               <div className="mt-2">
                 {/* <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
                   Informações Pessoais
                 </h5> */}
 
                 <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                  <div className="col-span-2 lg:col-span-1">
+                  <div className="col-span-2">
                     <Label>Nome</Label>
                     <Input type="text" defaultValue="Antônio" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Sobrenome</Label>
-                    <Input type="text" defaultValue="Silva" />
                   </div>
 
                   <div className="col-span-2">
                     <Label>Email</Label>
                     <Input type="text" defaultValue="randomuser@pimjo.com" />
-                  </div>
-
-                  {/* <div className="col-span-2 lg:col-span-1">
-                    <Label>Telefone</Label>
-                    <Input type="text" defaultValue="(xx) x xxxx-xxxx" />
-                  </div> */}
-
-                  <div className="col-span-2">
-                    <Label>Cargo</Label>
-                    <Input type="text" defaultValue="Team Manager" />
-                  </div>
-
-                  <div className="col-span-2">
-                    <Label>Corporação</Label>
-                    <Input type="text" defaultValue="Pague Menos" />
                   </div>
                 </div>
               </div>

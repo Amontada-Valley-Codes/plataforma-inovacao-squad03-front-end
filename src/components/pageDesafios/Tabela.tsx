@@ -67,8 +67,6 @@ export default function RecentChallenges({
   title = "Desafios da Corporação",
   initialLimit = 5,
   showLoadMore = true,
-  onView,
-  onEdit,
   onDelete,
 }: RecentChallengesProps) {
   
@@ -112,7 +110,7 @@ export default function RecentChallenges({
       
       return true;
     });
-  }, [challenges, memoizedFilters]);
+  }, [challenges, memoizedFilters.search, memoizedFilters.area, memoizedFilters.date]);
 
 
 

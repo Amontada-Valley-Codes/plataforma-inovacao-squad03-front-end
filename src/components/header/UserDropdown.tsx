@@ -1,12 +1,35 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import { api } from "@/api/axiosConfig";
+
+interface PropsInfoProfile {
+  name: string,
+  email: string
+}
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const [infoProfile, setInfoProfile] = useState<PropsInfoProfile | null>()
+
+  useEffect(() => {
+      const getDataProfile = async () => {
+        try {
+          const token = localStorage.getItem("authtoken");
+          const response = await api.get("/profile", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setInfoProfile(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      getDataProfile();
+    }, []);
 
 function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
   e.stopPropagation();
@@ -31,7 +54,7 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
           />
         </span>
 
-        <span className="block mr-1 font-medium text-theme-sm">Antônio</span>
+        <span className="block mr-1 font-medium text-theme-sm">{infoProfile?.name}</span>
 
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
@@ -60,10 +83,10 @@ function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
       >
         <div>
           <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
-            Antônio Silva
+            {infoProfile?.name}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            randomuser@pimjo.com
+            {infoProfile?.email}
           </span>
         </div>
 

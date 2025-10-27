@@ -5,30 +5,72 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@/api/axiosConfig";
 
 interface PropsUserInformation {
   name: string;
   email: string;
-  role: string
+  role: string;
+  profile: boolean;
+  setProfile: (prev: boolean) => void
 }
 
 const FORMATING_ROLE: Record<string, string> = {
-
   ADMIN: "ADMINISTRADOR",
   MANAGER: "GESTOR",
   EVALUATOR: "AVALIADOR",
   COMMON: "COMUM",
-  STARTUP_MEMBER: "STARTUP"
+  STARTUP_MEMBER: "STARTUP",
+};
 
-}
+const userInfoSchema = z.object({
+  name: z.string().min(2, "O nome precisa ter pelo menos 2 caracteres."),
+  email: z
+      .string()
+      .min(1, "Email é obrigatório")
+      .refine((val) => val.includes("@"), {
+        message: "O e-mail deve conter @",
+      }),
+});
 
-export default function UserInfoCard({name, email, role}: PropsUserInformation) {
+type UserInfoForm = z.infer<typeof userInfoSchema>;
+
+export default function UserInfoCard({ name, email, role, profile, setProfile }: PropsUserInformation) {
   const { isOpen, openModal, closeModal } = useModal();
-  const handleSave = () => {
-    // Handle save logic here
-    console.log("Saving changes...");
-    closeModal();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserInfoForm>({
+    resolver: zodResolver(userInfoSchema),
+    defaultValues: { name, email },
+  });
+
+  const onSubmit = async (data: UserInfoForm) => {
+    
+    try {
+      
+      const token = localStorage.getItem("authtoken")
+
+      await api.put("/profile", data, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setProfile(!profile)
+      closeModal()
+
+    } catch(error) {
+      console.log(error)
+    }
+
   };
+
   return (
     <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -56,15 +98,6 @@ export default function UserInfoCard({name, email, role}: PropsUserInformation) 
               </p>
             </div>
 
-            {/* <div>
-              <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Telefone
-              </p>
-              <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                xx x xxxx-xxxx
-              </p>
-            </div> */}
-
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                 Cargo
@@ -76,6 +109,7 @@ export default function UserInfoCard({name, email, role}: PropsUserInformation) 
           </div>
         </div>
 
+        {/* 🔘 Botão abre o modal */}
         <button
           onClick={openModal}
           className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
@@ -99,6 +133,7 @@ export default function UserInfoCard({name, email, role}: PropsUserInformation) 
         </button>
       </div>
 
+      {/* 🧩 Modal com o form */}
       <Modal isOpen={isOpen} onClose={closeModal} className="max-w-[700px] m-4">
         <div className="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
           <div className="px-2 pr-14">
@@ -109,31 +144,33 @@ export default function UserInfoCard({name, email, role}: PropsUserInformation) 
               Insira seus dados para manter seu perfil atualizado.
             </p>
           </div>
-          <form className="flex flex-col">
-            <div className="custom-scrollbar h-[250px] overflow-y-auto px-2 pb-3">
-              <div className="mt-2">
-                {/* <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
-                  Informações Pessoais
-                </h5> */}
 
-                <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                  <div className="col-span-2">
-                    <Label>Nome</Label>
-                    <Input type="text" defaultValue="Antônio" />
-                  </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+            <div className="custom-scrollbar h-[250px] overflow-y-auto px-2 pb-3 mb-10">
+              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+                <div className="col-span-2">
+                  <Label>Nome</Label>
+                  <Input type="text" {...register("name")} />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                  )}
+                </div>
 
-                  <div className="col-span-2">
-                    <Label>Email</Label>
-                    <Input type="text" defaultValue="randomuser@pimjo.com" />
-                  </div>
+                <div className="col-span-2">
+                  <Label>Email</Label>
+                  <Input type="text" {...register("email")} />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
             </div>
+
             <div className="flex items-center gap-3 px-2 mt-6 lg:-mt-16 lg:justify-end">
               <Button size="sm" variant="outline" onClick={closeModal}>
                 Fechar
               </Button>
-              <Button className="bg-green" size="sm" onClick={handleSave}>
+              <Button className="bg-green" onClick={() => onSubmit}>
                 Salvar
               </Button>
             </div>

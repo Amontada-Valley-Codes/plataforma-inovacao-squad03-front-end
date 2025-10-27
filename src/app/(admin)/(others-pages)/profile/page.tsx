@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Profile() {
   const [dataProfile, setDataProfile] = useState<PropsProfile | PropsProfileStar | null>(null);
+  const [profile, setProfile] = useState(false)
 
   useEffect(() => {
     const getDataProfile = async () => {
@@ -25,7 +26,7 @@ export default function Profile() {
     };
 
     getDataProfile();
-  }, []);
+  }, [profile]);
 
   // 🔍 Função de checagem de tipo
   const isCorp = (profile: any): profile is PropsProfile =>
@@ -41,6 +42,8 @@ export default function Profile() {
           <>
             <UserMetaCard name={dataProfile.name} role={dataProfile.role} />
             <UserInfoCard
+              profile={profile}
+              setProfile={setProfile}
               name={dataProfile.name}
               role={dataProfile.role}
               email={dataProfile.email}

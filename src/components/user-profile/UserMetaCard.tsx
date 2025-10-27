@@ -39,7 +39,11 @@ export default function UserMetaCard({name, role}: PropsMetaCard) {
     try {
       const token = localStorage.getItem("authtoken")
 
-      await api.delete("/profile")
+      await api.delete("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       router.push("/login")
 
     } catch(error) {

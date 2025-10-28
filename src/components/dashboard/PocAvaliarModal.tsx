@@ -18,11 +18,6 @@ const statusMap: Record<string, string> = {
   "REJECTED": "Rejeitado"
 };
 
-const statusColorMap: Record<string, "success" | "warning" | "info" | "light" | "primary"> = {
-  "PENDING": "warning",
-  "ACCEPTED": "success",
-  "REJECTED": "light"
-};
 
 const statusOptions: { value: PocStatus; label: string }[] = [
   { value: "PENDING", label: "Pendente" },

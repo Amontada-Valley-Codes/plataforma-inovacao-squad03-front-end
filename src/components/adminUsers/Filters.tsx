@@ -12,7 +12,7 @@ interface FiltersProps {
 }
 
 export default function Filters({ filters, onFilterChange }: FiltersProps) {
-  const categories = ['GESTOR', 'AVALIADOR', 'ADMINISTRADOR', 'COMUM'];
+  const categories = ['GESTOR', 'AVALIADOR', 'ADMINISTRADOR', 'COMUM', 'STARTUP'];
   const companies = ['PAGUE MENOS', 'LOJAS AMERICANAS', 'MAGAZINE LUIZA', 'VIA VAREJO', 'CASAS BAHIA', 'NATURA', 'AMBEV', 'RENNER'];
 
   return (

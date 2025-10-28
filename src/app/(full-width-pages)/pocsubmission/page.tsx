@@ -1,90 +1,191 @@
 'use client'
-import React, { useState } from "react";
-import Label from "@/components/form/Label";
-import Input from "@/components/form/input/InputField";
-import TextArea from "@/components/form/input/TextArea";
+import { useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import React, { useState, Suspense } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@/api/axiosConfig";
 
-export default function Submission() {
-  const [message, setMessage] = useState("");
-  const [files, setFiles] = useState<File[]>([]);
+const pocValidationSchema = z.object({
+  title: z.string().min(3, "O título está muito curto."),
+  description: z.string().min(10, "Sua descrição está muito curta!"),
+  contactPerson: z.string().min(3, "Informe o nome da pessoa de contato."),
+  challengeId: z.string(),
+  file: z
+    .any()
+    .refine((files) => files?.length === 1, "Um arquivo é obrigatório.")
+    .refine(
+      (files) => files && files[0]?.type === "application/pdf",
+      "O arquivo deve ser um PDF."
+    )
+    .refine(
+      (files) => files && files[0]?.size <= 10 * 1024 * 1024,
+      "O tamanho máximo permitido é 10MB."
+    ),
+});
 
+type PocFormData = z.infer<typeof pocValidationSchema>;
 
+function PocFormContent() {
+  const searchParams = useSearchParams();
+  const challengeId = searchParams.get("challengeId") || "";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ message, files });
-    alert("PoC enviada com sucesso!");
-    setMessage("");
-    setFiles([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<PocFormData>({
+    resolver: zodResolver(pocValidationSchema),
+    defaultValues: {
+      challengeId,
+    },
+  });
+
+  const onSubmitHandler = async (data: PocFormData) => {
+    setIsSubmitting(true);
+    setStatusMessage(null);
+
+    try {
+      const token = localStorage.getItem("authtoken");
+      const formData = new FormData();
+
+      formData.append("title", data.title);
+      formData.append("description", data.description);
+      formData.append("contactPerson", data.contactPerson);
+      formData.append("challengeId", challengeId);
+      formData.append("file", data.file[0]);
+
+      console.log("FormData enviada:", [...formData.entries()]);
+
+       await api.post("/poc", formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setStatusMessage({ type: "success", text: "PoC enviada com sucesso!" });
+      reset();
+    } catch (error) {
+      console.error("Erro ao enviar PoC:", error);
+      setStatusMessage({
+        type: "error",
+        text: "Erro ao enviar PoC. Tente novamente.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 w-full">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 w-full bg-gray-50">
       <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-4xl p-6 md:p-10 space-y-6 transition-all duration-300"
+        onSubmit={handleSubmit(onSubmitHandler)}
+        className="w-full max-w-4xl p-6 md:p-10 space-y-6 bg-white shadow-md rounded-2xl transition-all duration-300"
       >
-        {/* Título */}
         <div className="text-[25px] md:text-[30px] text-blue font-medium text-center">
           Submissão de PoC
         </div>
 
-        {/* Campo: Título da PoC */}
+        {statusMessage && (
+          <div
+            className={`p-3 rounded-md text-center font-medium ${
+              statusMessage.type === "success"
+                ? "bg-green-100 text-green-700 border border-green-300"
+                : "bg-red-100 text-red-700 border border-red-300"
+            }`}
+          >
+            {statusMessage.text}
+          </div>
+        )}
+
         <div>
-          <Label htmlFor="title">Título da PoC</Label>
-          <Input
+          <label htmlFor="title">Título da PoC</label>
+          <input
+            {...register("title")}
             id="title"
             type="text"
             placeholder="Digite o título da PoC"
-            className="w-full"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green"
           />
+          {errors.title?.message && (
+            <p className="mt-1 text-sm text-red-500">
+              {String(errors.title.message)}
+            </p>
+          )}
         </div>
 
-        {/* Campo: Descrição */}
         <div>
-          <Label htmlFor="description">Descrição</Label>
-          <TextArea
-            value={message}
-            onChange={setMessage}
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            {...register("description")}
+            id="description"
             rows={5}
-            placeholder="Descreva brevemente a sua PoC"
-            className="w-full !text-gray-800"
+            placeholder="Descreva brevemente a sua PoC."
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green"
           />
+          {errors.description?.message && (
+            <p className="text-red-500">
+              {String(errors.description.message)}
+            </p>
+          )}
         </div>
 
-        {/* Campo: Pessoa de Contato */}
         <div>
-          <Label htmlFor="contact">Pessoa de Contato</Label>
-          <Input
-            id="contact"
+          <label htmlFor="contactPerson">Responsável</label>
+          <input
+            {...register("contactPerson")}
+            id="contactPerson"
             type="text"
-            placeholder="Nome do responsável"
-            className="w-full"
+            placeholder="Nome do Responsável"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green"
           />
+          {errors.contactPerson?.message && (
+            <p className="text-red-500">
+              {String(errors.contactPerson.message)}
+            </p>
+          )}
         </div>
 
-        {/* Campo de Link do Projeto */}
+        <input type="hidden" {...register("challengeId")} />
+
         <div>
-          <Label htmlFor="projectLink">Link do Projeto</Label>
-          <Input
-            id="projectLink"
-            type="url"
-            placeholder="Insira o link do projeto"
-            className="w-full"
+          <label htmlFor="file">Arquivo do Projeto</label>
+          <input
+            type="file"
+            id="file"
+            accept="application/pdf"
+            {...register("file")}
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green"
           />
-          <p className="mt-2 text-sm text-gray-500">
-            Envie o link onde sua PoC está hospedada ou disponível para visualização.
-          </p>
+          {errors.file?.message && (
+            <p className="text-red-500">{String(errors.file.message)}</p>
+          )}
         </div>
 
-        {/* Botão */}
         <button
           type="submit"
-          className="px-6 py-3 text-white bg-green rounded-md hover:scale-102 transition-all w-full"
+          disabled={isSubmitting}
+          className={`px-6 py-3 text-white rounded-md transition-all w-full ${
+            isSubmitting
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green hover:bg-green-600 hover:scale-105"
+          }`}
         >
-          Enviar PoC
+          {isSubmitting ? "Enviando..." : "Enviar PoC"}
         </button>
       </form>
     </div>
+  );
+}
+
+
+// O useSearchParams() precisa estar envolvido em um Suspense boundary (next que dá e nao sabe pedir)
+export default function PocForm() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Carregando...</div>}>
+      <PocFormContent />
+    </Suspense>
   );
 }

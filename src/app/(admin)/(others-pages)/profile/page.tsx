@@ -29,10 +29,10 @@ export default function Profile() {
   }, [profile]);
 
   // 🔍 Função de checagem de tipo
-  const isCorp = (profile: any): profile is PropsProfile =>
+  const isCorp = (profile: PropsProfile | PropsProfileStar): profile is PropsProfile =>
     profile?.companyInformation?.type === "Corporation";
 
-  const isStartup = (profile: any): profile is PropsProfileStar =>
+  const isStartup = (profile: PropsProfile | PropsProfileStar): profile is PropsProfileStar =>
     profile?.companyInformation?.type === "Startup";
 
   return (

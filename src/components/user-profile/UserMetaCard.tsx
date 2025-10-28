@@ -25,7 +25,7 @@ const FORMATING_ROLE: Record<string, string> = {
 }
 
 export default function UserMetaCard({name, role}: PropsMetaCard) {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, closeModal } = useModal();
   const router = useRouter()
 
   const handleSave = () => {

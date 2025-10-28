@@ -107,7 +107,8 @@ export default function ChallengersForm() {
   };
 
   const handleDateChange = (field: keyof ProjectFormData) => (dates: Date[], currentDateString: string) => {
-    setValue(field, currentDateString, { shouldValidate: true });
+    const formattedDate = currentDateString || (dates[0] ? dates[0].toISOString().split('T')[0] : '');
+    setValue(field, formattedDate, { shouldValidate: true });
   };
 
   return (
@@ -134,6 +135,7 @@ export default function ChallengersForm() {
             id="start-date"
             label="Data de início"
             placeholder="Selecione a data de início"
+            value={watch('startDate')}
             onChange={handleDateChange('startDate')}
           />
           {errors.startDate && (
@@ -146,6 +148,7 @@ export default function ChallengersForm() {
             id="delivery-date"
             label="Data de entrega"
             placeholder="Selecione a data de entrega"
+            value={watch('deliveryDate')}
             onChange={handleDateChange('deliveryDate')}
           />
           {errors.deliveryDate && (

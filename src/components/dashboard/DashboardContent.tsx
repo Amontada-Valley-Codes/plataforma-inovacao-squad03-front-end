@@ -3,7 +3,7 @@
 import { InnovationMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
-import  TabelaPocs  from "@/components/pageDesafios/Tabela-pocs";
+import  TabelaPocs  from "@/components/dashboard/Tabela-pocs";
 import { useDashboard } from "@/hooks/useDashboard";
 
 export function DashboardContent() {

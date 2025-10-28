@@ -32,7 +32,6 @@ export default function TabelaPocs({
     hasMore,
     currentPage,
     dynamicColumns,
-    handleDelete,
     handleNextPage,
     handlePrevPage,
     formatColumnName,

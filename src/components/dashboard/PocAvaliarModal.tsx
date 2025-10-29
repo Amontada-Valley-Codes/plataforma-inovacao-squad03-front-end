@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Modal } from "../ui/modal";
-import Button from "../ui/button/Button";
+import { Button } from "../ui/button";
 import { useModal } from "@/hooks/useModal";
 import { type Poc } from "@/hooks/useTabelaPocs";
 import { usePocDetalhes } from "@/hooks/usePocDetalhes";
@@ -54,7 +54,7 @@ export default function PocAvaliarModal({ poc, onStatusUpdate }: PocAvaliarModal
 
   return (
     <>
-      <Button size="sm" variant="outline" onClick={openModal}>
+      <Button size="sm" variant="ninaButton" className="px-4" onClick={openModal}>
         Avaliar
       </Button>
       <Modal
@@ -151,10 +151,11 @@ export default function PocAvaliarModal({ poc, onStatusUpdate }: PocAvaliarModal
 
         {/* footer */}
         <div className="flex items-center justify-end w-full gap-3 p-6 border-t">
-          <Button size="sm" variant="outline" onClick={closeModal}>
+          <Button size="sm" variant="outline" className="border-blue text-blue" onClick={closeModal}>
             Fechar
           </Button>
           <Button 
+            className="bg-green hover:bg-white hover:border-1 border-green hover:text-green"
             size="sm" 
             onClick={handleStatusUpdate}
             disabled={isUpdating || selectedStatus === poc.status}

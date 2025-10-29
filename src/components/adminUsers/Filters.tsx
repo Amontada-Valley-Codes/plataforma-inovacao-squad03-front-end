@@ -13,7 +13,6 @@ interface FiltersProps {
 }
 
 export default function Filters({ filters, onFilterChange }: FiltersProps) {
-  const companies = ['PAGUE MENOS', 'LOJAS AMERICANAS', 'MAGAZINE LUIZA', 'VIA VAREJO', 'CASAS BAHIA', 'NATURA', 'AMBEV', 'RENNER'];
   const userRole = getUserRole()
   const isAdmin = userRole === "ADMIN"
 

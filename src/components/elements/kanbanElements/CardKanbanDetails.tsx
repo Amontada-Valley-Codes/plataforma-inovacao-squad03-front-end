@@ -15,6 +15,7 @@ import CardComments from "../CommentsElements/CardComments";
 import ButtonPublic from "../publicElements/ButtonPublic";
 import { useEffect } from "react";
 import { api } from "@/api/axiosConfig";
+import { getUserRole } from "../CommentsElements/GetUserRole";
 
 const COLUMN_TITLES: Record<string, string> = {
   GENERATION: "Geração de Ideias",
@@ -33,6 +34,7 @@ const FORMATING_SECTORS: Record<string, string> = {
     }
 
 export default function CardKanbanDetail(props: PropsCardKanban) {
+    const userRole = getUserRole()
     
     useEffect(() => {
         
@@ -73,13 +75,17 @@ export default function CardKanbanDetail(props: PropsCardKanban) {
                     {/* opções */}
                     <div className="flex items-center px-4 gap-2">
                         
-                        <ButtonPublic 
-                            id={props.id}
-                            published={props.publishOption} 
-                            state={props.status} 
-                            reload={props.realod} 
-                            setReload={props.setReload} 
-                        />
+                        {userRole === "MANAGER" && (
+
+                            <ButtonPublic 
+                                id={props.id}
+                                published={props.publishOption} 
+                                state={props.status} 
+                                reload={props.realod} 
+                                setReload={props.setReload} 
+                            />
+
+                        )}
 
                         <MenuCard {...props} realod={props.realod} setReload={props.setReload}/>
 

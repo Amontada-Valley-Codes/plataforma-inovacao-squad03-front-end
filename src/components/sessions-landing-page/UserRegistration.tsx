@@ -3,12 +3,11 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { api } from "@/api/axiosConfig"
 import { Button } from "../ui/button"
-import { toast, Toaster } from "sonner"
+import { Toaster } from "sonner"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff } from "lucide-react"
-import { AxiosError } from "axios";
+
 import Image from "next/image";
 
 // ✅ Schema de registro
@@ -46,7 +45,7 @@ export default function UserRegistro() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const onSubmit = async (data: RegistroData) => {
+  const onSubmit = async () => {
     setIsLoading(true);
     router.push("/login")
     // try {

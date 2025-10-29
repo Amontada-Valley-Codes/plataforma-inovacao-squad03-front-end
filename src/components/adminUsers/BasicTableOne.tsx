@@ -75,15 +75,16 @@ export default function BasicTableOne({ filters }: BasicTableOneProps) {
 
   
 
- const filteredData = useMemo(() => {
+const filteredData = useMemo(() => {
   return tableData.filter(user => {
     return (
       user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
       (filters.category === '' || FORMATING_ROLE[user.role] === filters.category) &&
-      (filters.company === '' || user.enterprise?.name === filters.company )
+      (filters.company === '' || user.enterprise?.name.toLowerCase().includes(filters.company.toLowerCase()))
     );
   });
 }, [filters, tableData]);
+
 
   const getBadgeColor = (category: string) => {
     switch (category) {

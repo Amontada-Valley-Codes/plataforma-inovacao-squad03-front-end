@@ -32,11 +32,11 @@ export function ChallengesFilters() {
 
   return (
     <div className="col-span-12 mb-5 rounded-[10px] mt-4">
-      {/* Barra de Filtros/Pesquisa - Tudo na mesma linha */}
-      <div className="flex flex-col md:flex-row gap-4 items-end">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        {/* Buscar por nome */}
-        <div className="flex-1 md:flex-[2] min-w-0">
+        {/* Buscar por nome - ocupa 2 colunas no desktop */}
+        <div className="sm:col-span-2 lg:col-span-1">
           <Label className="block mb-2">Buscar por nome</Label>
           <div className="relative">
             <input
@@ -50,7 +50,7 @@ export function ChallengesFilters() {
         </div>
 
         {/* Filtro por área/tema */}
-        <div className="flex-1 min-w-0">
+        <div className="">
           <Label className="block mb-2">Área/Tema</Label>
           <div className="relative">
             <Select
@@ -66,7 +66,7 @@ export function ChallengesFilters() {
         </div>
 
         {/* Filtro por data */}
-        <div className="flex-1 min-w-0">
+        <div className="">
           <Label className="block mb-2">Data de início</Label>
           <div className="relative">
             <input
@@ -79,15 +79,16 @@ export function ChallengesFilters() {
         </div>
 
         {/* Botão limpar filtros */}
-        <div className="flex-1 min-w-0">
-          <Label className="block mb-2">&nbsp;</Label>
+        <div className="sm:col-span-2 lg:col-span-1">
+          <Label className="block mb-2 sm:hidden lg:block">&nbsp;</Label>
           <button
             onClick={() => {
               updateFilter('search', '');
               updateFilter('area', '');
               updateFilter('date', '');
             }}
-            className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            className="w-full px-4 py-3 h-[48px] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500
+             dark:border-gray-600 dark:bg-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             Limpar Filtros
           </button>

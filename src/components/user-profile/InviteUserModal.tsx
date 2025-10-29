@@ -54,7 +54,8 @@ export default function InviteUserModal() {
 
   const onSubmit = (data: InviteFormData) => {
     console.log("Dados enviados:", data);
-    alert("Convite enviado!");
+    
+
     reset();
     closeModal();
   };

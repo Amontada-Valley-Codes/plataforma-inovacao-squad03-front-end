@@ -1,6 +1,7 @@
 import React from 'react';
 import Label from '@/components/form/Label';
 import Select from '@/components/form/Select';
+import { getUserRole } from '../elements/CommentsElements/GetUserRole';
 
 interface FiltersProps {
   filters: {
@@ -12,8 +13,13 @@ interface FiltersProps {
 }
 
 export default function Filters({ filters, onFilterChange }: FiltersProps) {
-  const categories = ['GESTOR', 'AVALIADOR', 'ADMINISTRADOR', 'COMUM', 'STARTUP'];
   const companies = ['PAGUE MENOS', 'LOJAS AMERICANAS', 'MAGAZINE LUIZA', 'VIA VAREJO', 'CASAS BAHIA', 'NATURA', 'AMBEV', 'RENNER'];
+  const userRole = getUserRole()
+  const isAdmin = userRole === "ADMIN"
+
+  const categories = isAdmin 
+    ? ['GESTOR', 'AVALIADOR', 'ADMINISTRADOR', 'COMUM', 'STARTUP'] 
+    : ['GESTOR', 'AVALIADOR', 'ADMINISTRADOR', 'COMUM']
 
   return (
     <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
@@ -43,16 +49,21 @@ export default function Filters({ filters, onFilterChange }: FiltersProps) {
           />
         </div>
 
+        {userRole === "ADMIN" && (
+
+          <div>
+            <Label htmlFor="company">Empresa</Label>
+            <input
+              type="text"
+              placeholder="Buscar por empresa..."
+              value={filters.company}
+              onChange={(e) => onFilterChange('company', e.target.value)}
+              className="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:border-gray-700 dark:focus:border-brand-800"
+            />
+          </div>
+
+        )}
         {/* Filtro por Empresa */}
-        <div>
-          <Label htmlFor="company">Empresa</Label>
-          <Select
-            options={[{ value: '', label: 'Todas as empresas' }, ...companies.map(comp => ({ value: comp, label: comp }))]}
-            placeholder="Selecione a empresa"
-            onChange={(value) => onFilterChange('company', value)}
-            defaultValue={filters.company}
-          />
-        </div>
 
         {/* Botão Limpar Filtros */}
         <div>

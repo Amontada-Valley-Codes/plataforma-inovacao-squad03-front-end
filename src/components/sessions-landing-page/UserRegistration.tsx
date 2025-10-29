@@ -20,7 +20,8 @@ const registroSchema = z.object({
   senha: z
     .string()
     .min(8, "Senha deve ter pelo menos 8 caracteres")
-    .max(20, "Senha deve ter no máximo 20 caracteres"),
+    .max(20, "Senha deve ter no máximo 20 caracteres")
+    .regex(/(?=.*[A-Z])(?=.*[^A-Za-z0-9])/, "Senha deve conter pelo menos uma letra maiúscula e um caractere especial"),
   confirmarSenha: z
     .string()
     .min(8, "Confirmação de senha é obrigatória"),
@@ -47,41 +48,42 @@ export default function UserRegistro() {
 
   const onSubmit = async (data: RegistroData) => {
     setIsLoading(true);
-    try {
-      await api.post("/auth", {
-        name: data.nome,
-        password: data.senha,
-      });
+    router.push("/login")
+    // try {
+    //   await api.post("/auth", {
+    //     name: data.nome,
+    //     password: data.senha,
+    //   });
 
-      toast.success("Usuário registrado com sucesso!", {
-        description: "Você será redirecionado para o login.",
-      });
+    //   toast.success("Usuário registrado com sucesso!", {
+    //     description: "Você será redirecionado para o login.",
+    //   });
 
-      setTimeout(() => router.push("/login"), 1500);
+    //   setTimeout(() => router.push("/login"), 1500);
 
-    } catch (error) {
-      const err = error as AxiosError;
-      console.error("Erro ao registrar usuário:", err);
+    // } catch (error) {
+    //   const err = error as AxiosError;
+    //   console.error("Erro ao registrar usuário:", err);
 
-      if (err.response) {
-        const status = err.response.status;
-        if (status === 400) {
-          toast.error("Erro nos dados enviados.", { description: "Verifique se todos os campos estão corretos." });
-        } else if (status === 409) {
-          toast.error("Usuário já existe.", { description: "Escolha outro nome." });
-        } else if (status === 500) {
-          toast.error("Erro interno do servidor.", { description: "Tente novamente mais tarde." });
-        } else {
-          toast.error("Erro inesperado.", { description: "Algo deu errado, tente novamente." });
-        }
-      } else if (err.request) {
-        toast.error("Falha de conexão com o servidor.", { description: "Verifique sua internet e tente novamente." });
-      } else {
-        toast.error("Erro desconhecido.", { description: err.message || "Tente novamente mais tarde." });
-      }
-    } finally {
-      setIsLoading(false);
-    }
+    //   if (err.response) {
+    //     const status = err.response.status;
+    //     if (status === 400) {
+    //       toast.error("Erro nos dados enviados.", { description: "Verifique se todos os campos estão corretos." });
+    //     } else if (status === 409) {
+    //       toast.error("Usuário já existe.", { description: "Escolha outro nome." });
+    //     } else if (status === 500) {
+    //       toast.error("Erro interno do servidor.", { description: "Tente novamente mais tarde." });
+    //     } else {
+    //       toast.error("Erro inesperado.", { description: "Algo deu errado, tente novamente." });
+    //     }
+    //   } else if (err.request) {
+    //     toast.error("Falha de conexão com o servidor.", { description: "Verifique sua internet e tente novamente." });
+    //   } else {
+    //     toast.error("Erro desconhecido.", { description: err.message || "Tente novamente mais tarde." });
+    //   }
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (

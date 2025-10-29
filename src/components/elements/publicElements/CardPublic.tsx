@@ -14,7 +14,7 @@ export default function CardPublic(props: PropsCard) {
 
     return(
 
-        <Card>
+        <Card className="rounded-2xl shadow-lg dark:shadow-lg dark:shadow-green/15">
 
             <CardHeader className="flex flex-row justify-start items-center gap-4">
 

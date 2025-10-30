@@ -172,6 +172,20 @@ export function Header({
                   {item.label}
                 </Link>
               ))}
+              
+              {/* Botão Login Mobile */}
+              <div className="pt-2">
+                <Button 
+                  variant={"ninaButton"} 
+                  className="w-full px-4 py-3 font-bold tracking-wide"
+                  onClick={() => {
+                    router.push("login")
+                    setMobileMenuOpen(false)
+                  }}
+                >
+                  LOGIN
+                </Button>
+              </div>
             </div>
           </div>
         )}

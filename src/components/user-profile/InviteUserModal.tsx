@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z, { email } from "zod";
+import z from "zod";
 import { Modal } from "../ui/modal";
 import { Button } from "../ui/button";
 import { useModal } from "@/hooks/useModal";

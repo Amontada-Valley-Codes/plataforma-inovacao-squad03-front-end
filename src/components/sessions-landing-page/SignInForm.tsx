@@ -15,15 +15,14 @@ import Image from "next/image";
 const loginSchema = z.object({
   email: z
     .string()
-    .min(1, "Email é obrigatório")
+    .min(1, "Email é obrigatório.")
     .refine((val) => val.includes("@"), {
-      message: "O e-mail deve conter @",
+      message: "O e-mail deve conter @.",
     }),
 
   senha: z
     .string()
-    .min(8, "Senha deve ter pelo menos 8 caracteres")
-    .max(20, "Senha deve ter no máximo 20 caracteres"),
+    .min(1, "A senha é obrigatória.")
 })
 
 type LoginData = z.infer<typeof loginSchema>

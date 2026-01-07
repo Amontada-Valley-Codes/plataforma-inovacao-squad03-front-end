@@ -1,25 +1,39 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
-
+import z, { email } from "zod";
 import { Modal } from "../ui/modal";
 import { Button } from "../ui/button";
 import { useModal } from "@/hooks/useModal";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
 import Select from "../form/Select";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, Eye, EyeOff } from "lucide-react";
 import { getUserRole } from "../elements/CommentsElements/GetUserRole";
+import { api } from "@/api/axiosConfig";
+import { getUserCorporationId } from "../elements/CommentsElements/GetUserRole";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
 
 
 const inviteSchema = z.object({
   email: z
     .string()
-    .min(1, "O e-mail é obrigatório")
-    .email("E-mail inválido"),
-  select: z.string().min(1, "Escolha uma opção"),
+    .min(1, "Email é obrigatório.")
+    .refine((val) => val.includes("@"), {
+      message: "O e-mail deve conter @.",
+    }),
+  select: z.string().min(1, "Escolha uma opção."),
+  name: z
+    .string()
+    .min(5, "O nome é muito curto."),
+  password: z
+    .string()
+    .min(8, "Senha deve ter pelo menos 8 caracteres.")
+    .max(20, "Senha deve ter no máximo 20 caracteres.")
+    .regex(/[A-Z]/, "A senha deve conter pelo menos uma letra maiúscula.")
+    .regex(/[^A-Za-z0-9]/, "A senha deve conter pelo menos um caractere especial.")
 });
 
 type InviteFormData = z.infer<typeof inviteSchema>;
@@ -27,6 +41,7 @@ type InviteFormData = z.infer<typeof inviteSchema>;
 export default function InviteUserModal() {
   const { isOpen, openModal, closeModal } = useModal();
   const isAdmin = getUserRole() === "ADMIN"
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -49,16 +64,55 @@ export default function InviteUserModal() {
     [ 
       { value: "MANAGER", label: "Gestor" },
       { value: "EVALUATOR", label: "Avaliador"}, 
-      { value: "COMOM", label: "Comum"}
+      { value: "COMMON", label: "Comum"}
     ]
 
-  const onSubmit = (data: InviteFormData) => {
-    console.log("Dados enviados:", data);
-    
+  const onSubmit = async (data: InviteFormData) => {
+  try {
+      const corporationId = getUserCorporationId();
 
-    reset();
-    closeModal();
+      await api.post("/auth/register", {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        corporationId,
+        role: data.select,
+      });
+
+      toast.success("Cadastro realizado com sucesso!", {
+        description: `O usuário ${data.name} foi cadastrado!`,
+      });
+
+      reset();
+      closeModal();
+
+    } catch (error) {
+      const err = error as AxiosError;
+
+      if (err.response) {
+        const status = err.response.status;
+
+        if (status === 400) {
+          toast.error("Erro nos dados enviados.", {
+            description: "Verifique se as informações estão corretas",
+          });
+        } else if (status === 404) {
+          toast.error("Corporação não encontrada.");
+        } else if (status === 409) {
+          toast.error("Email já está em uso.");
+        } else if (status === 500) {
+          toast.error("Erro interno do servidor.");
+        } else {
+          toast.error("Erro inesperado.");
+        }
+      } else if (err.request) {
+        toast.error("Falha de conexão com o servidor.");
+      } else {
+        toast.error("Erro desconhecido.");
+      }
+    }
   };
+
 
   return (
     <div>
@@ -77,16 +131,31 @@ export default function InviteUserModal() {
       >
 
         <h4 className="font-semibold text-blue mb-7 text-[25px] dark:text-white/90">
-          Convite de usuário
+         Cadastrar Usuário
         </h4>
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
+          <div>
+            <Label htmlFor="name">Nome</Label>
+            <Input
+              id="name"
+              placeholder="Digite o nome do usuário"
+              {...register("name")}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.name.message}
+              </p>
+            )}
+          </div>
+
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
-              placeholder="Digite o email do convidado"
+              placeholder="Digite o email do usuário"
               {...register("email")}
             />
             {errors.email && (
@@ -116,6 +185,33 @@ export default function InviteUserModal() {
             )}
           </div>
 
+          <div>
+            <Label htmlFor="password">Senha</Label>
+            <div className="relative">
+              <Input
+                id="password"
+                placeholder="Crie uma senha para o usuário"
+                {...register("password")}
+                type={showPassword ? "text" : "password"}
+                className="w-full pr-10"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+              </button>
+            </div>
+
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
           <div className="flex items-center justify-end w-full gap-3 mt-8">
             <Button
               type="button"
@@ -127,7 +223,7 @@ export default function InviteUserModal() {
               Cancelar
             </Button>
             <Button type="submit" size="sm" variant="ninaButton">
-              Enviar convite
+              Cadastrar
             </Button>
           </div>
         </form>

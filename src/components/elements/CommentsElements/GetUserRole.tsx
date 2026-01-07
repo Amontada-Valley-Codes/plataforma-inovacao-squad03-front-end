@@ -24,3 +24,18 @@ export function getUserRole(): "ADMIN" | "MANAGER" | "EVALUATOR" | "COMMON" | "S
     return null;
   }
 }
+
+export function getUserCorporationId() : string | null {
+  if (typeof window === "undefined") return null;
+
+  const token = localStorage.getItem("authtoken");
+  if (!token) return null;
+
+  try {
+    const decoded: DecodedToken = jwtDecode(token);
+    return decoded.corporationId
+  } catch {
+    console.log("Token inválido");
+    return null;
+  }
+}

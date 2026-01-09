@@ -79,7 +79,7 @@ export default function KanbanDemo() {
           <Kanban.Column
             key={columnValue}
             value={columnValue}
-            className="w-72 flex-none border-[#C9C9C9] dark:border-gray-700 bg-gray-50 dark:bg-gray-900 h-full"
+            className="w-72 flex-none border-[#C9C9C9] dark:border-gray-700 bg-gray-50 dark:bg-gray-900 h-full flex flex-col"
           >
             {/* Cabeçalho da coluna */}
             <div className="text-blue bg-card px-3 py-2 rounded-md flex items-center border-b-2 border-l-10 border-l-green justify-between">
@@ -92,12 +92,12 @@ export default function KanbanDemo() {
             </div>
 
             {/* Cards */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 overflow-y-auto px-1 pb-2 flex-1">
               
               {tasks.map((card) => (
                 <Kanban.Item key={card.id} value={card.id} asChild>
 
-                  <div className="relative bg-card shadow-md rounded-md hover:scale-102 transition-all">
+                  <div className="relative bg-card shadow-md rounded-md transition-all">
                     
                     <div>
                       <CardKanbanDetail {...card} realod={reload} setReload={setReload} />

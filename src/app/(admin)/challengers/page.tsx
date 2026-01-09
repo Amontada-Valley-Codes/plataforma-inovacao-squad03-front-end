@@ -6,7 +6,7 @@ export default function Challengers() {
 
     return (
 
-        <div className="w-full flex-1 min-h-0 flex flex-col">
+        <div className="w-full h-[82dvh] flex flex-col overflow-hidden">
 
             {/* Register */}
             <div className="col-span-12 space-y-2 py-4 px-2 flex justify-between items-center rounded-[10px]">
@@ -30,7 +30,7 @@ export default function Challengers() {
             {/* Kanban */}
            
 
-            <div className="w-full flex-1 min-h-0">
+            <div className="flex-1 min-h-0 overflow-hidden">
 
                 <KanbanDemo/>
 

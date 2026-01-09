@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import DialogForm from "@/components/elements/formChallengers/DialogForm";
+import ObjectivesModal from "../elements/ObjectivesElements/ObjectivesModal";
 
 export function ChallengesHeader() {
   return (
@@ -14,7 +15,11 @@ export function ChallengesHeader() {
         </p>
       </div>
 
-      <DialogForm />
+      <div className="flex flex-col gap-4 md:flex-row">
+        <ObjectivesModal/>
+        <DialogForm />
+      </div>
+
     </div>
   );
 }

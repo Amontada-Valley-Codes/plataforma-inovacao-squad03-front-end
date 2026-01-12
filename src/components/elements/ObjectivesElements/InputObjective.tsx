@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import Input from "@/components/form/input/InputField";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { FaPlus } from "react-icons/fa6"
@@ -44,7 +44,7 @@ const createObjective = async (data: ObjectiveData) => {
 
             <Input
                 placeholder="Crie um objetivo estratégico"
-                className="pr-15 h-11"
+                className="pr-15"
                 {...register("content")}
             />
 
@@ -52,13 +52,11 @@ const createObjective = async (data: ObjectiveData) => {
                 <span className="text-red-500 text-[14px]">{errors.content.message}</span>
             )}
 
-
-
             <Button
                 type="submit"
                 variant={"ninaButton"} 
                 size={"icon"} 
-                className="absolute top-1.5 right-2 rounded-full"
+                className="absolute top-1 right-2 rounded-full"
             > 
                 <FaPlus color="white" className="!w-5 !h-5"/>
             </Button>

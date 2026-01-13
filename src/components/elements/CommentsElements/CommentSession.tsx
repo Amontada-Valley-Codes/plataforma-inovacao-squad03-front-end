@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Comment from "./Comment"
 import InputCommnet from "./InputComment"
 import { api } from "@/api/axiosConfig"
-import { PropsSessionComment } from "@/types"
+import { PropsSessionComment } from "@/types" 
 import { PropsComment } from "@/types"
 
 export default function CommentSession({challangerId}:PropsSessionComment) {

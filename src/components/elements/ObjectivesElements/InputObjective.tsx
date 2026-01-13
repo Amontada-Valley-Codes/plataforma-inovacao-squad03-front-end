@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { FaPlus } from "react-icons/fa6"
 import z from "zod"
+import { InputObjectiveProps } from "@/types";
 
 const ObjectiveSchema = z.object({
     content: 
@@ -13,15 +14,16 @@ const ObjectiveSchema = z.object({
 
 type ObjectiveData = z.infer<typeof ObjectiveSchema>
 
-export default function InputObjective() {
+export default function InputObjective(props: InputObjectiveProps) {
 
-const createObjective = async (data: ObjectiveData) => {
+const createObjective = async ({/*data: ObjectiveData*/}) => {
 
         try {
-            const token = localStorage.getItem("authtoken")
-
+            // const token = localStorage.getItem("authtoken")
+            
             
             reset()
+            props.setObjectUpload(!props.ObjectiveUpload)
 
         } catch(error) {
             console.log(error)

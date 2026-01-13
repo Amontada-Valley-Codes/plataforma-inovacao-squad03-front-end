@@ -1,25 +1,28 @@
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { Modal } from "../../ui/modal";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/useModal";
 import InputObjective from "./InputObjective";
 import CardObjective from "./CardObjective";
+import { CardObjectiveProps } from "@/types";
 
 export default function ObjectivesModal() {
   const { isOpen, openModal, closeModal } = useModal();
+  const [objectives, setObjectives] = useState<CardObjectiveProps[]>([])
+  const [objectiveUpload, setObjectUpload] = useState(false)
 
-  const objectives = [
-    {
-      content: "Algum objetivo que eles cria aí.",
-      createDate: "01/10/26"
-    },
-    {
-      content: "Outro objetivo que eles cria aí.",
-      createDate: "01/10/26"
-    },
-    
-  ]
+  useEffect(() => {
+
+    const getObjectives = async () => {
+
+
+
+    }
+    getObjectives()
+
+  }, [objectiveUpload])
 
   return (
     <div>
@@ -51,20 +54,38 @@ export default function ObjectivesModal() {
 
                 <div className="py-2">
                   
-                  <InputObjective/>
+                  <InputObjective
+                    ObjectiveUpload={objectiveUpload}
+                    setObjectUpload={setObjectUpload}
+
+                  />
 
                 </div>
 
-                <div className="max-h-[300px] scrollbar-hidden overflow-auto space-y-2">
+                {objectives.length > 0 ? (
+
+                  <div className="max-h-[300px] scrollbar-hidden overflow-auto space-y-2">
+
                     {objectives.map((objective, index) => (
                       <CardObjective
                         key={index}
+                        id={objective.id}
                         content={objective.content}
                         createDate={objective.createDate}
+                        ObjectiveUpload={objectiveUpload}
+                        setObjectUpload={setObjectUpload}
                       />
                     ))}
 
-                </div>
+                  </div>
+
+                ) 
+                : 
+                (
+                  <div className="flex justify-center items-center">
+                    <span className="text-blue" >Ainda não há nenhum objetivo estratégico.</span>
+                  </div>
+                )}
 
             </div>
 

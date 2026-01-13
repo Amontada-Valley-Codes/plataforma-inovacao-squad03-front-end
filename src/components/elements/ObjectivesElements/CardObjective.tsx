@@ -1,4 +1,4 @@
-import { SlOptionsVertical } from "react-icons/sl";
+
 import MenuObjective from "./MenuObjective";
 
 

@@ -15,12 +15,11 @@ type ObjectiveData = z.infer<typeof ObjectiveSchema>
 
 export default function InputObjective() {
 
-const createObjective = async (data: ObjectiveData) => {
+const createObjective = async () => {
 
         try {
-            const token = localStorage.getItem("authtoken")
-
-            
+            // createObjective = async (data: ObjectiveData) => {
+            // const token = localStorage.getItem("authtoken")
             reset()
 
         } catch(error) {

@@ -10,15 +10,13 @@ import { CardObjectiveProps } from "@/types";
 
 export default function ObjectivesModal() {
   const { isOpen, openModal, closeModal } = useModal();
-  const [objectives, setObjectives] = useState<CardObjectiveProps[]>([])
+  const [objectives] = useState<CardObjectiveProps[]>([]) // , setObjectives
   const [objectiveUpload, setObjectUpload] = useState(false)
 
   useEffect(() => {
 
     const getObjectives = async () => {
-
-
-
+      
     }
     getObjectives()
 

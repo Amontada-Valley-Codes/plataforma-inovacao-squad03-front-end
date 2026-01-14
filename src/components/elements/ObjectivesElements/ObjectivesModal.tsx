@@ -11,25 +11,21 @@ import { api } from "@/api/axiosConfig";
 
 export default function ObjectivesModal() {
   const { isOpen, openModal, closeModal } = useModal();
-  const [objectives] = useState<CardObjectiveProps[]>([]) // , setObjectives
+  const [objectives, setObjectives] = useState<CardObjectiveProps[]>([]) // 
   const [objectiveUpload, setObjectUpload] = useState(false)
 
   useEffect(() => {
-
     const getObjectives = async () => {
-
       const token = localStorage.getItem("authtoken")
-
-      const response = await api.get("/strategic-objectives", 
-        {
-          headers: {
-              Authorization: `Bearer ${token}`
-          }
+      const response = await api.get("/strategic-objectives", {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      )
-
+      })
       setObjectives(response.data)
-
+    }
+    
+    getObjectives()
   }, [objectiveUpload])
 
   return (

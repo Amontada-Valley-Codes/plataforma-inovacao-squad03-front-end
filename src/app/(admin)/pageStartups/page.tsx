@@ -1,16 +1,11 @@
 'use client'
 
-import CardPublic from "@/components/elements/publicElements/CardPublic";
 import Filters from "@/components/elements/Filters";
-import { PropsCard } from "@/types";
-import { useEffect, useRef, useState } from "react";
-import { api } from "@/api/axiosConfig";
+import { useRef, useState } from "react";
 
 export default function Workflow() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [posts, setPosts] = useState<PropsCard[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedSector, setSelectedSector] = useState<string | null>(null);
 
 
   return (
@@ -55,7 +50,7 @@ export default function Workflow() {
 
       {/* categorias */}
       <div>
-        <Filters onSelectSector={(sector) => setSelectedSector(sector)} />
+        <Filters onSelectSector={() => {}} />
       </div>
 
       

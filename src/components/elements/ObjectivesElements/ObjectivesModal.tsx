@@ -11,7 +11,7 @@ import { api } from "@/api/axiosConfig";
 
 export default function ObjectivesModal() {
   const { isOpen, openModal, closeModal } = useModal();
-  const [objectives, setObjectives] = useState<CardObjectiveProps[]>([])
+  const [objectives] = useState<CardObjectiveProps[]>([]) // , setObjectives
   const [objectiveUpload, setObjectUpload] = useState(false)
 
   useEffect(() => {
@@ -29,9 +29,6 @@ export default function ObjectivesModal() {
       )
 
       setObjectives(response.data)
-
-    }
-    getObjectives()
 
   }, [objectiveUpload])
 

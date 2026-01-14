@@ -1,11 +1,5 @@
-
+import { CardObjectiveProps } from "@/types";
 import MenuObjective from "./MenuObjective";
-
-
-type CardObjectiveProps = {
-    content: string;
-    createDate: string
-}
 
 export default function CardObjective(props: CardObjectiveProps) {
 
@@ -24,7 +18,9 @@ export default function CardObjective(props: CardObjectiveProps) {
 
                 {/* Menu de editar ou deletar */}
                 <div className="text-blue">
-                    <MenuObjective/>
+                    <MenuObjective
+                        {...props}
+                    />
                 </div>
 
             </div>

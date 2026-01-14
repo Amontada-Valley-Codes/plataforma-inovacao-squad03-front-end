@@ -58,12 +58,14 @@ const AppSidebar: React.FC = () => {
         { icon: <BoxCubeIcon />, name: "Funil de Inovação", path: "/challengers" },
         { icon: <ListIcon />, name: "Desafios publicados", path: "/workflow" },
         { icon: <GroupIcon />, name: "Organização", path: "/adminUsers" },
+        { icon: <ListIcon />, name: "Banco de Startups", path: "/pageStartups" }
       ] 
     : [
         { icon: <GridIcon />, name: "Dashboard", path: "/admin" },
         { icon: <ShootingStarIcon />, name: "Desafios", path: "/pageDesafios" },
         { icon: <BoxCubeIcon />, name: "Funil de Inovação", path: "/challengers" },
         { icon: <ListIcon />, name: "Desafios publicados", path: "/workflow" },
+        { icon: <ListIcon />, name: "Banco de Startups", path: "/pageStartups" }
       ];
 
   // "Outros" — o User Profile aparece pra todo mundo

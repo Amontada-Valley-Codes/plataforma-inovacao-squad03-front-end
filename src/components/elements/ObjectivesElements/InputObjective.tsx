@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { FaPlus } from "react-icons/fa6"
 import z from "zod"
 import { InputObjectiveProps } from "@/types";
+import { api } from "@/api/axiosConfig";
 
 const ObjectiveSchema = z.object({
     content: 
@@ -16,14 +17,22 @@ type ObjectiveData = z.infer<typeof ObjectiveSchema>
 
 export default function InputObjective(props: InputObjectiveProps) {
 
-const createObjective = async ({/*data: ObjectiveData*/}) => {
+const createObjective = async (data: ObjectiveData) => {
 
         try {
-            // const token = localStorage.getItem("authtoken")
+            const token = localStorage.getItem("authtoken")
             
-           
-            reset()
+            await api.post("/strategic-objectives", {
+                title: data.content
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
             props.setObjectUpload(!props.ObjectiveUpload)
+            reset()
 
         } catch(error) {
             console.log(error)

@@ -1,23 +1,41 @@
+import { api } from "@/api/axiosConfig";
 import { MoreDotIcon } from "@/icons";
-import { CardObjectiveProps } from "@/types";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { 
+    DropdownMenu, 
+    DropdownMenuContent, 
+    DropdownMenuItem, 
+    DropdownMenuTrigger 
+} from "@radix-ui/react-dropdown-menu";
 
-export default function MenuObjective(props: CardObjectiveProps) {
+type MenuObjectiveProps = {
+    id: string;
+    ObjectiveUpload: boolean;
+    setObjectUpload: (prev: boolean) => void;
+    isEdit: boolean;
+    setIsEdit: (prev: boolean) => void;
+}
 
-    const handleDeleteObjective = (() => {
-
+export default function MenuObjective(props: MenuObjectiveProps) {
+    
+    const handleDelete = async () => {
+    
         try {
 
+            const token = localStorage.getItem("authtoken")
+    
+            await api.delete(`/strategic-objectives/${props.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
 
-            
             props.setObjectUpload(!props.ObjectiveUpload)
-
+    
         } catch(error) {
             console.log(error)
         }
-
-
-    })
+    
+    }
 
     return (
 
@@ -26,7 +44,7 @@ export default function MenuObjective(props: CardObjectiveProps) {
                 <MoreDotIcon className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-card p-2 space-y-0.5">
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()} onClick={() => props.setIsEdit(!props.isEdit)}>
                     <span className="flex items-center gap-2 w-full">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -38,7 +56,7 @@ export default function MenuObjective(props: CardObjectiveProps) {
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-red-500 flex items-center" onClick={handleDeleteObjective}>
+                <DropdownMenuItem className="text-red-500 flex items-center" onClick={handleDelete}>
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="red" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>

@@ -84,8 +84,8 @@ export type PropsInputComments = {
 
 export type CardObjectiveProps = {
     id: string;
-    content: string;
-    createDate: string
+    title: string;
+    createdAt: string
     ObjectiveUpload: boolean;
     setObjectUpload: (prev: boolean) => void;
 }

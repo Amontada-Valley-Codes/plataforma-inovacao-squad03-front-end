@@ -7,6 +7,7 @@ import { useModal } from "@/hooks/useModal";
 import InputObjective from "./InputObjective";
 import CardObjective from "./CardObjective";
 import { CardObjectiveProps } from "@/types";
+import { api } from "@/api/axiosConfig";
 
 export default function ObjectivesModal() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -16,9 +17,18 @@ export default function ObjectivesModal() {
   useEffect(() => {
 
     const getObjectives = async () => {
-      
-    }
-    getObjectives()
+
+      const token = localStorage.getItem("authtoken")
+
+      const response = await api.get("/strategic-objectives", 
+        {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      setObjectives(response.data)
 
   }, [objectiveUpload])
 
@@ -68,8 +78,8 @@ export default function ObjectivesModal() {
                       <CardObjective
                         key={index}
                         id={objective.id}
-                        content={objective.content}
-                        createDate={objective.createDate}
+                        title={objective.title}
+                        createdAt={objective.createdAt}
                         ObjectiveUpload={objectiveUpload}
                         setObjectUpload={setObjectUpload}
                       />

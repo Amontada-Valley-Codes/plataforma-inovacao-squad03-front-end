@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState,useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -42,36 +42,58 @@ const AppSidebar: React.FC = () => {
   const isStartup = userRole === "STARTUP_MEMBER";
   const isManager = userRole === "MANAGER"
 
-  const navItems: NavItem[] = isAdmin
+  const navItems: NavItem[] = useMemo(() => isAdmin
     ? [
         { icon: <GridIcon />, name: "Dashboard", path: "/dashboard-admin" },
         { icon: <GroupIcon />, name: "Organização", path: "/adminUsers" },
       ]
     : isStartup
     ? [
-        { icon: <ListIcon />, name: "Desafios publicas", path: "/workflow" },
+        { 
+          icon: <ShootingStarIcon />, 
+          name: "Área de Desafios",
+          subItems: [
+            { name: "Desafios", path: "/pageDesafios" },
+            { name: "Desafios publicados", path: "/workflow" },
+            { name: "POCs", path: "/pagePocs" }
+          ]
+        },
       ]
     : isManager 
     ? [
         { icon: <GridIcon />, name: "Dashboard", path: "/admin" },
-        { icon: <ShootingStarIcon />, name: "Desafios", path: "/pageDesafios" },
+        { 
+          icon: <ShootingStarIcon />, 
+          name: "Área de Desafios",
+          subItems: [
+            { name: "Desafios", path: "/pageDesafios" },
+            { name: "Desafios publicados", path: "/workflow" },
+            { name: "POCs", path: "/pagePocs" }
+          ]
+        },
         { icon: <BoxCubeIcon />, name: "Funil de Inovação", path: "/challengers" },
-        { icon: <ListIcon />, name: "Desafios publicados", path: "/workflow" },
+        { icon: <ListIcon />, name: "Banco de Startups", path: "/pageStartups" },
         { icon: <GroupIcon />, name: "Organização", path: "/adminUsers" },
-        { icon: <ListIcon />, name: "Banco de Startups", path: "/pageStartups" }
       ] 
     : [
         { icon: <GridIcon />, name: "Dashboard", path: "/admin" },
-        { icon: <ShootingStarIcon />, name: "Desafios", path: "/pageDesafios" },
+        { 
+          icon: <ShootingStarIcon />, 
+          name: "Área de Desafios",
+          subItems: [
+            { name: "Desafios", path: "/pageDesafios" },
+            { name: "Desafios publicados", path: "/workflow" },
+            { name: "POCs", path: "/pagePocs" }
+          ]
+        },
         { icon: <BoxCubeIcon />, name: "Funil de Inovação", path: "/challengers" },
-        { icon: <ListIcon />, name: "Desafios publicados", path: "/workflow" },
         { icon: <ListIcon />, name: "Banco de Startups", path: "/pageStartups" }
-      ];
+      ], [isAdmin, isStartup, isManager]);
 
   // "Outros" — o User Profile aparece pra todo mundo
-  const othersItems: NavItem[] = [
+  const othersItems: NavItem[] = useMemo(() => [
     { icon: <UserCircleIcon />, name: "Perfil de usuário", path: "/profile" },
-  ];
+  ], []);
 
 
   const renderMenuItems = (
@@ -107,14 +129,16 @@ const AppSidebar: React.FC = () => {
                 <span className={`menu-item-text`}>{nav.name}</span>
               )}
               {(isExpanded || isHovered || isMobileOpen) && (
-                <ChevronDownIcon
-                  className={`ml-auto w-5 h-5 transition-transform duration-200  ${
+                <span
+                  className={`ml-auto w-5 h-5 transition-transform duration-200 ${
                     openSubmenu?.type === menuType &&
                     openSubmenu?.index === index
-                      ? "rotate-180 text-brand-500"
+                      ? "rotate-180 text-green"
                       : ""
                   }`}
-                />
+                >
+                  <ChevronDownIcon />
+                </span>
               )}
             </button>
           ) : (
@@ -159,37 +183,13 @@ const AppSidebar: React.FC = () => {
                   <li key={subItem.name}>
                     <Link
                       href={subItem.path}
-                      className={`menu-dropdown-item ${
+                      className={`menu-item group border-0 ${
                         isActive(subItem.path)
-                          ? "menu-dropdown-item-active"
-                          : "menu-dropdown-item-inactive"
+                          ? "menu-item-active"
+                          : "menu-item-inactive"
                       }`}
                     >
                       {subItem.name}
-                      <span className="flex items-center gap-1 ml-auto">
-                        {subItem.new && (
-                          <span
-                            className={`ml-auto ${
-                              isActive(subItem.path)
-                                ? "menu-dropdown-badge-active"
-                                : "menu-dropdown-badge-inactive"
-                            } menu-dropdown-badge `}
-                          >
-                            new
-                          </span>
-                        )}
-                        {subItem.pro && (
-                          <span
-                            className={`ml-auto ${
-                              isActive(subItem.path)
-                                ? "menu-dropdown-badge-active"
-                                : "menu-dropdown-badge-inactive"
-                            } menu-dropdown-badge `}
-                          >
-                            pro
-                          </span>
-                        )}
-                      </span>
                     </Link>
                   </li>
                 ))}

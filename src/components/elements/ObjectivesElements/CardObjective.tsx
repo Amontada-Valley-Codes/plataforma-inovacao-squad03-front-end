@@ -42,14 +42,14 @@ export default function CardObjective(props: CardObjectiveProps) {
 
         <div className="w-full flex flex-col border-2 justify-center rounded-[14px] px-4 py-2">
             
-            <div className="flex justify-between items-start ">
+            <div className="flex justify-between items-start w-full">
 
                 {/* Conteúdo do objetivo estratégico */}
-                <div>
+                <div className="w-full">
                     {isEdit ? (
-                        <div className="flex flex-col gap-2 mb-3">
+                        <div className="w-full flex flex-col gap-2 mb-3">
                             <Input
-                                className="border rounded px-2 py-1 !w-[450px]"
+                                className="border rounded px-2 py-1 w-full"
                                 value={value}
                                 onChange={(e) => setValue(e.target.value)}
                             />

@@ -54,7 +54,7 @@ export default function ObjectivesModal() {
 
             </div>
 
-            <div className="space-y-4">
+            <div className="w-full space-y-4">
 
                 <div className="py-2">
                   
@@ -68,7 +68,7 @@ export default function ObjectivesModal() {
 
                 {objectives.length > 0 ? (
 
-                  <div className="max-h-[300px] scrollbar-hidden overflow-auto space-y-2">
+                  <div className="w-full max-h-[300px] scrollbar-hidden overflow-auto space-y-2">
 
                     {objectives.map((objective, index) => (
                       <CardObjective

@@ -3,7 +3,6 @@
 import { InnovationMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import MonthlyTarget from "@/components/ecommerce/MonthlyTarget";
 import StatisticsChart from "@/components/ecommerce/StatisticsChart";
-import  TabelaPocs  from "@/components/dashboard/Tabela-pocs";
 import { useDashboard } from "@/hooks/useDashboard";
 
 export function DashboardContent() {
@@ -85,12 +84,7 @@ export function DashboardContent() {
 
       <div className="col-span-12">
         <StatisticsChart 
-          
         />
-      </div>
-
-      <div className="col-span-12 xl:col-span-12 ">
-         <TabelaPocs />
       </div>
     </div>
   );

@@ -13,15 +13,17 @@ import { useTabelaPocs, type Poc } from "@/hooks/useTabelaPocs";
 import PocAvaliarModal from "./PocAvaliarModal";
 
 interface TabelaPocsProps {
-  title?: string;
+  typeTable: { title: string, status: "ACCEPTED" | "REJECTED" | "PENDING"}
+  onGlobalRefresh?: () => void;
   onView?: (poc: Poc) => void;
   onEdit?: (poc: Poc) => void;
   onDelete?: (poc: Poc) => void;
 }
 
 export default function TabelaPocs({
-  title = "POCs da Corporação",
+  typeTable,
   onDelete,
+  onGlobalRefresh,
 }: TabelaPocsProps) {
   const {
     pocs,
@@ -35,8 +37,10 @@ export default function TabelaPocs({
     handleNextPage,
     handlePrevPage,
     formatColumnName,
-    renderCellContent
-  } = useTabelaPocs(onDelete);
+    renderCellContent,
+    recoverRejectedPoc
+  } = useTabelaPocs(typeTable.status, onGlobalRefresh, onDelete);
+
 
   if (loading && pocs.length === 0) {
     return (
@@ -44,7 +48,7 @@ export default function TabelaPocs({
         <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              {title}
+              {typeTable.title}
             </h3>
           </div>
         </div>
@@ -61,7 +65,7 @@ export default function TabelaPocs({
         <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              {title}
+              {typeTable.title}
             </h3>
           </div>
         </div>
@@ -80,7 +84,7 @@ export default function TabelaPocs({
       <div className="flex flex-col gap-2 mb-4">
         <div>
           <h3 className="text-lg font-semibold text-blue dark:text-white/90">
-            {title}
+            {typeTable.title}
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {pagination?.totalItems || 0} POC(s) encontrado(s)
@@ -131,7 +135,13 @@ export default function TabelaPocs({
                   </TableCell>
                 ))}
                 <TableCell className="py-3">
-                  <PocAvaliarModal poc={poc} onStatusUpdate={refetch} />
+                  {typeTable.status == "REJECTED"? (
+                    <Button size="sm" variant="ninaButton" className="px-4" onClick={() => recoverRejectedPoc(poc)}>
+                      Recuperar
+                    </Button>
+                  ) : (
+                    <PocAvaliarModal poc={poc} onStatusUpdate={refetch} onGlobalRefresh={onGlobalRefresh} />
+                  )}
                 </TableCell>
               </TableRow>
             ))}

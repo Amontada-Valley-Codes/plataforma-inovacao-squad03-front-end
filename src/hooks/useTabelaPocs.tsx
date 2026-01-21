@@ -14,7 +14,7 @@ export interface Challenge {
 export interface Poc {
   id: string;
   title: string;
-  status: "PENDING" | "APPROVED" | "REJECTED" | "IN_PROGRESS" | "COMPLETED";
+  status: "PENDING" | "ACCEPTED" | "REJECTED";
   startup: Startup;
   challenge: Challenge;
   challengeId: string;
@@ -37,22 +37,18 @@ export interface PocResponse {
 // Mapeamentos
 const statusMap: Record<string, string> = {
   "PENDING": "Pendente",
-  "APPROVED": "Aprovado", 
+  "ACCEPTED": "Aprovado", 
   "REJECTED": "Rejeitado",
-  "IN_PROGRESS": "Em Andamento",
-  "COMPLETED": "Concluído"
 };
 
 const statusColorMap: Record<string, "success" | "warning" | "info" | "light" | "primary"> = {
   "PENDING": "warning",
-  "APPROVED": "success",
+  "ACCEPTED": "success",
   "REJECTED": "light",
-  "IN_PROGRESS": "info",
-  "COMPLETED": "primary"
 };
 
 // Hook para buscar POCs
-function usePocsByCorporation(page: number = 1, limit: number = 10) {
+function usePocsByCorporation(status: Poc["status"] ,page: number = 1, limit: number = 5) {
   const [data, setData] = useState<PocResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +60,7 @@ function usePocsByCorporation(page: number = 1, limit: number = 10) {
       
       const token = localStorage.getItem("authtoken");
       
-      const response = await api.get(`/poc/PaginedByCorporation?page=${page}&limit=${limit}`, {
+      const response = await api.get(`/poc/PaginedAll?status=${status}&page=${page}&limit=${limit}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -83,7 +79,7 @@ function usePocsByCorporation(page: number = 1, limit: number = 10) {
 
   useEffect(() => {
     fetchPocs(page, limit);
-  }, [page, limit]);
+  }, [status, page, limit]);
 
   return {
     pocs: data?.data || [],
@@ -96,11 +92,11 @@ function usePocsByCorporation(page: number = 1, limit: number = 10) {
 }
 
 // Hook principal da tabela
-export function useTabelaPocs(onDelete?: (poc: Poc) => void) {
+export function useTabelaPocs(status: Poc["status"] , onGlobalRefresh?: () => void, onDelete?: (poc: Poc) => void) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const { pocs, pagination, loading, error, refetch, hasMore } = usePocsByCorporation(currentPage, pageSize);
+  const { pocs, pagination, loading, error, refetch, hasMore } = usePocsByCorporation(status, currentPage, pageSize);
 
   const handleDelete = async (poc: Poc) => {
     try {
@@ -113,6 +109,7 @@ export function useTabelaPocs(onDelete?: (poc: Poc) => void) {
       });
       
       refetch();
+      onGlobalRefresh?.()
       onDelete?.(poc);
     } catch (error) {
       console.error("Erro ao deletar POC:", error);
@@ -195,6 +192,29 @@ export function useTabelaPocs(onDelete?: (poc: Poc) => void) {
     }
   };
 
+  const recoverRejectedPoc = async (poc: Poc) => {
+    try {
+      const token = localStorage.getItem("authtoken");
+
+      await api.patch(
+        `/poc/${poc.id}/status`,
+        {
+          status: "PENDING"
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      refetch();
+      onGlobalRefresh?.()
+    } catch (error) {
+      console.error("Erro ao recuperar POC:", error);
+    }
+};
+
   return {
     pocs,
     pagination,
@@ -210,6 +230,7 @@ export function useTabelaPocs(onDelete?: (poc: Poc) => void) {
     handlePrevPage,
     handlePageSizeChange,
     formatColumnName,
-    renderCellContent
+    renderCellContent,
+    recoverRejectedPoc
   };
 }

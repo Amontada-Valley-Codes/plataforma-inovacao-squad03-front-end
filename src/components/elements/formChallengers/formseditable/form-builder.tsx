@@ -117,7 +117,7 @@ export function FormBuilder({ config, onAddField, onUpdateField, onRemoveField, 
         <div className="p-6">
           <h4 className="font-semibold text-blue dark:text-white mb-3 text-[20px]">Excluir campo?</h4>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-            Tem certeza que deseja excluir o campo "{fieldToDelete?.label}"? Esta ação não pode ser desfeita.
+            Tem certeza que deseja excluir o campo &quot;{fieldToDelete?.label}&quot;? Esta ação não pode ser desfeita.
           </p>
           <div className="flex justify-end gap-3 pt-4 border-gray-200 dark:border-gray-700">
             <Button variant="outline" onClick={() => setDeleteFieldId(null)} className="px-6">

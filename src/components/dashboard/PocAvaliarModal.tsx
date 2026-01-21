@@ -10,6 +10,7 @@ import { usePocStatusUpdate, type PocStatus } from "@/hooks/usePocStatusUpdate";
 interface PocAvaliarModalProps {
   poc: Poc;
   onStatusUpdate?: () => void;
+  onGlobalRefresh?: () => void;
 }
 
 const statusMap: Record<string, string> = {
@@ -25,7 +26,7 @@ const statusOptions: { value: PocStatus; label: string }[] = [
   { value: "REJECTED", label: "Rejeitado" }
 ];
 
-export default function PocAvaliarModal({ poc, onStatusUpdate }: PocAvaliarModalProps) {
+export default function PocAvaliarModal({ poc, onStatusUpdate, onGlobalRefresh }: PocAvaliarModalProps) {
   const { isOpen, openModal, closeModal } = useModal();
   const [selectedStatus, setSelectedStatus] = useState<PocStatus>(poc.status as PocStatus);
   const { pocDetalhes, loading: loadingDetalhes, fetchPocDetalhes } = usePocDetalhes();
@@ -49,6 +50,7 @@ export default function PocAvaliarModal({ poc, onStatusUpdate }: PocAvaliarModal
     if (success) {
       onStatusUpdate?.();
       closeModal();
+      onGlobalRefresh?.();
     }
   };
 

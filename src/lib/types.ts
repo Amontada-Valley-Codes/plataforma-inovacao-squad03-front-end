@@ -23,3 +23,12 @@ export interface FormConfig {
   version: number
   fields: FormField[]
 }
+
+export interface FormListItem {
+  id: string
+  title: string
+  description: string
+  version: string
+  createdAt: string
+  fieldsCount: number
+}

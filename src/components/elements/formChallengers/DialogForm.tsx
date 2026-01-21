@@ -1,15 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useModal } from "@/hooks/useModal"
 import { Modal } from "@/components/ui/modal"
 import { VersionCard } from "@/components/pageDesafios/VersionCard"
 import { FormBuilder } from "./formseditable/form-builder"
 import { DynamicForm } from "./formseditable/dynamic-form"
-import type { FormConfig, FormField } from "@/lib/types"
+import type { FormConfig, FormField, FormListItem } from "@/lib/types"
+import { api } from "@/api/axiosConfig"
 
 export default function DialogForm() {
+
+  const [forms, setForms] = useState<FormListItem[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
   const {
     isOpen: isFullscreenModalOpen,
     openModal: openFullscreenModal,
@@ -70,12 +74,27 @@ export default function DialogForm() {
     }))
   }
 
+  useEffect(() => {
+  const fetchForms = async () => {
+    try {
+      const res = await api.get<FormListItem[]>("/forms")
+      setForms(res.data)
+    } catch (err) {
+      console.error("Erro ao buscar formulários", err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  fetchForms()
+}, [])
+
   return (
     <>
       <Button
         onClick={openFullscreenModal}
         variant="ninaButton"
-        className="px-10 md:px-12 md:text-[16px] text-white"
+        className="px-10 md:px-12    md:text-[16px] text-white"
       >
         Novo desafio
       </Button>
@@ -88,27 +107,50 @@ export default function DialogForm() {
       
         <div className="flex h-full flex-col">
 
-        
-          <div className="flex-1 overflow-y-auto p-6">
-            <div className="grid grid-cols-1 gap-6 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3">
-              
-              <VersionCard
-                title="Aplicativo de conexões empresariais"
-                startDate="18-11-2025"
-              />
-
-              <VersionCard
-                title="Versão 1.3"
-                startDate="20-11-2025"
-              /> 
-              <VersionCard
-                title="Versão 1.3"
-                startDate="20-11-2025"
-              />
-
-
+          <div className="rounded-[10px] py-5 px-3 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <div className="text-blue">
+              <h1 className="text-2xl md:text-3xl font-medium mb-1">
+                Meus Formulários
+              </h1>
+              <p className="text-base md:text-lg text-muted-foreground">
+                Criação e gerenciamento
+              </p>
             </div>
+        </div>
+
+
+        
+         <div className="flex-1 overflow-y-auto p-6">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+            {loading ? (
+              <p>Carregando formulários...</p>
+            ) : forms.length === 0 ? (
+              <p>Nenhum formulário Criado</p>
+            ) : (
+              forms.map((form) => (
+                <VersionCard
+                  key={form.id}
+                  title={form.title}
+                  startDate={form.createdAt}
+                  onUse={() => {
+                    console.log("Usar formulário:", form.id)
+                  }}
+                  onEdit={() => {
+                    console.log("Editar formulário:", form.id)
+                    openFormBuilderModal()
+                  }}
+                  onDelete={() => {
+                    console.log("Excluir formulário:", form.id)
+                  }}
+                />
+              ))
+            )}
           </div>
+
+         
+
+        </div>
+
 
      
           <div className=" bottom-0 flex justify-end gap-3  bg-white p-4 dark:bg-gray-900">

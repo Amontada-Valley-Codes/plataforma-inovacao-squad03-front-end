@@ -7,6 +7,7 @@ import { PropsCard } from "@/types";
 import { GripVertical } from "lucide-react"; // import do ícone
 import CardKanbanDetail from "./CardKanbanDetails";
 import { api } from "@/api/axiosConfig";
+import ModalCardKanban from "./ModalCardKanban";
 
 const COLUMN_TITLES: Record<string, string> = {
   GENERATION: "Geração de Ideias",
@@ -100,7 +101,7 @@ export default function KanbanDemo() {
                   <div className="relative bg-card shadow-md rounded-md transition-all">
                     
                     <div>
-                      <CardKanbanDetail {...card} realod={reload} setReload={setReload} />
+                      <ModalCardKanban {...card} />
                     </div>
                     
                     <Kanban.ItemHandle className="absolute top-2 right-0 cursor-grab text-gray-500 hover:text-gray-700">

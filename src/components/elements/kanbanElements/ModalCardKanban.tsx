@@ -30,12 +30,6 @@ export default function ModalCardKanban(props: PropsCard) {
     const { isOpen, openModal, closeModal } = useModal();
     const [changeContent, setChangeContent] = useState(true)
 
-    const handleSave = () => {
-    // Handle save logic here
-    console.log("Saving changes...");
-    closeModal();
-    };
-
     useEffect(() => {
             
             const updateChallenge = async () => {

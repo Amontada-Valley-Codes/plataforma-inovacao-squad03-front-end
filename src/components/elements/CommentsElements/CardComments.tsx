@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+
 import { TfiCommentAlt } from "react-icons/tfi";
 import CommentSession from "./CommentSession";
 import { PropsSessionComment } from "@/types";

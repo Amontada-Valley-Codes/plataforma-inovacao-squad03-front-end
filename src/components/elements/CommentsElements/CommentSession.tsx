@@ -46,7 +46,7 @@ export default function CommentSession({challangerId}:PropsSessionComment) {
 
       </div>
 
-      <div className="flex flex-col gap-3 ">
+      <div className="flex flex-col gap-3 max-h-[360px] overflow-auto">
 
         {comments.length > 0 ? (
 

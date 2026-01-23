@@ -8,12 +8,13 @@ import { GripVertical } from "lucide-react";
 import { api } from "@/api/axiosConfig";
 import ModalCardKanban from "./ModalCardKanban";
 
-const COLUMN_TITLES: Record<string, string> = {
-  GENERATION: "Geração de Ideias",
+export const COLUMN_TITLES: Record<string, string> = {
+  GENERATION: "Captura de Ideias",
   PRE_SCREENING: "Pré-Triagem",
-  IDEATION: "Ideação",
   DETAILED_SCREENING: "Triagem Detalhada",
+  MATERIALIZATION: "Materialização",
   EXPERIMENTATION: "Experimentação",
+  SCALE: "Escala"
 };
 
 
@@ -49,9 +50,10 @@ export default function KanbanDemo() {
     const grouped: Record<string, PropsCard[]> = {
       GENERATION: [],
       PRE_SCREENING: [],
-      IDEATION: [],
       DETAILED_SCREENING: [],
+      MATERIALIZATION: [],
       EXPERIMENTATION: [],
+      SCALE: []
     };
     for (const card of cards) {
       if (grouped[card.status]) grouped[card.status].push(card);

@@ -6,9 +6,10 @@ import { api } from "@/api/axiosConfig";
 export type ChallengeStatus = 
   | "GENERATION" 
   | "PRE_SCREENING" 
-  | "IDEATION" 
   | "DETAILED_SCREENING" 
-  | "EXPERIMENTATION";
+  | "MATERIALIZATION" 
+  | "EXPERIMENTATION"
+  | "SCALE";
 
 export type ChallengeSector =
   | "HEALTH"

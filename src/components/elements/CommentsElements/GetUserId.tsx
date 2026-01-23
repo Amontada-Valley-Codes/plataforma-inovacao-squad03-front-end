@@ -1,9 +1,9 @@
 import { jwtDecode } from "jwt-decode"
 
-type DecodedToken = {
+export type DecodedToken = {
   userId: string;
   email: string;
-  role: "ADMIN" | "MANAGER" | "EVALUATOR" | "COMMON" | "STARTUP_MEMBER"
+  role: "ADMIN" | "COLLABORATOR" | " OBSERVER" | "ORGANIZER" | "STARTUP_MEMBER" | "TECHNOLOGY_OFFICE"
   corporationId: string;
   iat: number;
   exp: number;

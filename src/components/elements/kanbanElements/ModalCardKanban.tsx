@@ -8,14 +8,7 @@ import CardComments from "../CommentsElements/CardComments";
 import { api } from "@/api/axiosConfig";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { Badge } from "@/components/ui/badge"
-
-const COLUMN_TITLES: Record<string, string> = {
-  GENERATION: "Geração de Ideias",
-  PRE_SCREENING: "Pré-Triagem",
-  IDEATION: "Ideação",
-  DETAILED_SCREENING: "Triagem Detalhada",
-  EXPERIMENTATION: "Experimentação",
-};
+import { COLUMN_TITLES } from "./KanbanDemo";
 
 const FORMATING_SECTORS: Record<string, string> = {
         HEALTH: "Saúde",

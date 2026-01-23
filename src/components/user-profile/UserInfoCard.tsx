@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@/api/axiosConfig";
+import { FORMATING_ROLE } from "../elements/CommentsElements/Comment";
 
 interface PropsUserInformation {
   name: string;
@@ -17,14 +18,6 @@ interface PropsUserInformation {
   profile: boolean;
   setProfile: (prev: boolean) => void
 }
-
-const FORMATING_ROLE: Record<string, string> = {
-  ADMIN: "ADMINISTRADOR",
-  MANAGER: "GESTOR",
-  EVALUATOR: "AVALIADOR",
-  COMMON: "COMUM",
-  STARTUP_MEMBER: "STARTUP",
-};
 
 const userInfoSchema = z.object({
   name: z.string().min(2, "O nome precisa ter pelo menos 2 caracteres."),

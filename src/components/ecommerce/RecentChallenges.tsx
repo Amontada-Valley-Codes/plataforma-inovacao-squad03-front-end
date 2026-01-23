@@ -14,6 +14,7 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { MoreDotIcon } from "@/icons";
 
+
 const sectorToAreaMap: Record<ChallengeSector, string> = {
   "TECHNOLOGY": "Tecnologia",
   "EDUCATION": "Educação",
@@ -28,19 +29,21 @@ const sectorToAreaMap: Record<ChallengeSector, string> = {
 };
 
 const statusMap: Record<ChallengeStatus, string> = {
-  "GENERATION": "Geração",
+  "GENERATION": "Captura de Ideias",
+  "MATERIALIZATION": "Materialização",
   "PRE_SCREENING": "Pré-Triagem",
-  "IDEATION": "Ideação",
   "DETAILED_SCREENING": "Triagem Detalhada",
-  "EXPERIMENTATION": "Experimentação"
+  "EXPERIMENTATION": "Experimentação",
+  "SCALE": "Escala"
 };
 
 const statusColorMap: Record<ChallengeStatus, "success" | "warning" | "info" | "light" | "primary"> = {
   "GENERATION": "primary",
   "PRE_SCREENING": "info",
-  "IDEATION": "warning",
+  "MATERIALIZATION": "warning",
   "DETAILED_SCREENING": "info",
-  "EXPERIMENTATION": "success"
+  "EXPERIMENTATION": "success",
+  "SCALE": "light"
 };
 
 interface RecentChallengesProps {

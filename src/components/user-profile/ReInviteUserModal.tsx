@@ -43,13 +43,14 @@ export default function ReInviteUserModal() {
   });
 
   const options = isAdmin ? [
-      { value: "MANAGER", label: "Gestor" },
+      { value: "ORGANIZER", label: "Organizador" },
     ] 
     : 
     [ 
-      { value: "MANAGER", label: "Gestor" },
-      { value: "EVALUATOR", label: "Avaliador"}, 
-      { value: "COMOM", label: "Comum"}
+      { value: "ORGANIZER", label: "Organizador" },
+      { value: "TECHNOLOGY_OFFICE", label: "Escritório de Tranformação"}, 
+      { value: "COLLABORATOR", label: "Colaborador"},
+      { value: "OBSERVER", label: "Obeservador"},
     ]
 
   const onSubmit = (data: InviteFormData) => {

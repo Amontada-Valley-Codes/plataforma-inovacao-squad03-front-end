@@ -40,7 +40,7 @@ const AppSidebar: React.FC = () => {
 
   const isAdmin = userRole === "ADMIN";
   const isStartup = userRole === "STARTUP_MEMBER";
-  const isManager = userRole === "MANAGER"
+  const isManager = userRole === "ORGANIZER"
 
   const navItems: NavItem[] = useMemo(() => isAdmin
     ? [

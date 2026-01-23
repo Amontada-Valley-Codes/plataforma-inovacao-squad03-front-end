@@ -8,12 +8,14 @@ import TextArea from "@/components/form/input/TextArea"
 import { getUserId } from "./GetUserId"
 import VoteButton from "./VoteButton"
 
-const FORMATING_ROLE: Record<string, string> = {
+export const FORMATING_ROLE: Record<string, string> = {
 
+  COLLABORATOR: "Colaborador",
+  OBSERVER: "Observador",
+  ORGANIZER: "Organizador",
   ADMIN: "Admin",
-  MANAGER: "Gestor",
-  EVALUATOR: "Avaliador",
-  COMMON: "Comum",
+  STARTUP_MEMBER: "Startup",
+  TECHNOLOGY_OFFICE: "Escritório de Transformação"
 
 }
 

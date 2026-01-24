@@ -13,6 +13,7 @@ import Badge from "../ui/badge/Badge";
 import ReInviteUserModal from "../user-profile/ReInviteUserModal";
 import { api } from "@/api/axiosConfig";
 import ConfirmDeleteMOdal from "./ConfirmDeleteModal";
+import { FORMATING_ROLE } from "../elements/CommentsElements/Comment";
 
 interface User {
   id: string
@@ -33,16 +34,6 @@ interface FiltersProps {
 
 interface BasicTableOneProps {
   filters: FiltersProps;
-}
-
-const FORMATING_ROLE: Record<string, string> = {
-
-  ADMIN: "ADMINISTRADOR",
-  MANAGER: "GESTOR",
-  EVALUATOR: "AVALIADOR",
-  COMMON: "COMUM",
-  STARTUP_MEMBER: "STARTUP"
-
 }
 
 export default function BasicTableOne({ filters }: BasicTableOneProps) {
@@ -88,13 +79,15 @@ const filteredData = useMemo(() => {
 
   const getBadgeColor = (category: string) => {
     switch (category) {
-      case "MANAGER":
+      case "ORGANIZER":
         return "success";
       case "ADMIN":
         return "primary";
-      case "EVALUATOR":
+      case "TECHNOLOGY_OFFICE":
         return "warning";
-      case "COMOM":
+      case "COLLABORATOR":
+        return "info";
+      case "OBSERVER":
         return "info";
       default:
         return "success";

@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa6"
 import z from "zod"
 import { InputObjectiveProps } from "@/types";
 import { api } from "@/api/axiosConfig";
+import { useState } from "react";
 
 const ObjectiveSchema = z.object({
     content: 
@@ -16,29 +17,34 @@ const ObjectiveSchema = z.object({
 type ObjectiveData = z.infer<typeof ObjectiveSchema>
 
 export default function InputObjective(props: InputObjectiveProps) {
+    const [loading, setLoading] = useState(false)
 
-const createObjective = async (data: ObjectiveData) => {
+    const createObjective = async (data: ObjectiveData) => {
 
-        try {
-            const token = localStorage.getItem("authtoken")
+            try {
+                setLoading(true)
+
+                const token = localStorage.getItem("authtoken")
+                
+                await api.post("/strategic-objectives", {
+                    title: data.content
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+
+                props.setObjectUpload(!props.ObjectiveUpload)
+                reset()
+
+            } catch(error) {
+                console.log(error)
+            } finally{
+                setLoading(false)
+            }
             
-            await api.post("/strategic-objectives", {
-                title: data.content
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-
-            props.setObjectUpload(!props.ObjectiveUpload)
-            reset()
-
-        } catch(error) {
-            console.log(error)
         }
-        
-    }
 
     const {
         register,
@@ -65,11 +71,19 @@ const createObjective = async (data: ObjectiveData) => {
 
             <Button
                 type="submit"
+                disabled={loading}
                 variant={"ninaButton"} 
                 size={"icon"} 
                 className="absolute top-1 right-2 rounded-full"
-            > 
-                <FaPlus color="white" className="!w-5 !h-5"/>
+            >   
+                {loading? (
+                    <div className="flex justify-center">
+                        <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
+                    </div>
+                ) : (
+                    <FaPlus color="white" className="!w-5 !h-5"/>
+                )}
+                
             </Button>
 
         </form>

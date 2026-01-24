@@ -130,13 +130,10 @@ export default function ChallengeViewDialog({ challenge, children }: ChallengeVi
             )}
           </div>
           
-          {(challengeDetails.status === "IDEATION" || 
-            challengeDetails.status === "DETAILED_SCREENING" || 
-            challengeDetails.status === "EXPERIMENTATION") && (
-            <div>
-              <CardComments challangerId={challengeDetails.id}/>
-            </div>
-          )}
+          <div>
+            <CardComments challangerId={challengeDetails.id}/>
+          </div>
+          
         </div>
       </DialogContent>
     </Dialog>

@@ -3,6 +3,7 @@ import Input from "@/components/form/input/InputField";
 import { Button } from "@/components/ui/button";
 import { PropsInputComments } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoIosSend } from "react-icons/io";
 import z from "zod";
@@ -16,10 +17,13 @@ const commentSchema = z.object({
 type CommentData = z.infer<typeof commentSchema>
 
 export default function InputComment(props: PropsInputComments) {
+    const [loading, setLoading] = useState(false)
 
     const createComment = async (data: CommentData) => {
 
         try {
+            setLoading(true)
+
             const token = localStorage.getItem("authtoken")
 
             await api.post("/comments", {
@@ -37,6 +41,8 @@ export default function InputComment(props: PropsInputComments) {
 
         } catch(error) {
             console.log(error)
+        }  finally{
+            setLoading(false)
         }
         
     }
@@ -64,15 +70,21 @@ export default function InputComment(props: PropsInputComments) {
                 <span className="text-red-500">{errors.content.message}</span>
             )}
 
-
-
             <Button
                 type="submit"
                 variant={"ninaButton"} 
+                disabled={loading}
                 size={"icon"} 
                 className="absolute top-1 right-2 rounded-full"
             > 
-                <IoIosSend color="white" className="!w-5 !h-5"/>
+                {loading? (
+                     <div className="flex justify-center">
+                        <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
+                    </div>
+                ) :
+                (
+                    <IoIosSend color="white" className="!w-5 !h-5"/>
+                )}
             </Button>
 
         </form>

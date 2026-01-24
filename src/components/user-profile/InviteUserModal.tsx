@@ -58,13 +58,14 @@ export default function InviteUserModal() {
   });
 
   const options = isAdmin ? [
-      { value: "MANAGER", label: "Gestor" },
+      { value: "ORGANIZER", label: "Organizador" },
     ] 
     : 
     [ 
-      { value: "MANAGER", label: "Gestor" },
-      { value: "EVALUATOR", label: "Avaliador"}, 
-      { value: "COMMON", label: "Comum"}
+      { value: "ORGANIZER", label: "Organizador" },
+      { value: "TECHNOLOGY_OFFICE", label: "Escritório de Tranformação"}, 
+      { value: "COLLABORATOR", label: "Colaborador"},
+      { value: "OBSERVER", label: "Obeservador"},
     ]
 
   const onSubmit = async (data: InviteFormData) => {

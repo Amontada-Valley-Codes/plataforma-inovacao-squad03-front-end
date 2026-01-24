@@ -8,20 +8,11 @@ import Label from "../form/Label";
 import Image from "next/image";
 import { api } from "@/api/axiosConfig";
 import { useRouter } from "next/navigation";
+import { FORMATING_ROLE } from "../elements/CommentsElements/Comment";
 
 interface PropsMetaCard {
   name: string;
   role: string;
-}
-
-const FORMATING_ROLE: Record<string, string> = {
-
-  ADMIN: "ADMINISTRADOR",
-  MANAGER: "GESTOR",
-  EVALUATOR: "AVALIADOR",
-  COMMON: "COMUM",
-  STARTUP_MEMBER: "STARTUP"
-
 }
 
 export default function UserMetaCard({name, role}: PropsMetaCard) {

@@ -13,16 +13,25 @@ export default function ObjectivesModal() {
   const { isOpen, openModal, closeModal } = useModal();
   const [objectives, setObjectives] = useState<CardObjectiveProps[]>([]) // 
   const [objectiveUpload, setObjectUpload] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getObjectives = async () => {
-      const token = localStorage.getItem("authtoken")
-      const response = await api.get("/strategic-objectives", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      setObjectives(response.data)
+
+      try {
+        const token = localStorage.getItem("authtoken")
+        const response = await api.get("/strategic-objectives", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        setObjectives(response.data)
+      } catch(error) {
+        console.log(error)
+      } finally {
+        setLoading(false)
+      }
+      
     }
     
     getObjectives()
@@ -66,7 +75,17 @@ export default function ObjectivesModal() {
 
                 </div>
 
-                {objectives.length > 0 ? (
+                {loading ? (
+
+                  <div className="flex justify-center mt-5">
+                    <div className="flex gap-1">
+                      <span className="w-2 h-2 bg-blue rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0ms]" />
+                      <span className="w-2 h-2 bg-blue rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:120ms]" />
+                      <span className="w-2 h-2 bg-blue rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:240ms]" />
+                    </div>
+                  </div>
+
+                ) : objectives.length > 0 ? (
 
                   <div className="w-full max-h-[300px] scrollbar-hidden overflow-auto space-y-2">
 
@@ -83,9 +102,7 @@ export default function ObjectivesModal() {
 
                   </div>
 
-                ) 
-                : 
-                (
+                ) : (
                   <div className="flex justify-center items-center">
                     <span className="text-blue" >Ainda não há nenhum objetivo estratégico.</span>
                   </div>

@@ -11,9 +11,9 @@ import type { FormConfig, FormField, FormListItem } from "@/lib/types"
 import { api } from "@/api/axiosConfig"
 
 export default function DialogForm() {
-
   const [forms, setForms] = useState<FormListItem[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+
   const {
     isOpen: isFullscreenModalOpen,
     openModal: openFullscreenModal,
@@ -37,12 +37,14 @@ export default function DialogForm() {
     fields: [],
   })
 
+
   const handleAddField = (field: Omit<FormField, "id" | "order">) => {
     const newField: FormField = {
       ...field,
       id: `field_${Date.now()}`,
       order: formConfig.fields.length,
     } as FormField
+
     setFormConfig((prev) => ({
       ...prev,
       fields: [...prev.fields, newField],
@@ -52,7 +54,9 @@ export default function DialogForm() {
   const handleUpdateField = (id: string, updates: Partial<FormField>) => {
     setFormConfig((prev) => ({
       ...prev,
-      fields: prev.fields.map((f) => (f.id === id ? { ...f, ...updates } : f)),
+      fields: prev.fields.map((f) =>
+        f.id === id ? { ...f, ...updates } : f
+      ),
     }))
   }
 
@@ -64,49 +68,70 @@ export default function DialogForm() {
   }
 
   const handleReorderFields = (fields: FormField[]) => {
-    const reorderedFields = fields.map((field, index) => ({
+    const reordered = fields.map((field, index) => ({
       ...field,
       order: index,
     }))
+
     setFormConfig((prev) => ({
       ...prev,
-      fields: reorderedFields,
+      fields: reordered,
     }))
   }
 
+
+
   useEffect(() => {
-  const fetchForms = async () => {
+    const fetchForms = async () => {
+      try {
+        const res = await api.get<FormListItem[]>("/forms")
+        setForms(res.data)
+      } catch (err) {
+        console.error("Erro ao buscar formulários", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchForms()
+  }, [])
+
+
+
+  const fetchFormById = async (id: string) => {
     try {
-      const res = await api.get<FormListItem[]>("/forms")
-      setForms(res.data)
-    } catch (err) {
-      console.error("Erro ao buscar formulários", err)
-    } finally {
-      setLoading(false)
+      const res = await api.get(`/forms/${id}`)
+
+      setFormConfig({
+        version: Number(res.data.version),
+        fields: res.data.fields,
+      })
+
+      openPreviewModal()
+    } catch (error) {
+      console.error("Erro ao buscar formulário:", error)
     }
   }
 
-  fetchForms()
-}, [])
+ 
 
   return (
     <>
       <Button
         onClick={openFullscreenModal}
         variant="ninaButton"
-        className="px-10 md:px-12    md:text-[16px] text-white"
+        className="px-10 md:px-12 md:text-[16px] text-white"
       >
         Novo desafio
       </Button>
 
+     
       <Modal
         isOpen={isFullscreenModalOpen}
         onClose={closeFullscreenModal}
         size="large"
       >
-      
         <div className="flex h-full flex-col">
-
           <div className="rounded-[10px] py-5 px-3 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div className="text-blue">
               <h1 className="text-2xl md:text-3xl font-medium mb-1">
@@ -116,44 +141,35 @@ export default function DialogForm() {
                 Criação e gerenciamento
               </p>
             </div>
-        </div>
-
-
-        
-         <div className="flex-1 overflow-y-auto p-6">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-            {loading ? (
-              <p>Carregando formulários...</p>
-            ) : forms.length === 0 ? (
-              <p>Nenhum formulário Criado</p>
-            ) : (
-              forms.map((form) => (
-                <VersionCard
-                  key={form.id}
-                  title={form.title}
-                  startDate={form.createdAt}
-                  onUse={() => {
-                    console.log("Usar formulário:", form.id)
-                  }}
-                  onEdit={() => {
-                    console.log("Editar formulário:", form.id)
-                    openFormBuilderModal()
-                  }}
-                  onDelete={() => {
-                    console.log("Excluir formulário:", form.id)
-                  }}
-                />
-              ))
-            )}
           </div>
 
-         
+          <div className="flex-1 overflow-y-auto p-6">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+              {loading ? (
+                <p>Carregando formulários...</p>
+              ) : forms.length === 0 ? (
+                <p>Nenhum formulário criado</p>
+              ) : (
+                forms.map((form) => (
+                  <VersionCard
+                    key={form.id}
+                    title={form.title}
+                    startDate={form.createdAt}
+                    onUse={() => fetchFormById(form.id)}
+                    onEdit={() => {
+                      fetchFormById(form.id)
+                      openFormBuilderModal()
+                    }}
+                    onDelete={() => {
+                      console.log("Excluir formulário:", form.id)
+                    }}
+                  />
+                ))
+              )}
+            </div>
+          </div>
 
-        </div>
-
-
-     
-          <div className=" bottom-0 flex justify-end gap-3  bg-white p-4 dark:bg-gray-900">
+          <div className="flex justify-end gap-3 bg-white p-4 dark:bg-gray-900">
             <Button variant="destructive" onClick={closeFullscreenModal}>
               Cancelar
             </Button>
@@ -162,10 +178,10 @@ export default function DialogForm() {
               Adicionar Formulários
             </Button>
           </div>
-
         </div>
       </Modal>
 
+     
       <Modal
         isOpen={isFormBuilderModalOpen}
         onClose={closeFormBuilderModal}
@@ -183,6 +199,7 @@ export default function DialogForm() {
         </div>
       </Modal>
 
+
       <Modal
         isOpen={isPreviewModalOpen}
         onClose={closePreviewModal}
@@ -193,7 +210,7 @@ export default function DialogForm() {
             config={formConfig}
             onSubmit={(data) => {
               console.log("Form data:", data)
-              alert("Formulário enviado! Veja o console para os dados.")
+              alert("Formulário enviado!")
             }}
           />
         </div>

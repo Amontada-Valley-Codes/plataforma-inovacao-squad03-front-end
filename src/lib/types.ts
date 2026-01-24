@@ -32,3 +32,13 @@ export interface FormListItem {
   createdAt: string
   fieldsCount: number
 }
+
+export interface FormWithFields {
+  id: string
+  title: string
+  description: string
+  version: string
+  stage: string
+  createdAt: string
+  fields: FormField[]
+}

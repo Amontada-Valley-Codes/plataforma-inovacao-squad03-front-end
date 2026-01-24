@@ -18,6 +18,15 @@ const FORMATING_SECTORS: Record<string, string> = {
         SALES: "Vendas",
     }
 
+const FORMATING_PUBLISH: Record<string, string> = {
+        PUBLIC: "Público",
+        RESTRICTED: "Restrito"
+    }
+
+
+const formatDate = (date: string) => {
+  return date.replace(/-/g, "/");
+};
 
 export default function ModalCardKanban(props: PropsCard) {
     const { isOpen, openModal, closeModal } = useModal();
@@ -63,7 +72,7 @@ export default function ModalCardKanban(props: PropsCard) {
                     <div className="flex gap-2 mb-4">
                         <button 
                             onClick={() => setChangeContent(true)}
-                            className="flex justify-center items-center gap-1 bg-gray-300 px-4 hover:bg-blue-400/70 hover:text-gray-800"
+                            className="flex justify-center items-center gap-1 bg-gray-300 dark:bg-card px-4 hover:bg-blue-400/70 hover:dark:bg-gray-300 hover:text-gray-800"
                         >
                             <AiOutlineInfoCircle />
                             Informações
@@ -71,7 +80,7 @@ export default function ModalCardKanban(props: PropsCard) {
 
                         <button 
                             onClick={() => setChangeContent(false)}
-                            className="flex justify-center items-center bg-gray-300 px-4 hover:bg-blue-400/70 hover:text-gray-800"
+                            className="flex justify-center items-center bg-gray-300 dark:bg-card px-4 hover:bg-blue-400/70 hover:dark:bg-gray-300 hover:text-gray-800"
                         >
                             {COLUMN_TITLES[props.status]}
                         </button>
@@ -85,14 +94,22 @@ export default function ModalCardKanban(props: PropsCard) {
                                 
                                 <div className="flex justify-between items-center gap-2">
                                     
-                                    <Badge variant={"topicBadge"} className="text-[14px] px-4 py-0.5">
-                                        {FORMATING_SECTORS[props.sector]}
-                                    </Badge>
+                                    <div className="flex gap-2">
+                                        <Badge variant={"topicBadge"} className="text-[14px] px-4 py-0.5">
+                                            {FORMATING_SECTORS[props.sector]}
+                                        </Badge>
+
+                                        {props.status === "EXPERIMENTATION" && (
+                                            <Badge variant={"topicBadge"} className="text-[14px] px-4 py-0.5">
+                                                {FORMATING_PUBLISH[props.publishOption]}
+                                            </Badge>
+                                        )}
+                                    </div>
 
                                     <div className="flex gap-4 text-[14px] text-muted-foreground">
 
-                                        <span>Início: {props.startDate}</span>
-                                        <span>Fim: {props.endDate}</span>
+                                        <span>Início: {formatDate(props.startDate)}</span>
+                                        <span>Fim: {formatDate(props.endDate)}</span>
 
                                     </div>  
 

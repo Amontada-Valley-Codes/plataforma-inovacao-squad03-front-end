@@ -8,6 +8,7 @@ import Input from "@/components/form/input/InputField";
 export default function CardObjective(props: CardObjectiveProps) {
     const [isEdit, setIsEdit] = useState(false)
     const [value, setValue] = useState(props.title)
+    
 
     useEffect(() => {
     if (isEdit) {

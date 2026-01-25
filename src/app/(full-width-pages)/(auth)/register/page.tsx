@@ -1,5 +1,6 @@
 import UserRegistro from "@/components/sessions-landing-page/UserRegistration";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Next.js Registration Page | TailAdmin - Next.js Dashboard Template",
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function Register() {
-  return <UserRegistro />;
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <UserRegistro />
+    </Suspense>
+  );
 }

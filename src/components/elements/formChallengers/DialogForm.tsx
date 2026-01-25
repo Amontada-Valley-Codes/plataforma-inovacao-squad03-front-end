@@ -83,6 +83,14 @@ export default function DialogForm() {
 
   useEffect(() => {
     const fetchForms = async () => {
+      const token = localStorage.getItem("authtoken")
+      
+      if (!token) {
+        console.warn("Usuário não autenticado")
+        setLoading(false)
+        return
+      }
+
       try {
         const res = await api.get<FormListItem[]>("/forms")
         setForms(res.data)

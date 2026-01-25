@@ -50,7 +50,7 @@ export default function UserLogin() {
         password: data.senha, // mapeando para password da API
       });
 
-      localStorage.setItem("token", response.data.access_token)
+      localStorage.setItem("authtoken", response.data.access_token)
 
       toast.success("Login realizado com sucesso!", {
         description: "Você será redirecionado em instantes...",

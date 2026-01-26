@@ -11,11 +11,14 @@ import { Button } from "@/components/ui/button"
 
 interface FormBuilderProps {
   config: FormConfig
+  formTitle?: string
+  formDescription?: string
   onAddField: (field: Omit<FormField, "id" | "order">) => void
-  onUpdateField: (id: string, updates: Partial<FormField>) => void
-  onRemoveField: (id: string) => void
-  onReorderFields: (fields: FormField[]) => void
+  onUpdateField?: (id: string, updates: Partial<FormField>) => void
+  onRemoveField?: (id: string) => void
+  onReorderFields?: (fields: FormField[]) => void
   onPreview?: () => void
+  onSaveForm?: () => void
 }
 
 const FIELD_TYPE_LABELS: Record<string, string> = {
@@ -38,7 +41,7 @@ const FIELD_TYPE_COLORS: Record<string, string> = {
   date: "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
 }
 
-export function FormBuilder({ config, onAddField, onUpdateField, onRemoveField, onReorderFields, onPreview }: FormBuilderProps) {
+export function FormBuilder({ config, formTitle, formDescription, onAddField, onUpdateField, onRemoveField, onReorderFields, onPreview, onSaveForm }: FormBuilderProps) {
   const [editingField, setEditingField] = useState<FormField | null>(null)
   const [isCreating, setIsCreating] = useState(false)
   const [deleteFieldId, setDeleteFieldId] = useState<string | null>(null)
@@ -48,7 +51,7 @@ export function FormBuilder({ config, onAddField, onUpdateField, onRemoveField, 
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    if (!over || active.id === over.id) return
+    if (!over || active.id === over.id || !onReorderFields) return
 
     const oldIndex = sortedFields.findIndex((f) => f.id === active.id)
     const newIndex = sortedFields.findIndex((f) => f.id === over.id)
@@ -61,7 +64,7 @@ export function FormBuilder({ config, onAddField, onUpdateField, onRemoveField, 
   }
 
   const handleSaveField = (field: FormField) => {
-    if (editingField) {
+    if (editingField && onUpdateField) {
       onUpdateField(field.id, field)
     } else {
       onAddField(field)
@@ -71,7 +74,7 @@ export function FormBuilder({ config, onAddField, onUpdateField, onRemoveField, 
   }
 
   const handleConfirmDelete = () => {
-    if (deleteFieldId) {
+    if (deleteFieldId && onRemoveField) {
       onRemoveField(deleteFieldId)
       setDeleteFieldId(null)
     }
@@ -81,13 +84,16 @@ export function FormBuilder({ config, onAddField, onUpdateField, onRemoveField, 
     <>
       <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
         <FormBuilderHeader
+          title={formTitle}
+          description={formDescription}
           version={config.version}
           fieldsCount={sortedFields.length}
           onAddField={() => setIsCreating(true)}
           onPreview={onPreview}
+          onSaveForm={onSaveForm}
         />
 
-        <div className="p-6">
+        <div className="p-6 max-h-[60vh] overflow-y-auto">
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6 text-sm text-blue-800 dark:text-blue-200">
             <strong className="font-semibold">Dica:</strong> Arraste os campos pelo ícone para reordená-los. Clique no lápis para editar ou na lixeira para excluir.
           </div>
